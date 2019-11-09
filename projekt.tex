@@ -17,8 +17,8 @@
 %   projekt-30-prilohy-appendices.tex - přílohy / appendices
 %   projekt-30-prilohy-appendices-en.tex - přílohy v angličtině / appendices in English
 %==============================================================================
-\documentclass[]{fitthesis} % bez zadání - pro začátek práce, aby nebyl problém s překladem
-%\documentclass[english]{fitthesis} % without assignment - for the work start to avoid compilation problem
+%\documentclass[]{fitthesis} % bez zadání - pro začátek práce, aby nebyl problém s překladem
+\documentclass[english]{fitthesis} % without assignment - for the work start to avoid compilation problem
 %\documentclass[zadani]{fitthesis} % odevzdani do wisu a/nebo tisk s barevnými odkazy - odkazy jsou barevné
 %\documentclass[english,zadani]{fitthesis} % for submission to the IS FIT and/or print with color links - links are color
 %\documentclass[zadani,print]{fitthesis} % pro černobílý tisk - odkazy jsou černé
@@ -51,8 +51,8 @@
 
 % Nastavení cesty k obrázkům
 % Setting of a path to the pictures
-%\graphicspath{{obrazky-figures/}{./obrazky-figures/}}
-%\graphicspath{{obrazky-figures/}{../obrazky-figures/}}
+\graphicspath{{images/}{./images/}}
+\graphicspath{{images/}{../images/}}
 
 %---rm---------------
 \renewcommand{\rmdefault}{lmr}%zavede Latin Modern Roman jako rm / set Latin Modern Roman as rm
@@ -117,25 +117,25 @@
 %---------------------------------------------------------------------------
 \projectinfo{
   %Prace / Thesis
-  project={BP},            %typ práce BP/SP/DP/DR  / thesis type (SP = term project)
+  project={DP},            %typ práce BP/SP/DP/DR  / thesis type (SP = term project)
   year={2020},             % rok odevzdání / year of submission
   date=\today,             % datum odevzdání / submission date
   %Nazev prace / thesis title
-  title.cs={Název práce},  % název práce v češtině či slovenštině (dle zadání) / thesis title in czech language (according to assignment)
-  title.en={Thesis title}, % název práce v angličtině / thesis title in english
+  title.cs={Využití IPFS pro zpracování blockchainu},  % název práce v češtině či slovenštině (dle zadání) / thesis title in czech language (according to assignment)
+  title.en={Processing of the Blockchain Employing IPFS}, % název práce v angličtině / thesis title in english
   %title.length={14.5cm}, % nastavení délky bloku s titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a thesis title for adjusting a line break (can be defined here or below)
   %sectitle.length={14.5cm}, % nastavení délky bloku s druhým titulkem pro úpravu zalomení řádku (lze definovat zde nebo níže) / setting the length of a block with a second thesis title for adjusting a line break (can be defined here or below)
   %Autor / Author
-  author.name={Jméno},   % jméno autora / author name
-  author.surname={Příjmení},   % příjmení autora / author surname 
-  %author.title.p={Bc.}, % titul před jménem (nepovinné) / title before the name (optional)
+  author.name={Matúš},   % jméno autora / author name
+  author.surname={Múčka},   % příjmení autora / author surname 
+  author.title.p={Bc.}, % titul před jménem (nepovinné) / title before the name (optional)
   %author.title.a={Ph.D.}, % titul za jménem (nepovinné) / title after the name (optional)
   %Ustav / Department
-  department={UPGM}, % doplňte příslušnou zkratku dle ústavu na zadání: UPSY/UIFS/UITS/UPGM / fill in appropriate abbreviation of the department according to assignment: UPSY/UIFS/UITS/UPGM
+  department={UIFS}, % doplňte příslušnou zkratku dle ústavu na zadání: UPSY/UIFS/UITS/UPGM / fill in appropriate abbreviation of the department according to assignment: UPSY/UIFS/UITS/UPGM
   % Školitel / supervisor
-  supervisor.name={Jméno},   % jméno školitele / supervisor name 
-  supervisor.surname={Příjmení},   % příjmení školitele / supervisor surname
-  supervisor.title.p={prof. RNDr.},   %titul před jménem (nepovinné) / title before the name (optional)
+  supervisor.name={Vladimír},   % jméno školitele / supervisor name 
+  supervisor.surname={Veselý},   % příjmení školitele / supervisor surname
+  supervisor.title.p={Ing.},   %titul před jménem (nepovinné) / title before the name (optional)
   supervisor.title.a={Ph.D.},    %titul za jménem (nepovinné) / title after the name (optional)
   % Klíčová slova / keywords
   keywords.cs={Sem budou zapsána jednotlivá klíčová slova v českém (slovenském) jazyce, oddělená čárkami.}, % klíčová slova v českém či slovenském jazyce / keywords in czech or slovak language
@@ -225,11 +225,7 @@ Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých
 
   % Text prace / Thesis text
   % ----------------------------------------------
-  \ifenglish
-    \input{projekt-01-kapitoly-chapters-en}
-  \else
-    \input{projekt-01-kapitoly-chapters}
-  \fi
+  \input{01-chapters}
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
@@ -260,7 +256,7 @@ Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých
   \fi
 \fi
   \begin{flushleft}
-  \bibliography{projekt-20-literatura-bibliography}
+  \bibliography{20-bibliography}
   \end{flushleft}
 
   % vynechani stranky v oboustrannem rezimu
@@ -319,11 +315,8 @@ Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých
   \fi
   
   % Přílohy / Appendices
-  \ifenglish
-    \input{projekt-30-prilohy-appendices-en}
-  \else
-    \input{projekt-30-prilohy-appendices}
-  \fi
+  \input{30-appendices}
+
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
