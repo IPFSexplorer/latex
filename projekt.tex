@@ -47,7 +47,7 @@
 
 % Kompilace po částech (rychlejší, ale v náhledu nemusí být vše aktuální)
 % Compilation piecewise (faster, but not all parts in preview will be up-to-date)
-% \usepackage{subfiles}
+\usepackage{subfiles}
 
 % Nastavení cesty k obrázkům
 % Setting of a path to the pictures
@@ -223,15 +223,15 @@ Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých
     \cleardoublepage
   \fi
 
-  % Text prace / Thesis text
-  % ----------------------------------------------
-  \input{01-chapters}
   
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
-  %\subfile{projekt-01-uvod-introduction}
-  % ...
-  %\subfile{chapters/projekt-05-conclusion}
+  \subfile{01-introduction}
+  \subfile{02-cryptocurrencies}
+  \subfile{03-IPFS}
+  \subfile{04-design}
+  \subfile{05-conclusion}
+
 
 
   % Pouzita literatura / Bibliography
@@ -314,12 +314,8 @@ Uvedl jsem všechny literární prameny, publikace a další zdroje, ze kterých
     \cleardoublepage
   \fi
   
-  % Přílohy / Appendices
-  \input{30-appendices}
-
-  
   % Kompilace po částech (viz výše, nutno odkomentovat)
   % Compilation piecewise (see above, it is necessary to uncomment it)
-  %\subfile{projekt-30-prilohy-appendices}
+  \subfile{30-appendices}
   
 \end{document}

@@ -1,4 +1,4 @@
-PWD f:/DP/latex
+PWD F:/DP/latex
 INPUT C:/Users/Matus/AppData/Local/MiKTeX/2.9/miktex/data/le/pdftex/pdflatex.fmt
 INPUT f:/DP/latex/projekt.tex
 OUTPUT f:/DP/latex/projekt.log
@@ -145,6 +145,10 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/l3kernel/l3pdfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/l3kernel/l3pdfmode.def
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/l3packages/xparse/xparse.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/l3packages/xparse/xparse.sty
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/subfiles/subfiles.sty
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/subfiles/subfiles.sty
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/verbatim.sty
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/verbatim.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/hyperref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/hyperref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/hobsub-hyperref.sty
@@ -245,36 +249,6 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lm
 INPUT f:/DP/latex/projekt.toc
 INPUT f:/DP/latex/projekt.toc
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/cmap/ot1.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/cmap/ot1.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oml.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oml.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oms.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oms.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmex10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/omx.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/omx.cmap
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsa.fd
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/amsfonts/umsb.fd
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx8.tfm
 OUTPUT f:/DP/latex/projekt.toc
 INPUT f:/DP/latex/01-chapters.tex
 INPUT f:/DP/latex/01-chapters.tex
@@ -287,95 +261,17 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmr.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmsy.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmsy.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/lmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr8.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oms.cmap
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/mmap/oms.cmap
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam5.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtti10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtti10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtti10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx9.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx5.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT f:/DP/latex/01-chapters.tex
+INPUT f:/DP/latex/01-chapters.tex
 INPUT f:/DP/latex/projekt.bbl
 INPUT f:/DP/latex/projekt.bbl
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmcsc10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmri8.tfm
 INPUT f:/DP/latex/30-appendices.tex
 INPUT f:/DP/latex/30-appendices.tex
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr17.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr17.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr17.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmex10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmex10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmex10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmr12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmmi12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmsy10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmex10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/cm/cmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msam10.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/placeholder.pdf
-INPUT f:/DP/latex/images/keep-calm.png
-INPUT f:/DP/latex/images/keep-calm.png
-INPUT f:/DP/latex/images/keep-calm.png
-INPUT f:/DP/latex/images/keep-calm.png
-INPUT f:/DP/latex/images/keep-calm.png
 OUTPUT f:/DP/latex/projekt.ptc
 INPUT f:/DP/latex/projekt.aux
 INPUT f:/DP/latex/projekt.out
@@ -388,53 +284,15 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/opensans/
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/opensans/opensans-01.enc
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/opensans/OpenSans-Bold.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/opensans/OpenSans-Bold.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmcsc10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri8.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri8.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb
