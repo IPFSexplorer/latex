@@ -1,5 +1,15 @@
 \makeatletter
 \makeatother
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{BigDataInVideoGames}
+{\sc\bgroup}Kalle{\egroup}, K.
+\newblock {\em Big data in video games}.
+\newblock Lappeenranta, FI, 2017.
+\newblock Bakal\'{a}\v{r}sk\'{a} pr\'{a}ce.
+\newblock Lappeenranta University of Technology, School of Business and
+  Management, Computer Science.
+\newblock Available at:
+  ~{\small\url{http://lutpub.lut.fi/handle/10024/147666}}.
 
 \end{thebibliography}
