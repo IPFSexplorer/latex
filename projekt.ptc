@@ -21,11 +21,13 @@
 \contentsline {subsection}{\numberline {3.3.7}Distributed hash table}{5}{subsection.3.3.7}
 \contentsline {chapter}{\numberline {4}Design}{6}{chapter.4}
 \contentsline {section}{\numberline {4.1}Feeder}{6}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Blockbook}{6}{subsection.4.1.1}
 \contentsline {section}{\numberline {4.2}Client application}{6}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}API}{6}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}UI}{6}{subsection.4.2.2}
 \contentsline {chapter}{\numberline {5}Implementation}{7}{chapter.5}
 \contentsline {chapter}{\numberline {6}Testing}{8}{chapter.6}
 \contentsline {section}{\numberline {6.1}Testing enviroment}{8}{section.6.1}
-\contentsline {section}{\numberline {6.2}Testing}{8}{section.6.2}
 \contentsline {chapter}{\numberline {7}Conclusion}{9}{chapter.7}
 \contentsline {chapter}{Bibliography}{10}{chapter*.2}
 \ttl@starttoc {chapters@1}
