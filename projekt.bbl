@@ -2,6 +2,13 @@
 \makeatother
 \begin{thebibliography}{1}
 
+\bibitem{haber1990time}
+{\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
+\newblock How to time-stamp a digital document.
+\newblock In: Springer.~{\em Conference on the Theory and Application of
+  Cryptography}.
+\newblock 1990, p.~437--455.
+
 \bibitem{BigDataInVideoGames}
 {\sc\bgroup}Kalle{\egroup}, K.
 \newblock {\em Big data in video games}.
@@ -11,5 +18,18 @@
   Management, Computer Science.
 \newblock Available at:
   ~{\small\url{http://lutpub.lut.fi/handle/10024/147666}}.
+
+\bibitem{narayanan2016bitcoin}
+{\sc\bgroup}Narayanan{\egroup}, A., {\sc\bgroup}Bonneau{\egroup}, J.,
+  {\sc\bgroup}Felten{\egroup}, E., {\sc\bgroup}Miller{\egroup}, A.
+  and~{\sc\bgroup}Goldfeder{\egroup}, S.
+\newblock {\em Bitcoin and cryptocurrency technologies: a comprehensive
+  introduction}.
+\newblock Princeton University Press, 2016.
+
+\bibitem{wayner1997digital}
+{\sc\bgroup}Wayner{\egroup}, P.
+\newblock {\em Digital cash: Commerce on the net}.
+\newblock Academic Press Professional, Inc., 1997.
 
 \end{thebibliography}

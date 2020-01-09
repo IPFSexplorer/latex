@@ -300,31 +300,46 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt9.tfm
 INPUT f:/DP/latex/02-cryptocurrencies.tex
 INPUT f:/DP/latex/02-cryptocurrencies.tex
+INPUT f:/DP/latex/images/failedCryptos.PNG
+INPUT f:/DP/latex/images/failedCryptos.PNG
+INPUT f:/DP/latex/images/failedCryptos.PNG
+INPUT f:/DP/latex/images/failedCryptos.PNG
+INPUT f:/DP/latex/images/failedCryptos.PNG
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT f:/DP/latex/03-IPFS.tex
-INPUT f:/DP/latex/03-IPFS.tex
-INPUT f:/DP/latex/images/IPFSstack.png
-INPUT f:/DP/latex/images/IPFSstack.png
-INPUT f:/DP/latex/images/IPFSstack.png
-INPUT f:/DP/latex/images/IPFSstack.png
-INPUT f:/DP/latex/images/IPFSstack.png
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT f:/DP/latex/04-design.tex
-INPUT f:/DP/latex/04-design.tex
-INPUT f:/DP/latex/images/AppArchitecture.png
-INPUT f:/DP/latex/images/AppArchitecture.png
-INPUT f:/DP/latex/images/AppArchitecture.png
-INPUT f:/DP/latex/images/AppArchitecture.png
-INPUT f:/DP/latex/images/AppArchitecture.png
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt10.tfm
-INPUT f:/DP/latex/05-implementation.tex
-INPUT f:/DP/latex/05-implementation.tex
-INPUT f:/DP/latex/06-testing.tex
-INPUT f:/DP/latex/06-testing.tex
-INPUT f:/DP/latex/07-conclusion.tex
-INPUT f:/DP/latex/07-conclusion.tex
+INPUT f:/DP/latex/03-decentralization.tex
+INPUT f:/DP/latex/03-decentralization.tex
+INPUT f:/DP/latex/04-IPFS.tex
+INPUT f:/DP/latex/04-IPFS.tex
+INPUT f:/DP/latex/images/IPFSstack.png
+INPUT f:/DP/latex/images/IPFSstack.png
+INPUT f:/DP/latex/images/IPFSstack.png
+INPUT f:/DP/latex/images/IPFSstack.png
+INPUT f:/DP/latex/images/IPFSstack.png
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
+INPUT f:/DP/latex/05-design.tex
+INPUT f:/DP/latex/05-design.tex
+INPUT f:/DP/latex/images/AppArchitecture.png
+INPUT f:/DP/latex/images/AppArchitecture.png
+INPUT f:/DP/latex/images/AppArchitecture.png
+INPUT f:/DP/latex/images/AppArchitecture.png
+INPUT f:/DP/latex/images/AppArchitecture.png
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmr.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmr.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmsy.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmsy.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/lmsy10.tfm
+INPUT f:/DP/latex/images/feederDataStorageStructure.png
+INPUT f:/DP/latex/images/feederDataStorageStructure.png
+INPUT f:/DP/latex/images/feederDataStorageStructure.png
+INPUT f:/DP/latex/images/feederDataStorageStructure.png
+INPUT f:/DP/latex/images/feederDataStorageStructure.png
+INPUT f:/DP/latex/06-implementation.tex
+INPUT f:/DP/latex/06-implementation.tex
+INPUT f:/DP/latex/08-conclusion.tex
+INPUT f:/DP/latex/08-conclusion.tex
 INPUT f:/DP/latex/projekt.bbl
 INPUT f:/DP/latex/projekt.bbl
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmcsc10.tfm
@@ -342,6 +357,7 @@ INPUT f:/DP/latex/projekt.aux
 INPUT f:/DP/latex/projekt.out
 INPUT f:/DP/latex/projekt.out
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/opensans/opensans-03.enc
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/opensans/opensans-02.enc
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/opensans/opensans-04.enc
@@ -368,6 +384,8 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb
