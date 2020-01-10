@@ -2,8 +2,12 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: projekt.aux
 The style file: bib-styles/Pysny/enplain.bst
 Database file #1: 20-bibliography.bib
 Warning--empty isbn and issn in haber1990time
+Warning--empty edition in OrbitDBManual
+Warning--empty isbn in OrbitDBManual
 Warning--empty edition in narayanan2016bitcoin
 Warning--empty isbn in narayanan2016bitcoin
+Warning--empty edition in TextileWhitePaper
+Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
-(There were 5 warnings)
+(There were 9 warnings)

@@ -13,11 +13,17 @@
 {\sc\bgroup}Kalle{\egroup}, K.
 \newblock {\em Big data in video games}.
 \newblock Lappeenranta, FI, 2017.
-\newblock Bakal\'{a}\v{r}sk\'{a} pr\'{a}ce.
+\newblock Bachalar Thesis.
 \newblock Lappeenranta University of Technology, School of Business and
   Management, Computer Science.
 \newblock Available at:
   ~{\small\url{http://lutpub.lut.fi/handle/10024/147666}}.
+
+\bibitem{OrbitDBManual}
+{\sc\bgroup}Mark Robert Henderson{\egroup}, S.~P.
+\newblock {\em The OrbitDB Field Manual}.
+\newblock 2019.
+\newblock Available at: ~{\small\url{https://github.com/orbitdb/field-manual}}.
 
 \bibitem{narayanan2016bitcoin}
 {\sc\bgroup}Narayanan{\egroup}, A., {\sc\bgroup}Bonneau{\egroup}, J.,
@@ -26,6 +32,14 @@
 \newblock {\em Bitcoin and cryptocurrency technologies: a comprehensive
   introduction}.
 \newblock Princeton University Press, 2016.
+
+\bibitem{TextileWhitePaper}
+{\sc\bgroup}Pick{\egroup}, S. and~{\sc\bgroup}Hagopian{\egroup}.
+\newblock {\em A protocol and event-sourced database for decentralized
+  user-siloed data}.
+\newblock 2019.
+\newblock Available at:
+  ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
 
 \bibitem{wayner1997digital}
 {\sc\bgroup}Wayner{\egroup}, P.

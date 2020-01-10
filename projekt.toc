@@ -23,6 +23,8 @@
 \contentsline {section}{\numberline {5.1}Feeder}{9}{section.5.1}
 \contentsline {section}{\numberline {5.2}Explorer}{9}{section.5.2}
 \contentsline {chapter}{\numberline {6}Implementation}{10}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusion}{11}{chapter.7}
-\contentsline {chapter}{Bibliography}{12}{chapter*.2}
+\contentsline {section}{\numberline {6.1}Feeder implementation}{10}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Indexes}{10}{subsection.6.1.1}
+\contentsline {chapter}{\numberline {7}Conclusion}{12}{chapter.7}
+\contentsline {chapter}{Bibliography}{13}{chapter*.2}
 \contentsfinish 
