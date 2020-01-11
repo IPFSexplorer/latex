@@ -1,9 +1,0 @@
-Motivacia:
-☐ HTTP is good enough to host and distribute small files (like web pages etc.). Ale ked chceme distribuovat celý blockchain, ktorý má velkosť niekolko stoviek gigabitov, zaciname narazat na limity HTTP.
-☐ One point of failure
-☐ Server side. Nestíha to. Pretazenie siete
-☐ Zlyhanie DB
-
-Poznamky:
-☐ For example, Linux distributions use BitTorrent to transmit disk images, and Blizzard, Inc. uses it to distribute video game content.
-☐ The central IPFS principle is modeling all data as part of the same Merkle DAG.

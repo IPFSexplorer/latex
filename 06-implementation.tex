@@ -55,7 +55,7 @@ Currently, there are two options for running Explorer. First one is running Expl
 \end{figure}
 
 \subsection{Running in browser as web aplication}
-Running in browser with GUI module provides simple user interface implemented as single page application. Browser's implementation of IndexedDB is used as a storage for IPFS as you can see at figure \ref{browserIPFS}. Communication with other peers is provided though WebSockets. Every tab openned in browser is the same IPFS node. Openning new tab in Incognito mode or in different browser will spawn different IPFS node.
+Running in browser with GUI module provides simple user interface implemented as single page application. Browser's implementation of IndexedDB is used as a storage for IPFS as you can see at figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab openned in browser is the same IPFS node. Openning new tab in Incognito mode or in different browser will spawn different IPFS node.
 
 \begin{figure}[h]
     \centering

@@ -2,6 +2,13 @@
 \makeatother
 \begin{thebibliography}{1}
 
+\bibitem{IPFSwhitepaper}
+{\sc\bgroup}Benet{\egroup}, J.
+\newblock {IPFS} - Content Addressed, Versioned, {P2P} File System.
+\newblock {\em CoRR}.
+\newblock 2014, abs/1407.3561.
+\newblock Available at: ~{\small\url{http://arxiv.org/abs/1407.3561}}.
+
 \bibitem{haber1990time}
 {\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
 \newblock How to time-stamp a digital document.
