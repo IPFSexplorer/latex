@@ -14,18 +14,80 @@ In my prototype, I tried a few different ways of indexing data in IPFS.
     \cite{TextileWhitePaper}
 \end{itemize}
 
-After some research, I came to conclusion that currently there is no solution for storing and indexing data in IPFS without high hardisk memory consumation. So I created my own indexing system that currently supports three types of index.
+After some research, I came to conclusion that currently there is no solution for storing and indexing data in IPFS without high hardisk memory consumation. So I created my own indexing system that currently supports three types of indexes.
 
 \begin{itemize}
     \item \textbf{Dictionary} - simple key-value structure that can be used for translating (for example block height to block). Search complexity is \texttt{O(1)} which is the fastest achievable speed. Big disadvantage is that client needs to download whole dictionary to performs search. In the time of writing this thesis, ethereum has 9 250 000 blocks. If we want to make dictionary for translating block height to IPFS block address, the size of this dictionary would be at least \texttt{(int\_size + multihash\_size) * 9 250 000 } where minimal size for \texttt{int\_size} is \texttt{4} bytes and \texttt{multihash\_size} is \texttt{36} bytes when sha-256 is used (32 bytes) and multihash prefix is 4 bytes long. So this dictionary would have over 1.3 GB only for ethereum. Another disadvantage is the impossibility to performing range search (for example get blocks between 9 249 950 and 2 500 000).
-    \item \textbf{Reverse lookup} - This structure is inspired by DNS lookup\footnote{\url{https://en.wikipedia.org/wiki/Reverse_DNS_lookup}} and it's principle can be seen on figure \ref{reverseLookupIndex}.
-    TODO opisat princíp. Key sa obrati atd.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=13cm]{ReverseLookup_index.png}
+        \caption{Reverse lookup by transaction hash}
+        \label{reverseLookupIndex}
+    \end{figure}
+
+
+    \item \textbf{Reverse lookup} - this structure is inspired by Reverse DNS lookup\footnote{\url{https://en.wikipedia.org/wiki/Reverse_DNS_lookup}} and it's principle can be seen on figure \ref{reverseLookupIndex}. For every item, that will be stored in this index, the key is reversed (for better selectivity) and split into the smaller substrings. First substring of every key is stored in root (level 1) dictionary and is pointing to another dictionary that consists of following substrings which have corresponding prefix in parent dictionary. Last level dictionary substrings are pointing to IPFS objects. In this index there is a problem with performing range select operations, because items have reversed key.
+    \item \textbf{B+ Tree} - perhaps most powerfull index structure. With auto balanced B+ tree we can efficienty search objects by given key, and performe range selects. Example of this structure can be seen on figure \ref{btreeindex}. By default there is limit of 32 items in one node (but can be change from 4 to 256). 
+    
+
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=13cm]{btreeindex.png}
+        \caption{B+ tree index structure}
+        \label{btreeindex}
+    \end{figure}
+
 \end{itemize}
 
+Implementing these indexes in IPFS was surprisingly simple thanks to IPFS objects and links.
 
-\begin{figure}[H]
+
+\section{Explorer implementation}
+Currently, there are two options for running Explorer. First one is running Explorer like web application in a browser and the second one is to use Explorer as RestAPI. This architecture is shown on figure \ref{ExplorerArchitecture}.
+
+\begin{figure}[h]
     \centering
-    \includegraphics[width=13cm]{ReverseLookup_index.png}
-    \caption{Reverse lookup by transaction hash}
-    \label{reverseLookupIndex}
+    \includegraphics[width=13cm]{ExplorerArchitecture.png}
+    \caption{Explorer architecture}
+    \label{ExplorerArchitecture}
 \end{figure}
+
+\subsection{Running in browser as web aplication}
+Running in browser with GUI module provides simple user interface implemented as single page application. Browser's implementation of IndexedDB is used as a storage for IPFS as you can see at figure \ref{browserIPFS}. Communication with other peers is provided though WebSockets. Every tab openned in browser is the same IPFS node. Openning new tab in Incognito mode or in different browser will spawn different IPFS node.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=12cm]{ipfsBrowser.PNG}
+    \caption{IPFS storage in browser}
+    \label{browserIPFS}
+\end{figure}
+
+
+\subsection{Running in node.js as REST api }
+Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data (figure \ref{nodeIPFS}). On the top of ExplorerCore, there is simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently supported routes are described in table \ref{tab:explorerApiEndpoints}. Every route supports query parameters \texttt{filter} uses for filtering results and \texttt{limit} which limits number of results. Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
+
+Rest API supports optional path param/s \texttt{path} that is usefull for traversing objects in IPFS. If we want to get fifth transaction of block with height 1000 one of the way is request url \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows user to explore IPFS storage as graph very quickly by objects links.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=12cm]{ipfsNode.PNG}
+    \caption{IPFS storage in node.js}
+    \label{nodeIPFS}
+\end{figure}
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|l|}
+    \hline
+    Endpoint                           & Description                       \\ \hline
+    \texttt{/tx/\{txHash\}/\{path*\}}           & Get transaction by hash  \\ \hline
+    \texttt{/block/\{blockHeight\}/\{path*\}}   & Get block by height      \\ \hline
+    \texttt{/block/\{blockHash\}/\{path*\}}     & Get block by hash        \\ \hline
+    \texttt{/address/\{addressHash\}/\{path*\}} & Get address by hash      \\ \hline
+    \end{tabular}
+    \caption{Rest API explorer endpoints}
+    \label{tab:explorerApiEndpoints}
+\end{table}

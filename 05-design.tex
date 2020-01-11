@@ -2,7 +2,7 @@
 
 The system consists of one or more Feeders and Explorers. Feeders are connected to external API and provide synchronization between cryptocurrency and IPFS data. Explorer can request data from the system network and display them to user.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=11cm]{AppArchitecture.png}
     \caption{System design}
@@ -23,7 +23,7 @@ A Feeder is a command-line application that and stores data in IPFS for all cryp
 The feeder should create indexes as it stores objects. These indexes will help Explorer perform queries.
 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{feederDataStorageStructure.png}
     \caption{Feeder data storage structure}

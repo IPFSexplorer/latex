@@ -149,6 +149,8 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/subfiles/subfil
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/subfiles/subfiles.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/verbatim.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/tools/verbatim.sty
+INPUT C:/Program Files/MiKTeX 2.9/tex/latex/hyphenat/hyphenat.sty
+INPUT C:/Program Files/MiKTeX 2.9/tex/latex/hyphenat/hyphenat.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/hyperref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/hyperref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/hobsub-hyperref.sty
@@ -186,6 +188,16 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/epstop
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/epstopdf-base.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/grfext.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/oberdiek/grfext.sty
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtti10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtto10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtcsc10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtk10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtko10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtl10.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtlo10.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/nameref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/hyperref/nameref.sty
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/generic/oberdiek/gettitlestring.sty
@@ -295,8 +307,6 @@ INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr6.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/t1lmtt.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt9.tfm
 INPUT f:/DP/latex/02-cryptocurrencies.tex
 INPUT f:/DP/latex/02-cryptocurrencies.tex
@@ -307,7 +317,6 @@ INPUT f:/DP/latex/images/failedCryptos.PNG
 INPUT f:/DP/latex/images/failedCryptos.PNG
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT f:/DP/latex/03-decentralization.tex
 INPUT f:/DP/latex/03-decentralization.tex
 INPUT f:/DP/latex/04-IPFS.tex
@@ -338,13 +347,33 @@ INPUT f:/DP/latex/images/feederDataStorageStructure.png
 INPUT f:/DP/latex/images/feederDataStorageStructure.png
 INPUT f:/DP/latex/06-implementation.tex
 INPUT f:/DP/latex/06-implementation.tex
+INPUT f:/DP/latex/images/ReverseLookup_index.png
+INPUT f:/DP/latex/images/ReverseLookup_index.png
+INPUT f:/DP/latex/images/ReverseLookup_index.png
+INPUT f:/DP/latex/images/ReverseLookup_index.png
+INPUT f:/DP/latex/images/ReverseLookup_index.png
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt8.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmtt8.tfm
-INPUT f:/DP/latex/images/ReverseLookup_index.png
-INPUT f:/DP/latex/images/ReverseLookup_index.png
-INPUT f:/DP/latex/images/ReverseLookup_index.png
-INPUT f:/DP/latex/images/ReverseLookup_index.png
-INPUT f:/DP/latex/images/ReverseLookup_index.png
+INPUT f:/DP/latex/images/btreeindex.png
+INPUT f:/DP/latex/images/btreeindex.png
+INPUT f:/DP/latex/images/btreeindex.png
+INPUT f:/DP/latex/images/btreeindex.png
+INPUT f:/DP/latex/images/btreeindex.png
+INPUT f:/DP/latex/images/ExplorerArchitecture.png
+INPUT f:/DP/latex/images/ExplorerArchitecture.png
+INPUT f:/DP/latex/images/ExplorerArchitecture.png
+INPUT f:/DP/latex/images/ExplorerArchitecture.png
+INPUT f:/DP/latex/images/ExplorerArchitecture.png
+INPUT f:/DP/latex/images/ipfsBrowser.PNG
+INPUT f:/DP/latex/images/ipfsBrowser.PNG
+INPUT f:/DP/latex/images/ipfsBrowser.PNG
+INPUT f:/DP/latex/images/ipfsBrowser.PNG
+INPUT f:/DP/latex/images/ipfsBrowser.PNG
+INPUT f:/DP/latex/images/ipfsNode.PNG
+INPUT f:/DP/latex/images/ipfsNode.PNG
+INPUT f:/DP/latex/images/ipfsNode.PNG
+INPUT f:/DP/latex/images/ipfsNode.PNG
+INPUT f:/DP/latex/images/ipfsNode.PNG
 INPUT f:/DP/latex/08-conclusion.tex
 INPUT f:/DP/latex/08-conclusion.tex
 INPUT f:/DP/latex/projekt.bbl
