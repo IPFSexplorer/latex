@@ -9,6 +9,14 @@
 \newblock 2014, abs/1407.3561.
 \newblock Available at: ~{\small\url{http://arxiv.org/abs/1407.3561}}.
 
+\bibitem{newYorkerBTC}
+{\sc\bgroup}Davis{\egroup}, J.
+\newblock The Crypto-Currency.
+\newblock {\em The New Yorker}.
+\newblock october 2011.
+\newblock Available at:
+  ~{\small\url{https://www.newyorker.com/magazine/2011/10/10/the-crypto-currency}}.
+
 \bibitem{haber1990time}
 {\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
 \newblock How to time-stamp a digital document.
@@ -31,6 +39,12 @@
 \newblock {\em The OrbitDB Field Manual}.
 \newblock 2019.
 \newblock Available at: ~{\small\url{https://github.com/orbitdb/field-manual}}.
+
+\bibitem{kademlia}
+{\sc\bgroup}Maymounkov{\egroup}, P. and~{\sc\bgroup}Mazieres{\egroup}, D.
+\newblock Kademlia: A peer-to-peer information system based on the xor metric.
+\newblock In: Springer.~{\em International Workshop on Peer-to-Peer Systems}.
+\newblock 2002, p.~53--65.
 
 \bibitem{narayanan2016bitcoin}
 {\sc\bgroup}Narayanan{\egroup}, A., {\sc\bgroup}Bonneau{\egroup}, J.,

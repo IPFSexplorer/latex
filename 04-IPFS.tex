@@ -1,4 +1,5 @@
 \chapter{IPFS}
+\label{ipfs}
 
 IPFS stands for InterPlanetary File System and is a peer-to-peer distributed filesystem designed to make the Web faster, safer, and more open. In contrast with standard filesystems, objects in IPFS are content-addressed, by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see figure \ref{webAddressing}). In IPFS user needs only to know the hash of the requested file. He does not care about the location of the file (see figure \ref{ipfsAddressing}). Let’s take a very famous file, and add it to IPFS. Here’s the plain-text MIT license:
 
@@ -35,8 +36,54 @@ Like in other network models, we can IPFS split into layers (see figure \ref{IPF
 \end{figure}
 
 
-\subsection{libp2p}
-\subsection{IPLD}
-\subsection{IPFS}
+\section{libp2p}
+Libp2p is transporting layer for IPFS. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer. For both content discovery and peer routing libp2p uses Kademlia-based distributed hash table. With Kademlia libp2p iteratively route requests closer to the desired peer ot content using Kademlia routing algorithm \cite{kademlia}. In the future, Kademlia might be changed easily to some other solutions that implements simple interface in figure \ref{libp2pInterface}.
 
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}
+        // gets a particular peer's network address
+        FindPeer(node NodeId)
+
+        // stores a small metadata value in DHT
+        SetValue(key []bytes, value []bytes)
+
+        // retrieves small metadata value from DHT
+        GetValue(key []bytes)
+
+        // announces this node can serve a large value
+        ProvideValue(key Multihash)
+
+        // gets a number of peers serving a large value
+        FindValuePeers(key Multihash, min int)
+
+    \end{lstlisting}
+    \caption{libp2p interface}
+    \label{libp2pInterface}
+\end{figure}
+
+\section{IPLD}
+IPLD is providing linking and addressing objects with CID (Content ID). CID is hash-based self-describing content indentifier (usually encoded to base58\footnote{\url{https://en.wikipedia.org/wiki/Base58}} format) which includes codec and multihash. Multihash is then further composed of hashtype and hash value. Let's look closer on the MIT license file, that we add to IPFS in the beginning of this chapter (see \ref{ipfs}). It's CID is \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ}. This can be converted to human readable format as can be seen on figure \ref{tab:CIDexample}, thanks to multicodec table\footnote{\url{https://github.com/multiformats/multicodec/blob/master/table.csv}}. We can see that this CID is encoded in base58 format and the file was stored using protobuf\footnote{\url{https://en.wikipedia.org/wiki/Protocol\_Buffers}} codec (this information is necessary to decode file correctly).
+
+
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|ll|l|}
+    \hline
+    \textbf{Property}                  &             & \textbf{Value}                                                            \\ \hline
+    Multibase                                        &             & base58btc                                                        \\ \hline
+    Version                                          &             & cidv0                                                            \\ \hline
+    Multicodec                                       &             & dag-pb                                                           \\ \hline
+    \multicolumn{1}{|l|}{\multirow{3}{*}{Multihash}} & Hash Type   & sha2-256                                                         \\ \cline{2-3} 
+    \multicolumn{1}{|l|}{}                           & Hash Length & 256                                                              \\ \cline{2-3} 
+    \multicolumn{1}{|l|}{}                           & Hash        & 7e1b666c0327...3dc3022f \\ \hline
+    \end{tabular}
+    \caption{Human redable version of CID \texttt{QmWpvK4bYR7k9b1feM48fskt2XsZfMaPfNnF\-xdbhJHw7QJ}}
+    \label{tab:CIDexample}
+\end{table}
+
+\section{IPFS}
+IPFS is top layer from IPFS stack. It is used for pinning objects and files, namming system (see IPNS\footnote{\url{https://docs.ipfs.io/guides/concepts/ipns/}}) and keys management. File or object is automatically pinned when user adds it (but other IPFS commands do not include automatic pinning). "Pinning" a CID tells an IPFS server that the data is important and mustn't be thrown away. When garbage collection is triggered on a node, any pinned content is automatically exempt from deletion. Non-pinned data may be deleted. The InterPlanetary Name System (IPNS) is a system for creating and updating mutable links to IPFS content. Since objects in IPFS are content addressed, an object's address changes every time an object's content changes. A name in IPNS is the hash of a public key. It is associated with a record containing information about the hash it links to that is signed by the corresponding private key.
 
