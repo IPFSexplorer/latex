@@ -1,13 +1,13 @@
 \chapter{IPFS}
 \label{ipfs}
 
-IPFS stands for InterPlanetary File System and is a peer-to-peer distributed filesystem designed to make the Web faster, safer, and more open. In contrast with standard filesystems, objects in IPFS are content-addressed, by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see figure \ref{webAddressing}). In IPFS user needs only to know the hash of the requested file. He does not care about the location of the file (see figure \ref{ipfsAddressing}). Let’s take a very famous file, and add it to IPFS. Here’s the plain-text MIT license:
+IPFS stands for InterPlanetary File System and is a peer-to-peer distributed filesystem designed to make the Web faster, safer, and more open. In contrast with standard filesystems, objects in IPFS are content-addressed, by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see figure \ref{webAddressing}). In IPFS user needs only to know the hash of the requested file. He does not care about the location of the file (see figure \ref{ipfsAddressing}). Let us take a very famous file, and add it to IPFS. Here is the plain-text MIT license:
 
 \begin{figure}[H]
     \texttt{Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\\\\ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\\\\ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}
 \end{figure}
 
-\noindent If somebody will try to add this license as file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is now, and will be in the future, the \textit{content address} of that file. Later, when you try to get this file by it's hash, you can get it from random person that added it into IPFS the past.
+\noindent If somebody tries to add this license as a file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is now, and will be in the future, the \textit{content address} of that file. Later, when user try to get this file by its hash, he can get it from a random person that added it into IPFS in the past.
 
 
 \begin{figure}[h]
@@ -25,7 +25,7 @@ IPFS stands for InterPlanetary File System and is a peer-to-peer distributed fil
 \end{figure}
 
 \section{IPFS stack}
-Like in other network models, we can IPFS split into layers (see figure \ref{IPFSstack}). There is \textit{libp2p}\footnote{\url{https://libp2p.io/}} at the bottom which is peer-to-peer networking module, that handle peer and content discovery, transport, security, identity, peer routing and messaging. \textit{IPLD} is the data model of the content-addressable web. It providing linking between objects and multihash computing. On the top is \textit{IPFS} which allows to publish and share files (or any data).\cite{IPFSwhitepaper}
+Like in other network models, we can IPFS split into layers (see figure \ref{IPFSstack}). There is \textit{libp2p}\footnote{\url{https://libp2p.io/}} at the bottom, which is peer-to-peer networking module, that handles peer and content discovery, transport, security, identity, peer routing, and messaging. \textit{IPLD} is the data model of the content-addressable web. It is providing linking between objects and multihash computing. On the top is \textit{IPFS} which allows to publish and share files (or any data).\cite{IPFSwhitepaper}
 
 
 \begin{figure}[h]
@@ -37,7 +37,7 @@ Like in other network models, we can IPFS split into layers (see figure \ref{IPF
 
 
 \section{libp2p}
-Libp2p is transporting layer for IPFS. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer. For both content discovery and peer routing libp2p uses Kademlia-based distributed hash table. With Kademlia libp2p iteratively route requests closer to the desired peer ot content using Kademlia routing algorithm \cite{kademlia}. In the future, Kademlia might be changed easily to some other solutions that implements simple interface in figure \ref{libp2pInterface}.
+Libp2p is transporting layer for IPFS. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer. For both content discovery and peer routing, libp2p uses Kademlia-based distributed hash table. With Kademlia libp2p iteratively route requests closer to the desired peer or content using Kademlia routing algorithm \cite{kademlia}. In the future, Kademlia might be changed easily to some other solutions that implement simple interface in figure \ref{libp2pInterface}.
 
 
 \begin{figure}[h]
@@ -64,7 +64,7 @@ Libp2p is transporting layer for IPFS. It grew out of IPFS to solve networking p
 \end{figure}
 
 \section{IPLD}
-IPLD is providing linking and addressing objects with CID (Content ID). CID is hash-based self-describing content indentifier (usually encoded to base58\footnote{\url{https://en.wikipedia.org/wiki/Base58}} format) which includes codec and multihash. Multihash is then further composed of hashtype and hash value. Let's look closer on the MIT license file, that we add to IPFS in the beginning of this chapter (see \ref{ipfs}). It's CID is \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ}. This can be converted to human readable format as can be seen on figure \ref{tab:CIDexample}, thanks to multicodec table\footnote{\url{https://github.com/multiformats/multicodec/blob/master/table.csv}}. We can see that this CID is encoded in base58 format and the file was stored using protobuf\footnote{\url{https://en.wikipedia.org/wiki/Protocol\_Buffers}} codec (this information is necessary to decode file correctly).
+IPLD is providing linking and addressing objects with CID (Content ID). CID is hash-based self-describing content identifier (usually encoded to base58\footnote{\url{https://en.wikipedia.org/wiki/Base58}} format) which includes codec and multihash. Multihash is then further composed of hashtype and hash value. Let us look closer on the MIT license file, that we add to IPFS at the beginning of this chapter (see \ref{ipfs}). It's CID is \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ}. It can be converted to human-readable format as can be seen on figure \ref{tab:CIDexample}, thanks to multicodec table\footnote{\url{https://github.com/multiformats/multicodec/blob/master/table.csv}}. We can see that this CID is encoded in base58 format and the file was stored using protobuf\footnote{\url{https://en.wikipedia.org/wiki/Protocol\_Buffers}} codec (this information is necessary to decode file correctly).
 
 
 
@@ -85,5 +85,7 @@ IPLD is providing linking and addressing objects with CID (Content ID). CID is h
 \end{table}
 
 \section{IPFS}
-IPFS is top layer from IPFS stack. It is used for pinning objects and files, namming system (see IPNS\footnote{\url{https://docs.ipfs.io/guides/concepts/ipns/}}) and keys management. File or object is automatically pinned when user adds it (but other IPFS commands do not include automatic pinning). "Pinning" a CID tells an IPFS server that the data is important and mustn't be thrown away. When garbage collection is triggered on a node, any pinned content is automatically exempt from deletion. Non-pinned data may be deleted. The InterPlanetary Name System (IPNS) is a system for creating and updating mutable links to IPFS content. Since objects in IPFS are content addressed, an object's address changes every time an object's content changes. A name in IPNS is the hash of a public key. It is associated with a record containing information about the hash it links to that is signed by the corresponding private key.
+IPFS is the top layer from the IPFS stack. It is used for pinning objects and files, naming system (see IPNS\footnote{\url{https://docs.ipfs.io/guides/concepts/ipns/}}) and keys management. File or object is automatically pinned when a user adds it (but other IPFS commands do not include automatic pinning). Pinning a CID tells an IPFS server that the data is important and must not be thrown away. When garbage collection is triggered on a node, any pinned content is automatically exempt from deletion. Non-pinned data may be deleted. The InterPlanetary Name System (IPNS) is a system for creating and updating mutable links to IPFS content. Since objects in IPFS are content addressed, an object's address changes every time an object's content changes. A name in IPNS is the hash of a public key. It is associated with a record containing information about the hash it links to that is signed by the corresponding private key.
 
+\section{Existing blockchain explorers in IPFS}
+\todo{TODOOOO}
