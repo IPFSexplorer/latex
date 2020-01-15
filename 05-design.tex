@@ -1,4 +1,5 @@
 \chapter{Design}
+\label{Design}
 
 The system consists of one or more Feeders and Explorers. Feeders are connected to external API and provide synchronization between cryptocurrency and IPFS data. Explorer can request data from the system network and display them to user.
 
@@ -9,7 +10,7 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
     \label{}
 \end{figure}
 
-\subsection{Blockbook}
+\section{Blockbook}
 Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and some others were implemented by the community). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSql database which stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
 \begin{itemize}
     \item \textbf{Not distributed} (client-server architecture) - problem with scalling for more users. 
@@ -18,7 +19,7 @@ Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain in
 \end{itemize}
 
 \section{Feeder}
-A Feeder is a command-line application that and stores data in IPFS for all cryptocurrencies specified in the config file. For obtaining data, it uses Blockbook API. Feeder stores data in structure such as in figure \ref{feederDataStorageStructure}. Each block (except genesis and last block) has a link to the previous and next block. Also, it has links to transactions that had been processed in this block. A transaction has links to address and previous/spent transaction for every input/output. This scheme allows store blockchain data in IPFS in small objects with size less than 256kb (a limit for storing objects directly in DHT). Also, every logical link between objects is preserved. 
+A Feeder is a command-line application that and stores data in IPFS for all cryptocurrencies specified in the config file. It uses Blockbook API for obtaining data. Feeder stores data in structure such as in figure \ref{feederDataStorageStructure}. Each block (except genesis and last block) has a link to the previous and next block. Also, it has links to transactions that had been processed in this block. A transaction has links to address and previous/spent transaction for every input/output. This scheme allows store blockchain data in IPFS in small objects with size less than 256kb (a limit for storing objects directly in DHT). Also, every logical link between objects is preserved. 
 
 The feeder should create indexes as it stores objects. These indexes will help Explorer perform queries.
 
