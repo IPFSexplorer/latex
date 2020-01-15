@@ -55,7 +55,17 @@ Currently, there are two options for running Explorer. First one is running Expl
     \label{ExplorerArchitecture}
 \end{figure}
 
-\subsection{Running in browser as web aplication}
+\subsection{ExplorerCore}
+ExplorerCore is module that communicate with IPFS. It has simple interface for obtaining the data:
+\begin{itemize}
+    \item \texttt{getTx(txHash)} - get transaction by its hash,
+    \item \texttt{getBlock(blockHash)} - get block by its hash,
+    \item \texttt{getBlock(blockHeight)} - get block by its height,
+    \item \texttt{getAddress(addressHash)} - get address by its hash,
+    \item \texttt{useIndex(index\_name, filter)} - use index to retrieve array of objects that fits \texttt{filter}.
+\end{itemize}
+
+\subsection{ExplorerGUI}
 Running in browser with GUI module provides simple user interface implemented as a single page application. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
 
 \begin{figure}[h]
@@ -66,7 +76,7 @@ Running in browser with GUI module provides simple user interface implemented as
 \end{figure}
 
 
-\subsection{Running in node.js as REST api }
+\subsection{ExplorerAPI}
 Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data (figure \ref{nodeIPFS}). On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently supported routes are described in table \ref{tab:explorerApiEndpoints}. Every route supports query parameters \texttt{filter} uses for filtering results and \texttt{limit} which limits number of results. Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
 
 Rest API supports optional path param/s \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.

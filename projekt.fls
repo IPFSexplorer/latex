@@ -1,4 +1,4 @@
-PWD F:/DP/latex
+PWD f:/DP/latex
 INPUT C:/Users/Matus/AppData/Local/MiKTeX/2.9/miktex/data/le/pdftex/pdflatex.fmt
 INPUT f:/DP/latex/projekt.tex
 OUTPUT f:/DP/latex/projekt.log
@@ -352,8 +352,6 @@ INPUT f:/DP/latex/images/AppArchitecture.png
 INPUT f:/DP/latex/images/AppArchitecture.png
 INPUT f:/DP/latex/images/AppArchitecture.png
 INPUT f:/DP/latex/images/AppArchitecture.png
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
-INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmr.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmr.fd
 INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/tex/latex/lm/omslmsy.fd
@@ -366,6 +364,8 @@ INPUT f:/DP/latex/images/feederDataStorageStructure.png
 INPUT f:/DP/latex/images/feederDataStorageStructure.png
 INPUT f:/DP/latex/06-implementation.tex
 INPUT f:/DP/latex/06-implementation.tex
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmr12.tfm
+INPUT C:/Users/Matus/AppData/Local/Programs/MiKTeX 2.9/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT f:/DP/latex/images/ReverseLookup_index.png
 INPUT f:/DP/latex/images/ReverseLookup_index.png
 INPUT f:/DP/latex/images/ReverseLookup_index.png
