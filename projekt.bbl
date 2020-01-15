@@ -1,6 +1,6 @@
 \makeatletter
 \makeatother
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{IPFSwhitepaper}
 {\sc\bgroup}Benet{\egroup}, J.
@@ -8,6 +8,14 @@
 \newblock {\em CoRR}.
 \newblock 2014, abs/1407.3561.
 \newblock Available at: ~{\small\url{http://arxiv.org/abs/1407.3561}}.
+
+\bibitem{digibyteBook}
+{\sc\bgroup}Dascano{\egroup}, M.
+\newblock {\em Digibyte: An Easy Guide to Learning the Essentials}.
+\newblock 1stth ed.
+\newblock North Charleston, SC, USA: CreateSpace Independent Publishing
+  Platform, 2018.
+\newblock ISBN 1725629178.
 
 \bibitem{newYorkerBTC}
 {\sc\bgroup}Davis{\egroup}, J.
@@ -23,6 +31,13 @@
 \newblock In: Springer.~{\em Conference on the Theory and Application of
   Cryptography}.
 \newblock 1990, p.~437--455.
+
+\bibitem{decredWhitePaper}
+{\sc\bgroup}Jepson{\egroup}, C.
+\newblock DTB001: Decred Technical Brief.
+\newblock {\em Available at h ps://coss. io/documents/white-papers/decred. pdf
+  Additional information available at h ps://www. decred. org}.
+\newblock 2015.
 
 \bibitem{BigDataInVideoGames}
 {\sc\bgroup}Kalle{\egroup}, K.
@@ -54,6 +69,12 @@
   introduction}.
 \newblock Princeton University Press, 2016.
 
+\bibitem{moneroTracebility}
+{\sc\bgroup}Noether{\egroup}, S.
+\newblock Ring SIgnature Confidential Transactions for Monero.
+\newblock {\em IACR Cryptology ePrint Archive}.
+\newblock 2015, vol.~2015, p.~1098.
+
 \bibitem{TextileWhitePaper}
 {\sc\bgroup}Pick{\egroup}, S. and~{\sc\bgroup}Hagopian{\egroup}.
 \newblock {\em A protocol and event-sourced database for decentralized
@@ -66,5 +87,11 @@
 {\sc\bgroup}Wayner{\egroup}, P.
 \newblock {\em Digital cash: Commerce on the net}.
 \newblock Academic Press Professional, Inc., 1997.
+
+\bibitem{wood2014ethereum}
+{\sc\bgroup}Wood{\egroup}, G. et~al.
+\newblock Ethereum: A secure decentralised generalised transaction ledger.
+\newblock {\em Ethereum project yellow paper}.
+\newblock 2014, vol.~151, no.~2014, p.~1--32.
 
 \end{thebibliography}

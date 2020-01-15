@@ -8,13 +8,18 @@ Warning--empty number in IPFSwhitepaper
 Warning--empty edition in newYorkerBTC
 Warning--empty number in newYorkerBTC
 Warning--empty isbn and issn in haber1990time
+Warning--empty edition in decredWhitePaper
+Warning--empty number in decredWhitePaper
 Warning--empty edition in OrbitDBManual
 Warning--empty isbn in OrbitDBManual
 Warning--empty isbn and issn in kademlia
 Warning--empty edition in narayanan2016bitcoin
 Warning--empty isbn in narayanan2016bitcoin
+Warning--empty edition in moneroTracebility
+Warning--empty number in moneroTracebility
 Warning--empty edition in TextileWhitePaper
 Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
-(There were 15 warnings)
+Warning--empty edition in wood2014ethereum
+(There were 20 warnings)

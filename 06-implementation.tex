@@ -58,6 +58,7 @@ Currently, there are two options for running Explorer. First one is running Expl
 \subsection{ExplorerCore}
 ExplorerCore is module that communicate with IPFS. It has simple interface for obtaining the data:
 \begin{itemize}
+    \item \texttt{getObject(CID[, path])} - get object from IPFS with optional path,
     \item \texttt{getTx(txHash)} - get transaction by its hash,
     \item \texttt{getBlock(blockHash)} - get block by its hash,
     \item \texttt{getBlock(blockHeight)} - get block by its height,
