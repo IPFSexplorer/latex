@@ -25,6 +25,15 @@
 \newblock Available at:
   ~{\small\url{https://www.newyorker.com/magazine/2011/10/10/the-crypto-currency}}.
 
+\bibitem{WebEngineering}
+{\sc\bgroup}Dias{\egroup}, D. and~{\sc\bgroup}Benet{\egroup}, J.
+\newblock Distributed Web Applications with IPFS, Tutorial.
+\newblock In: {\sc\bgroup}Bozzon{\egroup}, A., {\sc\bgroup}Cudre
+  Maroux{\egroup}, P. and~{\sc\bgroup}Pautasso{\egroup}, C.,  ed.~{\em Web
+  Engineering}.
+\newblock Cham: Springer International Publishing, 2016, p.~616--619.
+\newblock ISBN 978-3-319-38791-8.
+
 \bibitem{haber1990time}
 {\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
 \newblock How to time-stamp a digital document.

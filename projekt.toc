@@ -6,23 +6,28 @@
 \contentsline {section}{\numberline {2.3}Ethereum}{5}{section.2.3}
 \contentsline {section}{\numberline {2.4}Decred}{5}{section.2.4}
 \contentsline {section}{\numberline {2.5}Monero}{5}{section.2.5}
-\contentsline {chapter}{\numberline {3}IPFS}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}IPFS stack}{8}{section.3.1}
-\contentsline {section}{\numberline {3.2}libp2p}{9}{section.3.2}
-\contentsline {section}{\numberline {3.3}IPLD}{10}{section.3.3}
-\contentsline {section}{\numberline {3.4}IPFS}{10}{section.3.4}
-\contentsline {section}{\numberline {3.5}Existing blockchain explorers in IPFS}{10}{section.3.5}
-\contentsline {chapter}{\numberline {4}Design}{12}{chapter.4}
-\contentsline {section}{\numberline {4.1}Blockbook}{12}{section.4.1}
-\contentsline {section}{\numberline {4.2}Feeder}{13}{section.4.2}
-\contentsline {section}{\numberline {4.3}Explorer}{13}{section.4.3}
+\contentsline {chapter}{\numberline {3}IPFS}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}IPFS stack}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}libp2p}{7}{section.3.2}
+\contentsline {section}{\numberline {3.3}IPLD}{8}{section.3.3}
+\contentsline {section}{\numberline {3.4}IPFS}{8}{section.3.4}
+\contentsline {section}{\numberline {3.5}IPNS}{9}{section.3.5}
+\contentsline {section}{\numberline {3.6}Existing blockchain explorers in IPFS}{9}{section.3.6}
+\contentsline {chapter}{\numberline {4}Design}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Overview}{11}{section.4.1}
+\contentsline {section}{\numberline {4.2}Blockbook}{11}{section.4.2}
+\contentsline {section}{\numberline {4.3}Feeder}{12}{section.4.3}
+\contentsline {section}{\numberline {4.4}Explorer}{12}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}ExplorerGUI}{13}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}ExplorerAPI}{13}{subsection.4.4.2}
 \contentsline {chapter}{\numberline {5}Implementation}{14}{chapter.5}
 \contentsline {section}{\numberline {5.1}Feeder implementation}{14}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Indexes}{14}{subsection.5.1.1}
 \contentsline {section}{\numberline {5.2}Explorer implementation}{16}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}ExplorerCore}{16}{subsection.5.2.1}
+\contentsline {subsubsection}{Query object}{17}{section*.2}
 \contentsline {subsection}{\numberline {5.2.2}ExplorerGUI}{17}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}ExplorerAPI}{17}{subsection.5.2.3}
-\contentsline {chapter}{\numberline {6}Conclusion}{19}{chapter.6}
-\contentsline {chapter}{Bibliography}{20}{chapter*.2}
+\contentsline {subsection}{\numberline {5.2.3}ExplorerAPI}{18}{subsection.5.2.3}
+\contentsline {chapter}{\numberline {6}Conclusion}{20}{chapter.6}
+\contentsline {chapter}{Bibliography}{21}{chapter*.3}
 \contentsfinish 
