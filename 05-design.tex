@@ -22,7 +22,7 @@ Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain in
 \end{itemize}
 
 \section{Feeder}
-A Feeder is a command-line service that stores data in IPFS for all cryptocurrencies specified in the config file. It uses Blockbook API for obtaining data. Feeder stores data in structure such as in Figure \ref{feederDataStorageStructure}. Each block (except genesis and last block) has a link to the previous and next block. Also, it has links to transactions that had been processed in this block. A transaction has links to address and previous/spent transaction for every input/output. This scheme allows to store blockchain data in IPFS in small objects with size less than 256KB (a limit for storing objects directly in DHT). Also, every logical link between objects is preserved.
+A Feeder is a command-line service that stores data in IPFS for all cryptocurrencies specified in the config file. It uses Blockbook API for obtaining data. Feeder stores data in structure such as in Figure \ref{feederDataStorageStructure}. Each block (except genesis and last block) has a link to the previous and next block. Also, it has links to transactions that had been processed in this block. A transaction has links to address and previous/spent transaction for every input/output. This scheme allows to store blockchain data in IPFS in small objects with size less than 256kB (a limit for storing objects directly in DHT). Also, every logical link between objects is preserved.
 
 \begin{figure}[h]
     \centering
