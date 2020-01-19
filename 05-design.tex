@@ -1,10 +1,10 @@
 \chapter{Design}
 \label{Design}
-This chapter describes the proposed design of whole system for storing and exploring blockchains in IPFS that is to be
-created as a result of this thesis. All parts of system are described in this chapter.
+This chapter describes the proposed design of the whole system for storing and exploring blockchains in IPFS that is to be
+created as a result of this thesis. All parts of the system are described in this chapter.
 
 \section{Overview}
-The system consists of one or more Feeders and Explorers. Feeders are connected to external API and provide synchronization between cryptocurrency and IPFS data. Explorer can request data from the system network and display them to user.
+The system consists of one or more Feeders and Explorers. Feeders are connected to Blockbook and provide synchronization between cryptocurrency and IPFS data. Explorer can request data from the system network and display them to user.
 
 \begin{figure}[h]
     \centering
@@ -14,16 +14,15 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
 \end{figure}
 
 \section{Blockbook}
-Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and some others were implemented by the community). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSql database which stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
+Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and the community implemented some others). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSQL database which stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
 \begin{itemize}
-    \item \textbf{Not distributed} (client-server architecture) - problem with scalling for more users. 
+    \item \textbf{Not distributed} (client-server architecture) - problem with scaling for more users. 
     \item \textbf{Not a SQL database} - it does not have a relational data model, it does not support SQL queries, and it has no support for indexes.
     \item \textbf{Single-Process} - only a single process (possibly multi-threaded) can access a particular database at a time.
 \end{itemize}
 
 \section{Feeder}
 A Feeder is a command-line service that stores data in IPFS for all cryptocurrencies specified in the config file. It uses Blockbook API for obtaining data. Feeder stores data in structure such as in figure \ref{feederDataStorageStructure}. Each block (except genesis and last block) has a link to the previous and next block. Also, it has links to transactions that had been processed in this block. A transaction has links to address and previous/spent transaction for every input/output. This scheme allows to store blockchain data in IPFS in small objects with size less than 256KB (a limit for storing objects directly in DHT). Also, every logical link between objects is preserved.
-
 
 \begin{figure}[h]
     \centering
@@ -34,9 +33,30 @@ A Feeder is a command-line service that stores data in IPFS for all cryptocurren
 
 
 
-
 \section{Explorer}
-Explorer is an application providing simple GUI and API. Application is runnable in browser or Node.js\footnote{\url{https://nodejs.org/}}. Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, depending on specified indexes in Feeder, Explorer can also make more complex queries, for example, get 20 transaction where the sum of inputs is more than 0.5, or get transactions between some time interval.
+Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries, for example, get 20 transaction where the sum of inputs is more than 0.5, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with simple GUI, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
+
+\subsection{ExplorerGUI}
+ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties is supported.
+
+\subsection{ExplorerAPI}
+\label{explorerAPIroutes}
+ExplorerAPI is a node.js application provides several endpoints for obtaining the data:
+\begin{itemize}
+    \item \texttt{GET /tx} - get collection of transaction, 
+    \item \texttt{GET /tx/[:txHash]} - get transaction by hash,
+    \item \texttt{GET /block} - get block collection,
+    \item \texttt{GET /block/[:blockHeightOrHash]} - get block by height or hash,
+    \item \texttt{GET /address} - get address collection,
+    \item \texttt{GET /address/[:hash]} - get address by hash.
+\end{itemize}
+All endpoints support more detailed path specification by providing multiple parameters at the end of the path (for example, it is possible to request only a block hash by calling \texttt{/block/42/hash}). Also, every endpoint supports query parameters
+\begin{itemize}
+    \item \texttt{filter} where value of this parameter can be simple arithmetic expression like \texttt{height>50},
+    \item \texttt{limit} parameter for pagination with default value set to \texttt{20},
+    \item \texttt{orderBy} sorts results of a sequence in ascending order.
+\end{itemize}
+ 
 
 
 

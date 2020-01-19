@@ -1,9 +1,9 @@
 \chapter{IPFS}
 \label{ipfs}
 
-IPFS\footnote{\url{https://ipfs.io/}} stands for InterPlanetary File System and is a peer-to-peer distributed filesystem designed to make the Web faster, safer, and more open. In contrast with standard filesystem, objects in IPFS are content-addressed by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see figure \ref{webAddressing}). In IPFS user needs only to know the hash of the requested file. He does not care about the location of the file (see figure \ref{ipfsAddressing}). Let us take a MIT license text, and add it to IPFS.If somebody tries to add this license as a file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is now and will be in the future, the \textit{content address} of that file. Later, when user try to get this file by its hash, he can get it from a random person that added it into IPFS in the past.
+IPFS\footnote{\url{https://ipfs.io/}} stands for InterPlanetary File System and is a peer-to-peer distributed filesystem designed to make the Web faster, safer, and more open. In contrast with a standard filesystem, objects in IPFS are content-addressed by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see figure \ref{webAddressing}). In IPFS user needs only to know the hash of the requested file. He does not care about the location of the file (see figure \ref{ipfsAddressing}). Let us take an MIT license text, and add it to IPFS.If somebody tries to add this license as a file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is now and will be in the future, the \textit{content address} of that file. Later, when user try to get this file by its hash, he can get it from a random person that added it into IPFS in the past.
 
-IPFS can easily represent a file system consisting of files and directories. A small file (less than 256 kB) is represented by an IPFS object with data being the file contents (plus a small header and footer). Note that the file name is not part of the IPFS object, so two files with different names and the same content will have the same IPFS object representation and hence the same hash. A large file (more than 256 kB) is represented by a list of links to file chunks that are less than 256 kB, and only minimal information specifying that this object represents a large file. Currently there is no known size limitations uploaded file or directory. There are already some big datasets hosted on IPFS such as Geocities archive\footnote{\url{https://ipfs.io/ipfs/QmVCjhoEFC9vwvaa8bKyJgwAByP4MXSogcyDGoz4Lkc3ox}} (704TB) or Project Apollo Archives\footnote{\url{https://ipfs.io/ipfs/QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D}} (61GB).
+IPFS can easily represent a file system consisting of files and directories. A small file (less than 256 kB) is represented by an IPFS object with data being the file contents (plus a small header and footer). Note that the file name is not part of the IPFS object, so two files with different names and the same content will have the same IPFS object representation and hence the same hash. A large file (more than 256 kB) is represented by a list of links to file chunks that are less than 256 kB, and only minimal information specifying that this object represents a large file. Currently, there is no known size limitations uploaded file or directory. There are already some big datasets hosted on IPFS such as Geocities archive\footnote{\url{https://ipfs.io/ipfs/QmVCjhoEFC9vwvaa8bKyJgwAByP4MXSogcyDGoz4Lkc3ox}} (704TB) or Project Apollo Archives\footnote{\url{https://ipfs.io/ipfs/QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D}} (61GB).
 
 IPFS provides API for manipulation with objects in several levels of abstraction. Two most used APIs are Files and Graph API. 
 The files API\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/FILES.md}} enables users to use the File System abstraction of IPFS. Currently it has \texttt{add},  \texttt{cat},  \texttt{get} and  \texttt{ls} methods. In the future, there should be MFS (Mutable File System), that would add methods \texttt{chmod}, \texttt{cp}, \texttt{mv}, \texttt{rm}, \texttt{stat} and \texttt{touch}\footnote{\url{https://docs.ipfs.io/guides/concepts/mfs/}}.
@@ -24,7 +24,7 @@ Graph API\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/mast
 \end{figure}
 
 \section{IPFS stack}
-We can split IPFS into layers (see figure \ref{IPFSstack}). There is \textit{libp2p}\footnote{\url{https://libp2p.io/}} at the bottom, which is peer-to-peer networking module, that handles peer and content discovery, transport, security, identity, peer routing, and messaging. \textit{IPLD} is the data model of the content-addressable web. It is providing linking between objects and multihash computing. On the top is \textit{IPFS} which allows to publish and share files (or any data).\cite{IPFSwhitepaper}
+We can split IPFS into layers (see figure \ref{IPFSstack}). \textit{Libp2p}\footnote{\url{https://libp2p.io/}} is at the bottom, which is a peer-to-peer networking module, that handles peer and content discovery, transport, security, identity, peer routing, and messaging. \textit{IPLD} is the data model of the content-addressable web. It is providing linking between objects and multihash computing. On the top is \textit{IPFS} which allows to publish and share files (or any data).\cite{IPFSwhitepaper}
 
 
 \begin{figure}[h]
@@ -36,31 +36,31 @@ We can split IPFS into layers (see figure \ref{IPFSstack}). There is \textit{lib
 
 
 \section{libp2p}
-Libp2p is a modular system of protocols, specifications and libraries that enable the development of peer-to-peer network applications. It provides NAT Traversal, Peer Discovery, Routing, Stream Multiplexing, Protocol Multiplexing, Encryption, Authentication and more. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer, which is responsible for the actual transmission and receipt of data from one peer to another. For both content discovery and peer routing, libp2p uses Kademlia-based distributed hash table. With Kademlia, libp2p iteratively routes requests closer to the desired peer or content using Kademlia routing algorithm\cite{kademlia}. In the future, Kademlia might be changed easily to some other solutions that implements simple interface in figure \ref{libp2pInterface}.\cite{WebEngineering}
+Libp2p is a modular system of protocols, specifications and libraries that enable the development of peer-to-peer network applications. It provides NAT Traversal, Peer Discovery, Routing, Stream Multiplexing, Protocol Multiplexing, Encryption, Authentication and more. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer, which is responsible for the actual transmission and receipt of data from one peer to another. For both content discovery and peer routing, libp2p uses Kademlia-based distributed hash table. With Kademlia, libp2p iteratively routes requests closer to the desired peer or content using Kademlia routing algorithm\cite{kademlia}. In the future, Kademlia might be changed easily to some other solutions that implements a simple interface for publishing and requesting data and finding a peer.\cite{WebEngineering}
 
 
-\begin{figure}[h]
-    \centering
-    \begin{lstlisting}
-        // gets a particular peer's network address
-        FindPeer(node NodeId)
+% \begin{figure}[h]
+%     \centering
+%     \begin{lstlisting}
+%         // gets a particular peer's network address
+%         FindPeer(node NodeId)
 
-        // stores a small metadata value in DHT
-        SetValue(key []bytes, value []bytes)
+%         // stores a small metadata value in DHT
+%         SetValue(key []bytes, value []bytes)
 
-        // retrieves small metadata value from DHT
-        GetValue(key []bytes)
+%         // retrieves small metadata value from DHT
+%         GetValue(key []bytes)
 
-        // announces this node can serve a large value
-        ProvideValue(key Multihash)
+%         // announces this node can serve a large value
+%         ProvideValue(key Multihash)
 
-        // gets a number of peers serving a large value
-        FindValuePeers(key Multihash, min int)
+%         // gets a number of peers serving a large value
+%         FindValuePeers(key Multihash, min int)
 
-    \end{lstlisting}
-    \caption{libp2p interface}
-    \label{libp2pInterface}
-\end{figure}
+%     \end{lstlisting}
+%     \caption{libp2p interface}
+%     \label{libp2pInterface}
+% \end{figure}
 
 \section{IPLD}
 IPLD is providing linking and addressing objects with CID (Content ID). CID is hash-based self-describing content identifier (usually encoded to base58\footnote{\url{https://en.wikipedia.org/wiki/Base58}} format) which includes codec and multihash. Multihash is then further composed of hashtype and hash value. Let us look closer on the MIT license file, that we add to IPFS at the beginning of this chapter (see figure \ref{ipfs}). It's CID is \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ}. It can be converted to human-readable format as can be seen in figure \ref{tab:CIDexample}, thanks to multicodec table\footnote{\url{https://github.com/multiformats/multicodec/blob/master/table.csv}}. We can see that this CID is encoded in base58 format and the file was stored using protobuf\footnote{\url{https://en.wikipedia.org/wiki/Protocol\_Buffers}} codec (this information is necessary to decode file correctly).
@@ -94,9 +94,9 @@ There are already stored a few blockchains of cryptocurrencies in IPFS. For brow
 
 \begin{itemize}
     \item Existing IPLD codecs for cryptocurrencies are very limited. Only a few of cryptocurrency codecs are currently available in IPLD (namely Leofcoin, Ethereum, Bitcoin, Zcash, Steller, Decred and Dash)\footnote{\url{https://github.com/multiformats/multicodec/blob/master/table.csv}}.
-    \item Addresses are not stored in IPFS, because they are not part of a blockchain. This means, the explorer needs to go through the entire blockchain for computing address balance or finding address transactions.
-    \item No additional information (for example transaction value in US dollars) can be stored with objects, because it would change content, and therefore its hash.
-    \item There is no sorting or filtering. Explorer can only show object (block or transaction) by its hash. 
+    \item Addresses are not stored in IPFS, because they are not part of a blockchain. This means the explorer needs to go through the entire blockchain for computing address balance or to find address transactions.
+    \item No additional information (for example transaction value in US dollars) can be stored with objects because it would change content, and therefore hash of the object.
+    \item There is no sorting or filtering. Explorer can only show the object (block or transaction) by its hash. 
 \end{itemize}
 
 

@@ -1,19 +1,19 @@
 \chapter{Implementation}
 \label{Implementation}
-
-Both Feeder and Explorer are implemented in Typescript, and they are using js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation of IPFS node. This selection of tools enables code sharing between these two separated applications.
+This chapter describes the implementation details of the system, shows the internal
+architecture. As mentioned in the previous chapter, the program was created in Typescript, and they are using js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation of IPFS node. This selection of tools enables code sharing between these two separated applications.
 
 \section{Feeder implementation}
-Informations about supported cryptocurrencies and enabled indexes are stored in Feeder's configuration file. Based on these settings, Feeder will chcek for new cryptocurrencies blocks after start. If Feeder finds some unstored blocks, it starts following pipeline for each missing block:
+Informations about supported cryptocurrencies and enabled indexes are stored in Feeder's configuration file. Based on these settings, Feeder will check for new cryptocurrencies blocks after the start. If Feeder finds some unstored blocks, it starts following pipeline for each missing block:
 \begin{itemize}
     \item downloads missing block from Blockbook with its transactions,
     \item saves block and its transactions in IPFS,
-    \item updates indexes. 
+    \item updates indexes.
 \end{itemize}
 
 
 \subsection{Indexes}
-There are implemented a few different ways of indexing blockchain data in the prototype:
+Indexes are used for quick access to the data. Several different ways of indexing data are currently possible in IPFS:
 \begin{itemize}
     \item \textbf{OrbitDB}\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks\footnote{\url{https://haja.io/}}. OrbitDB is a good solution for small user's databases, but it is still in the alpha stage of developing, and it is not well optimized to store hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform query like \texttt{db.query((tx) => tx.amount > 0.001)} OrbitDB needs to load all database locally and then cycling between them. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
     \cite{OrbitDBManual}
@@ -21,9 +21,7 @@ There are implemented a few different ways of indexing blockchain data in the pr
     \cite{TextileWhitePaper}
 \end{itemize}
 
-After some research, we concluded that currently for storing and indexing data in IPFS without large harddisk memory consumption, there is no solution.
-
-I created my own indexing system that currently supports three types of indexes.
+After some research, we concluded that currently for storing and indexing data in IPFS without large harddisk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes.
 
 \begin{itemize}
     \item \textbf{Dictionary} -- A simple key-value structure that can be used for translating (for example, block height to block). Search complexity is \texttt{O(1)}, which is the fastest achievable speed. Big disadvantage is that client needs to download a whole dictionary to performs search. In the time of writing this thesis, Ethereum has 9 250 000 blocks. If we want to make dictionary for translating block height to IPFS block address, the size of this dictionary would be at least \texttt{(int\_size + multihash\_size) * 9 250 000 } where minimal size for \texttt{int\_size} is \texttt{4} bytes and \texttt{multihash\_size} is \texttt{36} bytes when sha-256 is used (32 bytes) and multihash prefix is 4 bytes long. So this dictionary would have over 1.3 GB only for Ethereum. Another disadvantage is the impossibility to performing range search (for example get blocks between 9 249 950 and 9 250 000).
@@ -34,7 +32,6 @@ I created my own indexing system that currently supports three types of indexes.
         \caption{Reverse lookup by transaction hash}
         \label{reverseLookupIndex}
     \end{figure}
-
 
     \item \textbf{Reverse lookup} -- This structure is inspired by Reverse DNS lookup\footnote{\url{https://en.wikipedia.org/wiki/Reverse_DNS_lookup}} and its principle can be seen on figure \ref{reverseLookupIndex}. For every item that will be stored in this index, the key is reversed (for better selectivity) and split into the smaller substrings. Leading substring of every key is stored in root (level 1) dictionary and is pointing to another dictionary that consists of following substrings which have the corresponding prefix in parent dictionary. Last level dictionary substrings are pointing to IPFS objects. In this index, there is a problem with performing range select operations, because items have reversed key.
     
@@ -50,18 +47,12 @@ I created my own indexing system that currently supports three types of indexes.
     \end{figure}
 
 \end{itemize}
+Implementing these indexes in IPFS was surprisingly simple thanks to IPLD objects and links. When Feeder stores data into IPFS, it may also perform an index update that will change content address of the index. To prevent this, we use IPNS for creating and updating mutable links to indexes.
 
-Implementing these indexes in IPFS was surprisingly simple thanks to IPLD objects and links.
 
 
 \section{Explorer implementation}
-Currently, there are two options for running Explorer:
-\begin{itemize}
-    \item running Explorer like web application in a browser with simple GUI,
-    \item using Explorer as RestAPI to interact with other services.
-\end{itemize} 
-
-This architecture is shown in Figure \ref{ExplorerArchitecture}.
+We can split Explorer to several modules. The central part is ExplorerCore which communicates with IPFS and provides an interface to explore blockchain and to perform queries. There can be ExplorerGUI or ExplorerAPI on the top of the ExplorerCore. These modules are providing communication with user or other systems. This architecture is shown in Figure \ref{ExplorerArchitecture}.
 
 \begin{figure}[h]
     \centering
@@ -71,18 +62,27 @@ This architecture is shown in Figure \ref{ExplorerArchitecture}.
 \end{figure}
 
 \subsection{ExplorerCore}
-ExplorerCore is module that communicate with IPFS. It has simple interface for obtaining the data:
+ExplorerCore is main module of the Explorer. It is responsible for obtaining and resolving data from IPFS and performing queries. It has simple interface:
 \begin{itemize}
     \item \texttt{getObject(CID[, path])} - gets object from IPFS with optional path,
     \item \texttt{getTx(txHash)} - gets transaction by its hash,
     \item \texttt{getBlock(blockHash)} - gets block by its hash,
     \item \texttt{getBlock(blockHeight)} - gets block by its height,
-    \item \texttt{getAddress(addressHash)} - gets address by its hash,
-    \item \texttt{useIndex(index\_name, filter)} - uses index to retrieve array of objects that fits \texttt{filter}.
+    \item \texttt{getAddress(addressHash)} - gets address by its hash.
+\end{itemize}
+All ExplorerCore methods except \texttt{getObject} are returning \texttt{QueryObject}.
+
+\subsubsection{Query object}
+When ExplorerCore performs some method, its result are not immediately obtained from IPFS. Instead, a Query object is returned. The data obtaining will happen only when we access the data inside the Query object (for example, in for-loop) or by calling \texttt{toArray} method. This approach allows us filtering and sorting on the current Query object. Currently supported Query objects methods are:
+\begin{itemize}
+    \item \texttt{where(filter)} - returns only data that matchs \texttt{filter},
+    \item \texttt{select(subPath)} - from each object, returns only part defined by \texttt{subPath},
+    \item \texttt{limit(number)} - set maximum number of results,
+    \item \texttt{orderBy(property)} - sorts the elements of a sequence in ascending order.
 \end{itemize}
 
 \subsection{ExplorerGUI}
-ExplorerGUI is a single page application with simple user interface that runs in browser. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
+ExplorerGUI is a single page application with simple user interface that runs in browser implemented with Vue.js\footnote{\url{https://vuejs.org/}}. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
 
 \begin{figure}[h]
     \centering
@@ -93,7 +93,7 @@ ExplorerGUI is a single page application with simple user interface that runs in
 
 
 \subsection{ExplorerAPI}
-Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data (figure \ref{nodeIPFS}). On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently available routes are described in table \ref{tab:explorerApiEndpoints}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
+Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data (figure \ref{nodeIPFS}). On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
 
 Rest API supports optional path param \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.
 
@@ -103,18 +103,3 @@ Rest API supports optional path param \texttt{path} that is useful for traversin
     \caption{IPFS storage in node.js}
     \label{nodeIPFS}
 \end{figure}
-
-
-\begin{table}[h]
-    \centering
-    \begin{tabular}{|l|l|}
-    \hline
-    Endpoint                           & Description                       \\ \hline
-    \texttt{/tx/\{txHash\}/\{path*\}}           & Get transaction by hash  \\ \hline
-    \texttt{/block/\{blockHeight\}/\{path*\}}   & Get block by height      \\ \hline
-    \texttt{/block/\{blockHash\}/\{path*\}}     & Get block by hash        \\ \hline
-    \texttt{/address/\{addressHash\}/\{path*\}} & Get address by hash      \\ \hline
-    \end{tabular}
-    \caption{Rest API explorer endpoints}
-    \label{tab:explorerApiEndpoints}
-\end{table}
