@@ -27,7 +27,7 @@
 \contentsline {subsection}{\numberline {5.2.1}ExplorerCore}{16}{subsection.5.2.1}
 \contentsline {subsubsection}{Query system}{17}{section*.2}
 \contentsline {subsection}{\numberline {5.2.2}ExplorerGUI}{18}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}ExplorerAPI}{19}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.3}ExplorerAPI}{18}{subsection.5.2.3}
 \contentsline {chapter}{\numberline {6}Conclusion}{20}{chapter.6}
 \contentsline {chapter}{Bibliography}{21}{chapter*.3}
 \contentsfinish 
