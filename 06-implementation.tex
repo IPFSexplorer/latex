@@ -72,14 +72,25 @@ ExplorerCore is main module of the Explorer. It is responsible for obtaining and
 \end{itemize}
 All ExplorerCore methods except \texttt{getObject} are returning \texttt{QueryObject}.
 
-\subsubsection{Query object}
-When ExplorerCore performs some method, its result are not immediately obtained from IPFS. Instead, a Query object is returned. The data obtaining will happen only when we access the data inside the Query object (for example, in for-loop) or by calling \texttt{toArray} method. This approach allows us filtering and sorting on the current Query object. Currently supported Query objects methods are:
+\subsubsection{Query system}
+Explorer supports a simple query system. Every queriable object (address, transaction, block) has methods:
 \begin{itemize}
-    \item \texttt{where(filter)} - returns only data that matchs \texttt{filter},
-    \item \texttt{select(subPath)} - from each object, returns only part defined by \texttt{subPath},
-    \item \texttt{limit(number)} - set maximum number of results,
-    \item \texttt{orderBy(property)} - sorts the elements of a sequence in ascending order.
+    \item \texttt{is(propertyName)} - create a condition on the property. There can be multiple conditions in one query. A condition hash to be followed by one of the functions: 
+    \begin{itemize}
+        \item \texttt{gt(value)} - property is greater or equal than \texttt{value}. The query finds in an index first object that has property (set by \texttt{propertyName} in condition) equal or greater than \texttt{value}, and traverse index to the right (to bigger objects).
+        \item \texttt{lt(value)} - property is less or equal than \texttt{value}. Similar as in the \texttt{gt} function, the query finds the closest object that has property equal or less than \texttt{value}. Then, the query traverses index to the smaller objects with smaller index value (to the left).
+    \end{itemize}
+    \item \texttt{offset(offsetValue)} - query will skip \texttt{offsetValue} number of results,
+    \item \texttt{limit(limitValue)} - set maximum number of results. After query has \texttt{limitValue} count of matched objects it will stop browsing the index,
+    \item \texttt{all()} - return all objects that matched query,
+    \item \texttt{first()} - return the first object that matched a query,
+    \item \texttt{and(childQuery)} - logical and between two queries. Parent query resolves \texttt{childQuery} (call \texttt{all()} function) and makes a hashtable from its results. Later, when parent query being resolved, query checks if the result exists in the hashtable for every result.
+    \item \texttt{or(childQuery)} - logical or between two queries. \texttt{childQuery} will be resolved by parent query, and its results stores in hashtable. When the parent query is resolved, its results will be added to the hashtable. This will remove duplicates in the final results.
+    \item \texttt{[Symbol.iterator]()} - iterator that is used in cycle \texttt{for (result of query)}.
+
 \end{itemize}
+
+The data obtaining will happen only when we access the data inside the Query object (for example, in for-loop) or by calling \texttt{all()} or \texttt{first()} method. Index is used only for the first condition in a query, that is on the property, that has created index. Other conditions are performed client-side.
 
 \subsection{ExplorerGUI}
 ExplorerGUI is a single page application with simple user interface that runs in browser implemented with Vue.js\footnote{\url{https://vuejs.org/}}. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
