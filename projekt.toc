@@ -1,33 +1,47 @@
 \babel@toc {english}{}
-\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}
-\contentsline {chapter}{\numberline {2}Cryptocurrencies}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}Bitcoin}{4}{section.2.1}
-\contentsline {section}{\numberline {2.2}DigiByte}{4}{section.2.2}
-\contentsline {section}{\numberline {2.3}Ethereum}{5}{section.2.3}
-\contentsline {section}{\numberline {2.4}Decred}{5}{section.2.4}
-\contentsline {section}{\numberline {2.5}Monero}{5}{section.2.5}
-\contentsline {chapter}{\numberline {3}IPFS}{6}{chapter.3}
-\contentsline {section}{\numberline {3.1}IPFS stack}{7}{section.3.1}
-\contentsline {section}{\numberline {3.2}libp2p}{7}{section.3.2}
-\contentsline {section}{\numberline {3.3}IPLD}{8}{section.3.3}
-\contentsline {section}{\numberline {3.4}IPFS}{8}{section.3.4}
-\contentsline {section}{\numberline {3.5}IPNS}{9}{section.3.5}
-\contentsline {section}{\numberline {3.6}Existing blockchain explorers in IPFS}{9}{section.3.6}
-\contentsline {chapter}{\numberline {4}Design}{11}{chapter.4}
-\contentsline {section}{\numberline {4.1}Overview}{11}{section.4.1}
-\contentsline {section}{\numberline {4.2}Blockbook}{12}{section.4.2}
-\contentsline {section}{\numberline {4.3}Feeder}{12}{section.4.3}
-\contentsline {section}{\numberline {4.4}Explorer}{13}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}ExplorerGUI}{13}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}ExplorerAPI}{13}{subsection.4.4.2}
-\contentsline {chapter}{\numberline {5}Implementation}{14}{chapter.5}
-\contentsline {section}{\numberline {5.1}Feeder implementation}{14}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Indexes}{14}{subsection.5.1.1}
-\contentsline {section}{\numberline {5.2}Explorer implementation}{16}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}ExplorerCore}{16}{subsection.5.2.1}
-\contentsline {subsubsection}{Query system}{17}{section*.2}
-\contentsline {subsection}{\numberline {5.2.2}ExplorerGUI}{18}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}ExplorerAPI}{18}{subsection.5.2.3}
-\contentsline {chapter}{\numberline {6}Conclusion}{20}{chapter.6}
-\contentsline {chapter}{Bibliography}{21}{chapter*.3}
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Cryptocurrencies}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Bitcoin}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2}DigiByte}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Ethereum}{6}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Decred}{6}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Monero}{6}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Decentralization (Web3.0)}{7}{chapter.3}%
+\contentsline {chapter}{\numberline {4}IPFS}{8}{chapter.4}%
+\contentsline {section}{\numberline {4.1}IPFS stack}{9}{section.4.1}%
+\contentsline {section}{\numberline {4.2}libp2p}{9}{section.4.2}%
+\contentsline {section}{\numberline {4.3}IPLD}{10}{section.4.3}%
+\contentsline {section}{\numberline {4.4}IPFS}{10}{section.4.4}%
+\contentsline {section}{\numberline {4.5}IPNS}{11}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Existing blockchain explorers in IPFS}{11}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Design}{13}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Database system}{13}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}OrbitDB}{13}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Textile}{13}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Database system design}{14}{subsection.5.1.3}%
+\contentsline {subsubsection}{Record}{14}{section*.2}%
+\contentsline {subsubsection}{Indexes}{14}{section*.3}%
+\contentsline {subsubsection}{Table}{14}{section*.4}%
+\contentsline {subsubsection}{Foreign keys}{14}{section*.5}%
+\contentsline {subsubsection}{Transactions}{14}{section*.6}%
+\contentsline {subsubsection}{Synchronization}{15}{section*.7}%
+\contentsline {subsubsection}{Queries}{15}{section*.8}%
+\contentsline {section}{\numberline {5.2}System components}{15}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Blockbook}{16}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Feeder}{16}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Explorer}{17}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}ExplorerGUI}{17}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}ExplorerAPI}{17}{subsection.5.5.2}%
+\contentsline {chapter}{\numberline {6}Implementation}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Feeder implementation}{19}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Indexes}{19}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Explorer implementation}{21}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}ExplorerCore}{21}{subsection.6.2.1}%
+\contentsline {subsubsection}{Query system}{22}{section*.9}%
+\contentsline {subsection}{\numberline {6.2.2}ExplorerGUI}{23}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}ExplorerAPI}{23}{subsection.6.2.3}%
+\contentsline {chapter}{\numberline {7}Benchmarking}{25}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Benchmarking enviroment}{25}{section.7.1}%
+\contentsline {chapter}{\numberline {8}Conclusion}{26}{chapter.8}%
+\contentsline {chapter}{Bibliography}{27}{chapter*.10}%
 \contentsfinish 

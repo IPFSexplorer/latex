@@ -18,7 +18,7 @@ $(CO).pdf: clean
 	pdflatex $(CO)
 	-bibtex $(CO)
 	pdflatex $(CO)
-	pdflatex $(CO)
+	pdflatex -synctex=1 $(CO)
 
 $(CO).dvi: $(CO).tex $(CO).bib
 	latex $(CO)

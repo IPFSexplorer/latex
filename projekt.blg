@@ -1,8 +1,23 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: projekt.aux
+This is BibTeX, Version 0.99d (TeX Live 2019/W32TeX)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: projekt.aux
 The style file: bib-styles/Pysny/enplain.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+format.manual.type is an unknown function---line 2841 of file bib-styles/Pysny/enplain.bst
+format.manual.details is an unknown function---line 2846 of file bib-styles/Pysny/enplain.bst
+manual is already a type "wizard-defined" function name
+---line 2860 of file bib-styles/Pysny/enplain.bst
+ : function {manual
+ :                 } { techreport }
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: 20-bibliography.bib
 Warning--"{" isn't a brace-balanced string for entry IPFSwhitepaper
-while executing--line 3375 of file bib-styles/Pysny/enplain.bst
+while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
 Warning--empty number in IPFSwhitepaper
 Warning--empty edition in newYorkerBTC
@@ -22,4 +37,45 @@ Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-(There were 20 warnings)
+You've used 14 entries,
+            3715 wiz_defined-function locations,
+            865 strings with 7379 characters,
+and the built_in function-call counts, 6166 in all, are:
+= -- 465
+> -- 195
+< -- 26
++ -- 66
+- -- 49
+* -- 339
+:= -- 825
+add.period$ -- 46
+call.type$ -- 14
+change.case$ -- 89
+chr.to.int$ -- 26
+cite$ -- 33
+duplicate$ -- 412
+empty$ -- 804
+format.name$ -- 49
+if$ -- 1468
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 0
+newline$ -- 93
+num.names$ -- 29
+pop$ -- 147
+preamble$ -- 1
+purify$ -- 57
+quote$ -- 0
+skip$ -- 275
+stack$ -- 0
+substring$ -- 287
+swap$ -- 71
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 29
+warning$ -- 19
+while$ -- 43
+width$ -- 16
+write$ -- 166
+(There were 3 error messages)

@@ -1,3 +1,9 @@
+% TODO: cele prepisat!!!!!!
+
+
+
+
+
 \chapter{Implementation}
 \label{Implementation}
 This chapter describes the implementation details of the system, shows the internal
@@ -94,7 +100,7 @@ Explorer supports a simple query system. Every queriable object (address, transa
 The data obtaining will happen only when we access the data inside the Query object (for example, in for-loop) or by calling \texttt{all()} or \texttt{first()} method. Index is used only for the first condition in a query, that is on the property, that has created index. Other conditions are performed client-side.
 
 \subsection{ExplorerGUI}
-ExplorerGUI is a single page application with simple user interface that runs in browser implemented with Vue.js\footnote{\url{https://vuejs.org/}}. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
+ExplorerGUI is a single page application with simple user interface that runs in browser implemented with Vue.js\footnote{\url{https://vuejs.org/}}. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in Figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
 
 \begin{figure}[h]
     \centering

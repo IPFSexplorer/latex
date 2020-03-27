@@ -70,7 +70,6 @@
 
 
 \usepackage{url}
-\usepackage[htt]{hyphenat}
 
 
 % =======================================================================
@@ -113,13 +112,14 @@
 % Řešení problému, kdy klikací odkazy na obrázky vedou za obrázek
 % This solves the problems with links which leads after the picture
 \usepackage[all]{hypcap}
-\usepackage[utf8]{inputenc}
+
+\makeatletter \let\import@path@fix\@firstofone \makeatother 
 
 % Informace o práci/projektu / Information about the thesis
 %---------------------------------------------------------------------------
 \projectinfo{
   %Prace / Thesis
-  project={SP},            %typ práce BP/SP/DP/DR  / thesis type (SP = term project)
+  project={DP},            %typ práce BP/SP/DP/DR  / thesis type (SP = term project)
   year={2020},             % rok odevzdání / year of submission
   date=\today,             % datum odevzdání / submission date
   %Nazev prace / thesis title
@@ -228,11 +228,11 @@
   % Compilation piecewise (see above, it is necessary to uncomment it)
   \subfile{01-introduction}
   \subfile{02-cryptocurrencies}
-  %\subfile{03-decentralization}
+  \subfile{03-decentralization}
   \subfile{04-IPFS}
   \subfile{05-design}
   \subfile{06-implementation}
-  %\subfile{07-testing}
+  \subfile{07-benchmarking}
   \subfile{08-conclusion}
 
 
