@@ -27,20 +27,20 @@
 \contentsline {subsubsection}{Synchronization}{15}{section*.7}%
 \contentsline {subsubsection}{Queries}{15}{section*.8}%
 \contentsline {section}{\numberline {5.2}System components}{15}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Blockbook}{16}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Feeder}{16}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Explorer}{17}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}ExplorerGUI}{17}{subsection.5.5.1}%
-\contentsline {subsection}{\numberline {5.5.2}ExplorerAPI}{17}{subsection.5.5.2}%
-\contentsline {chapter}{\numberline {6}Implementation}{19}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Feeder implementation}{19}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Indexes}{19}{subsection.6.1.1}%
-\contentsline {section}{\numberline {6.2}Explorer implementation}{21}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}ExplorerCore}{21}{subsection.6.2.1}%
-\contentsline {subsubsection}{Query system}{22}{section*.9}%
-\contentsline {subsection}{\numberline {6.2.2}ExplorerGUI}{23}{subsection.6.2.2}%
+\contentsline {section}{\numberline {5.3}Feeder}{16}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Explorer}{16}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}ExplorerGUI}{17}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}ExplorerAPI}{17}{subsection.5.4.2}%
+\contentsline {chapter}{\numberline {6}Implementation}{18}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Feeder implementation}{18}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Blockbook}{18}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Indexes}{19}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Explorer implementation}{20}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}ExplorerCore}{20}{subsection.6.2.1}%
+\contentsline {subsubsection}{Query system}{21}{section*.9}%
+\contentsline {subsection}{\numberline {6.2.2}ExplorerGUI}{22}{subsection.6.2.2}%
 \contentsline {subsection}{\numberline {6.2.3}ExplorerAPI}{23}{subsection.6.2.3}%
-\contentsline {chapter}{\numberline {7}Benchmarking}{25}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Benchmarking and testing}{25}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Benchmarking enviroment}{25}{section.7.1}%
 \contentsline {chapter}{\numberline {8}Conclusion}{26}{chapter.8}%
 \contentsline {chapter}{Bibliography}{27}{chapter*.10}%

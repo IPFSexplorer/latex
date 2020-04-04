@@ -17,6 +17,14 @@ Informations about supported cryptocurrencies and enabled indexes are stored in 
     \item updates indexes.
 \end{itemize}
 
+\subsection{Blockbook}
+Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and the community implemented some others). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSQL database that stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
+\begin{itemize}
+    \item \textbf{Not distributed} (client-server architecture) - problem with scaling for more users. 
+    \item \textbf{Not a SQL database} - it does not have a relational data model, it does not support SQL queries, and it has no support for indexes.
+    \item \textbf{Single-Process} - only a single process (possibly multi-threaded) can access a particular database at a time.
+\end{itemize}
+
 
 \subsection{Indexes}
 Indexes are used for quick access to the data. Several different ways of indexing data are currently possible in IPFS:
@@ -50,6 +58,7 @@ After some research, we concluded that currently for storing and indexing data i
         \includegraphics[width=13cm]{btreeindex.png}
         \caption{B+ tree index structure}
         \label{btreeindex}
+        \todo{Change image of B-tree without cyclic references}
     \end{figure}
 
 \end{itemize}
