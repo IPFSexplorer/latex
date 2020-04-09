@@ -15,10 +15,10 @@ $(CO).ps: $(CO).dvi
 	dvips $(CO)
 
 $(CO).pdf: clean
-	pdflatex $(CO)
+	pdflatex -interaction=nonstopmode $(CO)
 	-bibtex $(CO)
-	pdflatex $(CO)
-	pdflatex -synctex=1 $(CO)
+	pdflatex -interaction=nonstopmode $(CO)
+	pdflatex -synctex=1 -interaction=nonstopmode $(CO)
 
 $(CO).dvi: $(CO).tex $(CO).bib
 	latex $(CO)
@@ -27,9 +27,9 @@ $(CO).dvi: $(CO).tex $(CO).bib
 	latex $(CO)
 
 clean:
-	rm -f *.dvi $(CO).blg $(CO).bbl $(CO).toc *.aux $(CO).out $(CO).lof $(CO).ptc
-	rm -f $(CO).pdf
-	rm -f *~
+	# rm -f *.dvi $(CO).blg $(CO).bbl $(CO).toc *.aux $(CO).out $(CO).lof $(CO).ptc
+	# rm -f $(CO).pdf
+	# rm -f *~
 
 pack:
 	tar czvf $(CO).tar.gz *.tex *.bib *.bst ./template-fig/* ./bib-styles/* ./cls/* zadani.pdf $(CO).pdf Makefile Changelog

@@ -23,25 +23,31 @@
 \contentsline {subsubsection}{Indexes}{14}{section*.3}%
 \contentsline {subsubsection}{Table}{14}{section*.4}%
 \contentsline {subsubsection}{Foreign keys}{14}{section*.5}%
-\contentsline {subsubsection}{Transactions}{14}{section*.6}%
+\contentsline {subsubsection}{Transactions}{15}{section*.6}%
 \contentsline {subsubsection}{Synchronization}{15}{section*.7}%
 \contentsline {subsubsection}{Queries}{15}{section*.8}%
-\contentsline {section}{\numberline {5.2}System components}{15}{section.5.2}%
+\contentsline {section}{\numberline {5.2}System components}{16}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Feeder}{16}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Explorer}{16}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Explorer}{17}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}ExplorerGUI}{17}{subsection.5.4.1}%
 \contentsline {subsection}{\numberline {5.4.2}ExplorerAPI}{17}{subsection.5.4.2}%
-\contentsline {chapter}{\numberline {6}Implementation}{18}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Feeder implementation}{18}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Blockbook}{18}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Indexes}{19}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Explorer implementation}{20}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}ExplorerCore}{20}{subsection.6.2.1}%
-\contentsline {subsubsection}{Query system}{21}{section*.9}%
-\contentsline {subsection}{\numberline {6.2.2}ExplorerGUI}{22}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}ExplorerAPI}{23}{subsection.6.2.3}%
-\contentsline {chapter}{\numberline {7}Benchmarking and testing}{25}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Benchmarking enviroment}{25}{section.7.1}%
-\contentsline {chapter}{\numberline {8}Conclusion}{26}{chapter.8}%
-\contentsline {chapter}{Bibliography}{27}{chapter*.10}%
+\contentsline {chapter}{\numberline {6}Implementation}{19}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Explorer-core implementation}{19}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Indexes}{19}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Query system}{20}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Database}{20}{subsection.6.1.3}%
+\contentsline {subsubsection}{Tables}{20}{section*.9}%
+\contentsline {subsubsection}{Transactions}{20}{section*.10}%
+\contentsline {subsubsection}{Synchronization}{21}{section*.11}%
+\contentsline {section}{\numberline {6.2}Feeder implementation}{21}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Explorer implementation}{21}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}ExplorerCore}{22}{subsection.6.3.1}%
+\contentsline {subsubsection}{Query system}{22}{section*.12}%
+\contentsline {subsection}{\numberline {6.3.2}ExplorerGUI}{24}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}ExplorerAPI}{24}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {7}Benchmarking and testing}{26}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Benchmarking enviroment}{26}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Blockbook}{26}{subsection.7.1.1}%
+\contentsline {chapter}{\numberline {8}Conclusion}{27}{chapter.8}%
+\contentsline {chapter}{Bibliography}{28}{chapter*.13}%
 \contentsfinish 

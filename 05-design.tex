@@ -13,7 +13,7 @@ Textile is a set of open-source tools that provide a distributed peer-to-peer da
 Neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed.
 
 \subsection{Database system design}
-A database system that fits our needs is distributed and decentralized. That brings us lots of synchronization problems to solve. This database system consists of tables that contain records. For faster searching, tables have indexes. Relations between tables are represented via foreign keys. Also, this database system supports fluent query language, used for performing complex queries.
+After some research, we concluded that currently for storing and indexing data in IPFS without large harddisk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes. A database system that fits our needs is distributed and decentralized. That brings us lots of synchronization problems to solve. This database system consists of tables that contain records. For faster searching, tables have indexes. Relations between tables are represented via foreign keys. Also, this database system supports fluent query language, used for performing complex queries.
 
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
@@ -42,7 +42,7 @@ Every time a transaction queue is empty (all pending transactions has been appli
 
 \todo{Describe log more https://hal.inria.fr/inria-00555588}
 
-If more than one user publishes a new version of the database that has been created from the same version, other use needs to decide which version they would accept. There are multiple ways to solve database version conflicts: 
+ If more than one user publishes a new version of the database that has been created from the same version, other use needs to decide which version they would accept. There are multiple ways to solve database version conflicts: 
 \begin{itemize}
     \item Compare hashes of new database versions and who has the biggest hash wins,
     \item A user who is connected for the longest time wins.
@@ -101,10 +101,10 @@ A Feeder can use different sources for obtaining blockchains data. It can be con
 
 
 \section{Explorer}
-Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries, for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
+Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
 
 \subsection{ExplorerGUI}
-ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user clicks on a different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties is supported.
+ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties is supported.
 
 
 \subsection{ExplorerAPI}

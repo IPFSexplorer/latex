@@ -1,54 +1,72 @@
-% TODO: cele prepisat!!!!!!
-
-
-
-
-
 \chapter{Implementation}
 \label{Implementation}
 This chapter describes the implementation details of the system, shows the internal
 architecture. As mentioned in the previous chapter, the program was created in Typescript, and they are using js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation of IPFS node. This selection of tools enables code sharing between these two separated applications.
 
-\section{Feeder implementation}
-Informations about supported cryptocurrencies and enabled indexes are stored in Feeder's configuration file. Based on these settings, Feeder will check for new cryptocurrencies blocks after the start. If Feeder finds some unstored blocks, it starts following pipeline for each missing block:
-\begin{itemize}
-    \item downloads missing block from Blockbook with its transactions,
-    \item saves block and its transactions in IPFS,
-    \item updates indexes.
-\end{itemize}
-
-\subsection{Blockbook}
-Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and the community implemented some others). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSQL database that stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
-\begin{itemize}
-    \item \textbf{Not distributed} (client-server architecture) - problem with scaling for more users. 
-    \item \textbf{Not a SQL database} - it does not have a relational data model, it does not support SQL queries, and it has no support for indexes.
-    \item \textbf{Single-Process} - only a single process (possibly multi-threaded) can access a particular database at a time.
-\end{itemize}
-
+\section{Explorer-core implementation}
+Explorer-core is the most complex module of a whole system with more than 5000 lines of code. The database is a main part of the explorer-core module. Database system consists of a query system, indexes and a database abstract layer. 
 
 \subsection{Indexes}
-Indexes are used for quick access to the data. Several different ways of indexing data are currently possible in IPFS:
+For indexing there is currently implemented only B-tree, but different structures such as tries\footnote{\url{https://en.wikipedia.org/wiki/Trie}} can be implemented easily. They only need to implement index's interface (function such as \texttt{insert}, \texttt{delete}, \texttt{update}, \texttt{find}). We can create indexes on database entities with decorators\footnote{\url{https://www.typescriptlang.org/docs/handbook/decorators.html}}, which are part of ECMAScript 6 standard. Every database entity has to have \texttt{PrimaryKey} decorator on property that is used as a primary index. Index has three parameters:
 \begin{itemize}
-    \item \textbf{OrbitDB}\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks\footnote{\url{https://haja.io/}}. OrbitDB is a good solution for small user's databases, but it is still in the alpha stage of developing, and it is not well optimized to store hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform query like \texttt{db.query((tx) => tx.amount > 0.001)} OrbitDB needs to load all database locally and then cycling between them. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
-    \cite{OrbitDBManual}
-    \item \textbf{Textile}\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a decentralized database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos\footnote{\url{https://textile.photos/}}, notes\footnote{\url{https://noet.io/}} or anything else\footnote{\url{https://anytype.io/}}. Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses \textit{Cafe} peers to provides backups and indexing. Every data store is duplicated on several \textit{Cafe} peers. When a client is obtaining some data, it will contact one of the \textit{Cafe} peers, and \textit{Cafe} peer will resolve a query for the client. This is a problem for our solution because using textile require lots of harddisk memory and does not solve the problem with overloading \textit{Cafe} peers.
-    \cite{TextileWhitePaper}
+    \item \texttt{comparator} - is a function that accepts two arguments and returns number that is less than zero if first arguments is greater than second, zero if arguments are the same, more then zero if a second argument is greater than first. If a user has not set any custom comparator default one (\texttt{(a, b) =>
+    a < b ? -1 : +(a > b)}) is used. This default comparator works on atomic keys such as string or numbers. 
+    \item \texttt{keyGetter} - is another function that accepts a whole entity as arguments and returns key, that is used in an index. A default key getter is function that returns property of the entity (for example default key getter for property \texttt{height} is \texttt{(e) =>  e[''height'']}).
+    \item \texttt{branching} - the branching factor is the number of children at each node, the outdegree. Default branching factor is 16.
 \end{itemize}
 
-After some research, we concluded that currently for storing and indexing data in IPFS without large harddisk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes.
+\todo{Image of B-Tree}
+
+\subsection{Query system}
+Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results.
+
+\subsection{Database}
+The most important part of the explorer-core module is a Database system which connects query system with indexes. When we make a query, it translates to the database, and data are obtained from the indexes.
+
+\subsubsection{Tables}
+A database contains tables. A table contains indexes and table name and implements operations that modifies its state:
+\begin{itemize}
+    \item \texttt{insert} - creates history log for entity with first entity version. Then adds it to every table index.
+    \item \texttt{update} - adds new version of the entity to its history log. Than update every index of the table.
+    \item \texttt{delete} - removes entity from every table index. From now, entity can not be find in this table.
+\end{itemize}
+
+\subsubsection{Transactions}
+A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
+
+\subsubsection{Synchronization}
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks.
 
 \begin{itemize}
-    \item \textbf{Dictionary} -- A simple key-value structure that can be used for translating (for example, block height to block). Search complexity is \texttt{O(1)}, which is the fastest achievable speed. Big disadvantage is that client needs to download a whole dictionary to performs search. In the time of writing this thesis, Ethereum has 9 250 000 blocks. If we want to make dictionary for translating block height to IPFS block address, the size of this dictionary would be at least \texttt{(int\_size + multihash\_size) * 9 250 000 } where minimal size for \texttt{int\_size} is \texttt{4} bytes and \texttt{multihash\_size} is \texttt{36} bytes when sha-256 is used (32 bytes) and multihash prefix is 4 bytes long. So this dictionary would have over 1.3 GB only for Ethereum. Another disadvantage is the impossibility to performing range search (for example get blocks between 9 249 950 and 9 250 000).
+    \item \textbf{Longer connected wins} - user that is connected to database 
+\end{itemize}
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=13cm]{ReverseLookup_index.png}
-        \caption{Reverse lookup by transaction hash}
-        \label{reverseLookupIndex}
-    \end{figure}
 
-    \item \textbf{Reverse lookup} -- This structure is inspired by Reverse DNS lookup\footnote{\url{https://en.wikipedia.org/wiki/Reverse_DNS_lookup}} and its principle can be seen in Figure \ref{reverseLookupIndex}. For every item that will be stored in this index, the key is reversed (for better selectivity) and split into the smaller substrings. Leading substring of every key is stored in root (level 1) dictionary and is pointing to another dictionary that consists of following substrings which have the corresponding prefix in parent dictionary. Last level dictionary substrings are pointing to IPFS objects. In this index, there is a problem with performing range select operations, because items have reversed key.
-    
+
+
+\section{Feeder implementation}
+A Feeder is a simple program (less than a hundred lines of code) written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends only explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain (we can spawn one Feeder for every blockchain we want to index).
+
+
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    load configuration\;
+     \While{there is new block}{
+         fetch block\;
+         \For{transaction in block}{
+            save transaction\;
+            }
+          save block\;
+     }
+    \caption{Feeder algorithm}
+    \label{feederAlgo}
+\end{algorithm}
+
+
+
+\begin{itemize}
+   
     \item \textbf{B+ Tree} - It is perhaps the most powerful index structure. With auto balanced B+ tree, we can efficiently search objects by given key and performs range selects. Example of this structure can be seen in Figure \ref{btreeindex}. By default, there is the limit of 32 items in one node (but can be changed from 4 to 256). 
     
 

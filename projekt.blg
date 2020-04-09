@@ -25,57 +25,53 @@ Warning--empty number in newYorkerBTC
 Warning--empty isbn and issn in haber1990time
 Warning--empty edition in decredWhitePaper
 Warning--empty number in decredWhitePaper
-Warning--empty edition in OrbitDBManual
-Warning--empty isbn in OrbitDBManual
 Warning--empty isbn and issn in kademlia
 Warning--empty edition in narayanan2016bitcoin
 Warning--empty isbn in narayanan2016bitcoin
 Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
-Warning--empty edition in TextileWhitePaper
-Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-You've used 14 entries,
+You've used 12 entries,
             3715 wiz_defined-function locations,
-            865 strings with 7379 characters,
-and the built_in function-call counts, 6166 in all, are:
-= -- 465
-> -- 195
-< -- 26
-+ -- 66
-- -- 49
-* -- 339
-:= -- 825
-add.period$ -- 46
-call.type$ -- 14
-change.case$ -- 89
+            852 strings with 7008 characters,
+and the built_in function-call counts, 5455 in all, are:
+= -- 411
+> -- 172
+< -- 24
++ -- 56
+- -- 43
+* -- 296
+:= -- 727
+add.period$ -- 40
+call.type$ -- 12
+change.case$ -- 78
 chr.to.int$ -- 26
-cite$ -- 33
-duplicate$ -- 412
-empty$ -- 804
-format.name$ -- 49
-if$ -- 1468
+cite$ -- 27
+duplicate$ -- 362
+empty$ -- 716
+format.name$ -- 43
+if$ -- 1306
 int.to.chr$ -- 0
-int.to.str$ -- 14
+int.to.str$ -- 12
 missing$ -- 0
-newline$ -- 93
-num.names$ -- 29
-pop$ -- 147
+newline$ -- 81
+num.names$ -- 25
+pop$ -- 128
 preamble$ -- 1
-purify$ -- 57
+purify$ -- 49
 quote$ -- 0
-skip$ -- 275
+skip$ -- 242
 stack$ -- 0
-substring$ -- 287
-swap$ -- 71
-text.length$ -- 13
+substring$ -- 265
+swap$ -- 65
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 29
-warning$ -- 19
-while$ -- 43
-width$ -- 16
-write$ -- 166
+type$ -- 25
+warning$ -- 15
+while$ -- 39
+width$ -- 14
+write$ -- 144
 (There were 3 error messages)
