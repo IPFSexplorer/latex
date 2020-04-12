@@ -16,6 +16,8 @@ manual is already a type "wizard-defined" function name
  :                 } { techreport }
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: 20-bibliography.bib
+Warning--entry type for "crdtLog" isn't style-file defined
+--line 1 of file 20-bibliography.bib
 Warning--"{" isn't a brace-balanced string for entry IPFSwhitepaper
 while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
@@ -33,45 +35,45 @@ Warning--empty number in moneroTracebility
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-You've used 12 entries,
+You've used 13 entries,
             3715 wiz_defined-function locations,
-            852 strings with 7008 characters,
-and the built_in function-call counts, 5455 in all, are:
-= -- 411
-> -- 172
+            861 strings with 7277 characters,
+and the built_in function-call counts, 5595 in all, are:
+= -- 424
+> -- 182
 < -- 24
-+ -- 56
-- -- 43
-* -- 296
-:= -- 727
++ -- 61
+- -- 47
+* -- 307
+:= -- 753
 add.period$ -- 40
-call.type$ -- 12
-change.case$ -- 78
+call.type$ -- 13
+change.case$ -- 84
 chr.to.int$ -- 26
 cite$ -- 27
-duplicate$ -- 362
-empty$ -- 716
-format.name$ -- 43
-if$ -- 1306
+duplicate$ -- 364
+empty$ -- 722
+format.name$ -- 47
+if$ -- 1330
 int.to.chr$ -- 0
-int.to.str$ -- 12
+int.to.str$ -- 13
 missing$ -- 0
 newline$ -- 81
-num.names$ -- 25
-pop$ -- 128
+num.names$ -- 26
+pop$ -- 132
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 55
 quote$ -- 0
-skip$ -- 242
+skip$ -- 249
 stack$ -- 0
-substring$ -- 265
+substring$ -- 270
 swap$ -- 65
 text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 25
+type$ -- 27
 warning$ -- 15
-while$ -- 39
-width$ -- 14
+while$ -- 40
+width$ -- 15
 write$ -- 144
 (There were 3 error messages)

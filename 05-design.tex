@@ -18,7 +18,15 @@ After some research, we concluded that currently for storing and indexing data i
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
 
-In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody does not update it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head on record log, and users need to solve them in application logic.
+In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody does not update it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just needs to look at the previous entry and compute increment for both country. Then update the record with final increment.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=11cm]{recordConflictSolver.png}
+    \caption{Record conflict}
+    \label{recordConflict}
+\end{figure}
 
 
 \subsubsection{Indexes}
@@ -29,24 +37,36 @@ An index is B-tree optimized for IPFS (no cycled references and node size less t
 \end{itemize}
 
 \subsubsection{Table}
-A table contains indexes, a list of foreign keys and table name.
+A table contains indexes and table name. Also it implements operations like \texttt{insert}, \texttt{update} and \texttt{delete}.
 
 \subsubsection{Foreign keys}
-We use foreign keys to represent relationships between tables. A foreign key is the value of a primary key of a referenced record.
+We use foreign keys to represent relationships between tables. A foreign key is simply a table name and a value of a primary key of a referenced record.
 
 \subsubsection{Transactions}
-When we commit a transaction, it is inserted to the queue. If there are more transactions in the queue, a database performs it one by one.
+When we commit a transaction, it is inserted to the transactions queue. If there are more transactions in the queue, a database performs it one by one. We can not execute more transactions in one moment, because it could cause data inconsistency. There are five types of transactions:
+\begin{itemize}
+    \item \texttt{read} - transaction for reading data from table. It is not logged in a database log (other peers don't have to know what we are reading from database).
+    \item \texttt{sync} - when some peer publishes a new version of the database, all other peers have to migrate to it. This transaction has the biggest priority, and therefore it is inserted at the beginning of the transactions queue. After a migration is done, transactions queue can continue working normally.
+    \item \texttt{insert}, \texttt{update}, \texttt{delete} - other types of transactions are written to database logs, because they are modifying the database.
+\end{itemize}
 
 \subsubsection{Synchronization} 
-Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version was created. Database versions create an append-only log. 
+Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version was created. Database versions create an append-only log called database log. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS and each points to a hash of previous version(s) forming a graph. Database logs can be forked and joined back together.\cite{crdtLog}
 
-\todo{Describe log more https://hal.inria.fr/inria-00555588}
-
- If more than one user publishes a new version of the database that has been created from the same version, other use needs to decide which version they would accept. There are multiple ways to solve database version conflicts: 
+If more than one peer publishes a new version of the database that has been created from the same database version, other peers needs to decide which version they would accept. Opposite to records conflicts, we needs to solve database versions conflict fast and automatically. There are multiple ways to solve them. For example: 
 \begin{itemize}
-    \item Compare hashes of new database versions and who has the biggest hash wins,
-    \item A user who is connected for the longest time wins.
+    \item \textbf{The biggest hash wins} - if there is more than one database version at the same (discrete) time, the one with the biggest hash wins. This strategy is present in Figure \ref{databaseConflict}. 
+    \item \textbf{The longest connecting time wins} - a user who is connected to the database for the longest time wins.
 \end{itemize}
+
+Lots of more strategies can be implemented. But they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13cm]{DBconflict.png}
+    \caption{Synchronization of a database. Note that in time 4, Node1 add two transactions in one DB version.}
+    \label{databaseConflict}
+\end{figure}
 
 \subsubsection{Queries} 
 A Database system provides query language for performing selects. A query consists of:
@@ -64,7 +84,7 @@ A Database system provides query language for performing selects. A query consis
     \begin{itemize}
         \item \textbf{all} - returns array of all results of the query,
         \item \textbf{first} - returns only first result,
-        \item \textbf{take} - returns \texttt{N} number of results where \texttt{N} is argument,
+        \item \textbf{take} - returns \texttt{N} number of results where \texttt{N} is an argument,
         \item \textbf{paginate} - 
         \item \textbf{iterate} -
     \end{itemize}
@@ -76,7 +96,7 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
 \begin{figure}[h]
     \centering
     \includegraphics[width=11cm]{AppArchitecture.png}
-    \caption{System design}
+    \caption{System architecture}
     \label{systemArchitecture}
 \end{figure}
 
@@ -90,13 +110,13 @@ A Feeder can use different sources for obtaining blockchains data. It can be con
 \todo{Describe used indexes and database structure that is present in feeder}
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=12cm]{feederDataStorageStructure.png}
-    \caption{Feeder data storage structure}
-    \label{feederDataStorageStructure}
-    \todo{change image to represent real scheme described}
-\end{figure}
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=12cm]{feederDataStorageStructure.png}
+%     \caption{Feeder data storage structure}
+%     \label{feederDataStorageStructure}
+%     \todo{change image to represent real scheme described}
+% \end{figure}
 
 
 

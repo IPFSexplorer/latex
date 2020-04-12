@@ -15,7 +15,20 @@ For indexing there is currently implemented only B-tree, but different structure
     \item \texttt{branching} - the branching factor is the number of children at each node, the outdegree. Default branching factor is 16.
 \end{itemize}
 
-\todo{Image of B-Tree}
+The B-tree structure (see Figure \ref{btree}) is optimized for IPFS. Unlike PostgreSQL B-tree\footnote{\url{https://github.com/postgres/postgres/tree/master/src/backend/access/nbtree}}, lead nodes haven't got left and right sibling references (due to cyclic reference this is not possible in IPFS). And therefore we don't have to store data only in leaves, but we can store data in nodes itself. This approach lead to better performance when executing queries. In insert queries, statistically fewer nodes needs to be updated. Also in search queries, there is a chance that we found a key in some non-leaf node, and therefore we would need fewer node visits.
+
+All search queries (equal, less, greater, between) has two steps:
+\begin{itemize}
+    \item \textbf{Find subtree} - First, we need to find minimal subtree that contains all results. We start in a root node of the B-tree. Then, we use an index's \texttt{comparator} function to determine if we can visit some child node and still have all the result in it. If not, we found a minimal subtree for the query.
+    \item \textbf{Traverse} - To get results of the query we can traverse minimal subtree in two direction. In-order for \texttt{greater than} and \texttt{between}. For \texttt{less than} reversed in-order. With \texttt{equal} it does not matter.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13cm]{btreeindex.png}
+    \caption{Btree indexing first 100 block by their height}
+    \label{btree}
+\end{figure}
 
 \subsection{Query system}
 Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results.
@@ -35,11 +48,7 @@ A database contains tables. A table contains indexes and table name and implemen
 A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks.
-
-\begin{itemize}
-    \item \textbf{Longer connected wins} - user that is connected to database 
-\end{itemize}
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \todo{add link}).
 
 
 
@@ -62,25 +71,6 @@ A Feeder is a simple program (less than a hundred lines of code) written in Type
     \caption{Feeder algorithm}
     \label{feederAlgo}
 \end{algorithm}
-
-
-
-\begin{itemize}
-   
-    \item \textbf{B+ Tree} - It is perhaps the most powerful index structure. With auto balanced B+ tree, we can efficiently search objects by given key and performs range selects. Example of this structure can be seen in Figure \ref{btreeindex}. By default, there is the limit of 32 items in one node (but can be changed from 4 to 256). 
-    
-
-
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=13cm]{btreeindex.png}
-        \caption{B+ tree index structure}
-        \label{btreeindex}
-        \todo{Change image of B-tree without cyclic references}
-    \end{figure}
-
-\end{itemize}
-Implementing these indexes in IPFS was surprisingly simple thanks to IPLD objects and links. When Feeder stores data into IPFS, it may also perform an index update that will change content address of the index. To prevent this, we use IPNS for creating and updating mutable links to indexes.
 
 
 

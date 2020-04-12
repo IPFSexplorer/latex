@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  9 APR 2020 19:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  12 APR 2020 20:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -781,7 +781,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.47 ... {6.3.3}ExplorerAPI}{24}{subsection.6.3.3}
+l.47 ... {6.3.3}ExplorerAPI}{25}{subsection.6.3.3}
                                                   % [1
 
 
@@ -871,83 +871,98 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 Chapter 5.
 [13
 
-] [14]
-<images/AppArchitecture.png, id=467, 692.5875pt x 474.77374pt>
-File: images/AppArchitecture.png Graphic file (type png)
-<use images/AppArchitecture.png>
-Package pdftex.def Info: images/AppArchitecture.png  used on input line 78.
-(pdftex.def)             Requested size: 312.9803pt x 214.55176pt.
- [15]
-<images/feederDataStorageStructure.png, id=480, 822.07124pt x 521.95pt>
-File: images/feederDataStorageStructure.png Graphic file (type png)
-<use images/feederDataStorageStructure.png>
-Package pdftex.def Info: images/feederDataStorageStructure.png  used on input l
-ine 95.
-(pdftex.def)             Requested size: 341.43306pt x 216.78043pt.
+]
+<images/recordConflictSolver.png, id=459, 532.99126pt x 544.0325pt>
+File: images/recordConflictSolver.png Graphic file (type png)
+<use images/recordConflictSolver.png>
+Package pdftex.def Info: images/recordConflictSolver.png  used on input line 26
+.
+(pdftex.def)             Requested size: 312.9803pt x 319.47386pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[16 <./images/AppArchitecture.png>] [17 <./images/feederDataStorageStructure.pn
-g>]
-Overfull \hbox (14.27757pt too wide) in paragraph at lines 123--124
+[14]
+
+LaTeX Warning: Citation `crdtLog' on page 15 undefined on input line 54.
+
+[15 <./images/recordConflictSolver.png>]
+<images/DBconflict.png, id=478, 683.55376pt x 522.95375pt>
+File: images/DBconflict.png Graphic file (type png)
+<use images/DBconflict.png>
+Package pdftex.def Info: images/DBconflict.png  used on input line 66.
+(pdftex.def)             Requested size: 369.88582pt x 282.98929pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16]
+<images/AppArchitecture.png, id=489, 699.61375pt x 510.90875pt>
+File: images/AppArchitecture.png Graphic file (type png)
+<use images/AppArchitecture.png>
+Package pdftex.def Info: images/AppArchitecture.png  used on input line 98.
+(pdftex.def)             Requested size: 312.9803pt x 228.56593pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `feederDataStorageStructure' on page 17 undefined on i
+nput line 105.
+
+[17 <./images/DBconflict.png>] [18 <./images/AppArchitecture.png>]
+Overfull \hbox (14.27757pt too wide) in paragraph at lines 143--144
 []\T1/lmtt/m/n/10.95 filter \T1/lmr/m/n/10.95 where value of this pa-ram-e-ter 
 can be sim-ple arith-metic ex-pres-sion like \T1/lmtt/m/n/10.95 height>50\T1/lm
 r/m/n/10.95 , 
  []
 
-) (./06-implementation.tex [18]
+) (./06-implementation.tex [19]
 Chapter 6.
-[19
+[20
 
-] [20]
-<images/btreeindex.png, id=527, 673.51625pt x 423.5825pt>
+]
+<images/btreeindex.png, id=533, 673.51625pt x 303.1325pt>
 File: images/btreeindex.png Graphic file (type png)
 <use images/btreeindex.png>
-Package pdftex.def Info: images/btreeindex.png  used on input line 76.
-(pdftex.def)             Requested size: 369.88582pt x 232.62854pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<images/ExplorerArchitecture.png, id=529, 693.59125pt x 422.57875pt>
+Package pdftex.def Info: images/btreeindex.png  used on input line 28.
+(pdftex.def)             Requested size: 369.88582pt x 166.47824pt.
+ [21 <./images/btreeindex.png>] [22]
+<images/ExplorerArchitecture.png, id=552, 693.59125pt x 422.57875pt>
 File: images/ExplorerArchitecture.png Graphic file (type png)
 <use images/ExplorerArchitecture.png>
-Package pdftex.def Info: images/ExplorerArchitecture.png  used on input line 92
+Package pdftex.def Info: images/ExplorerArchitecture.png  used on input line 82
 .
 (pdftex.def)             Requested size: 369.88582pt x 225.36488pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[21] [22 <./images/btreeindex.png>]
-Overfull \hbox (3.8962pt too wide) in paragraph at lines 121--122
+ [23 <./images/ExplorerArchitecture.png>]
+Overfull \hbox (3.8962pt too wide) in paragraph at lines 111--112
 []\T1/lmtt/m/n/10.95 and(childQuery) \T1/lmr/m/n/10.95 - log-i-cal and be-tween
  two queries. Par-ent query re-solves \T1/lmtt/m/n/10.95 childQuery
  []
 
-[23 <./images/ExplorerArchitecture.png>]
-<images/ipfsBrowser.PNG, id=556, 1120.185pt x 724.7075pt>
+[24]
+<images/ipfsBrowser.PNG, id=571, 1120.185pt x 724.7075pt>
 File: images/ipfsBrowser.PNG Graphic file (type png)
 <use images/ipfsBrowser.PNG>
-Package pdftex.def Info: images/ipfsBrowser.PNG  used on input line 134.
+Package pdftex.def Info: images/ipfsBrowser.PNG  used on input line 124.
 (pdftex.def)             Requested size: 341.43306pt x 220.88618pt.
-<images/ipfsNode.PNG, id=563, 636.87938pt x 307.1475pt>
+<images/ipfsNode.PNG, id=578, 636.87938pt x 307.1475pt>
 File: images/ipfsNode.PNG Graphic file (type png)
 <use images/ipfsNode.PNG>
-Package pdftex.def Info: images/ipfsNode.PNG  used on input line 147.
+Package pdftex.def Info: images/ipfsNode.PNG  used on input line 137.
 (pdftex.def)             Requested size: 341.43306pt x 164.66206pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (./07-benchmarking.tex [24 <./images/ipfsBrowser.PNG>] [25 <./images/ipfsNode
+) (./07-benchmarking.tex [25 <./images/ipfsBrowser.PNG>] [26 <./images/ipfsNode
 .PNG>]
 Chapter 7.
-) (./08-conclusion.tex [26
+) (./08-conclusion.tex [27
 
 ]
 Chapter 8.
-) (./projekt.bbl [27
+) (./projekt.bbl [28
 
 ])
 \c@ttl@toc@chapters=\count338
@@ -956,7 +971,7 @@ Chapter 8.
 \openout5 = `projekt.ptc'.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 324.
- [28
+ [29
 
 ]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 324.
@@ -965,15 +980,19 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 324.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 324.
 Package rerunfilecheck Info: File `projekt.out' has not changed.
 (rerunfilecheck)             Checksum: 4328E6B65EF86C4B6BAEF5ED761F65AF;4695.
+
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 16842 strings out of 480994
- 248453 string characters out of 5916032
+ 16854 strings out of 480994
+ 248618 string characters out of 5916032
  547039 words of memory out of 5000000
- 31753 multiletter control sequences out of 15000+600000
+ 31760 multiletter control sequences out of 15000+600000
  623868 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,12n,42p,1772b,639s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,42p,1772b,644s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/tex
 mf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvi
 ps/opensans/a_jg4h6q.enc}<c:/texlive/2019/texmf-dist/fonts/type1/ascender/opens
@@ -987,10 +1006,10 @@ e/2019/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fo
 nts/type1/public/lm/lmr9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/
 lmri10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/tex
 live/2019/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on projekt.pdf (31 pages, 1584280 bytes).
+Output written on projekt.pdf (32 pages, 1591557 bytes).
 PDF statistics:
- 691 PDF objects out of 1000 (max. 8388607)
- 588 compressed objects within 6 object streams
- 145 named destinations out of 1000 (max. 500000)
- 407 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 705 PDF objects out of 1000 (max. 8388607)
+ 599 compressed objects within 6 object streams
+ 149 named destinations out of 1000 (max. 500000)
+ 412 words of extra memory for PDF output out of 10000 (max. 10000000)
 
