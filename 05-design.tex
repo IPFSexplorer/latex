@@ -58,7 +58,6 @@ If more than one peer publishes a new version of the database that has been crea
     \item \textbf{The biggest hash wins} - if there is more than one database version at the same (discrete) time, the one with the biggest hash wins. This strategy is present in Figure \ref{databaseConflict}. 
     \item \textbf{The longest connecting time wins} - a user who is connected to the database for the longest time wins.
 \end{itemize}
-
 Lots of more strategies can be implemented. But they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).
 
 \begin{figure}[h]
@@ -85,8 +84,8 @@ A Database system provides query language for performing selects. A query consis
         \item \textbf{all} - returns array of all results of the query,
         \item \textbf{first} - returns only first result,
         \item \textbf{take} - returns \texttt{N} number of results where \texttt{N} is an argument,
-        \item \textbf{paginate} - 
-        \item \textbf{iterate} -
+        \item \textbf{paginate} - returns page of results. Accept two arguments. \texttt{perPage} specifies the number of results in one page. \texttt{page} is number of requested page.
+        \item \textbf{iterate} - returns iterator that can be used in cycles such as \texttt{for} or \texttt{while}.
     \end{itemize}
 \end{itemize}  
 

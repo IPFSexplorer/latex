@@ -31,7 +31,14 @@ All search queries (equal, less, greater, between) has two steps:
 \end{figure}
 
 \subsection{Query system}
-Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results.
+Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results. Example query returning blocks between 38 and 42 is shown in Figure \ref{btreeQuery}. A peer needs to download only data that are highlighted in green. After downloading them, they are stored on peer's filesystem and are offered to other peers. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13cm]{btreeIndexQuery.png}
+    \caption{Data access for performing query that returns blocks that have a height between 38 and 42.}
+    \label{btreeQuery}
+\end{figure}
 
 \subsection{Database}
 The most important part of the explorer-core module is a Database system which connects query system with indexes. When we make a query, it translates to the database, and data are obtained from the indexes.
@@ -41,8 +48,30 @@ A database contains tables. A table contains indexes and table name and implemen
 \begin{itemize}
     \item \texttt{insert} - creates history log for entity with first entity version. Then adds it to every table index.
     \item \texttt{update} - adds new version of the entity to its history log. Than update every index of the table.
-    \item \texttt{delete} - removes entity from every table index. From now, entity can not be find in this table.
+    \item \texttt{delete} - removes entity from every table index. From now, an entity can not be find in this table.
 \end{itemize}
+
+Example of the class User is in Figure \ref{classExample}. It has two indexes. One primary on property \texttt{name} and one normal index on property \texttt{age}. The second index has also specified \texttt{comparator} that is a bit faster than default one, but works only on numbers, and \texttt{keygetter} that returns a year when a user has born. 
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}[language=python]
+        class User extends Queriable<User> {
+            @PrimaryKey()
+            name: string;
+    
+            @Index(
+                (a, b) => a - b,
+                u => new Date().getFullYear() - u.age,
+            )
+            age: number;
+        }
+    \end{lstlisting}
+    \caption{Example of class. }
+    \label{classExample}
+\end{figure}
+
+
 
 \subsubsection{Transactions}
 A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
@@ -54,8 +83,7 @@ There are two types of transactions. Those that changes the database state (\tex
 
 
 \section{Feeder implementation}
-A Feeder is a simple program (less than a hundred lines of code) written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends only explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain (we can spawn one Feeder for every blockchain we want to index).
-
+A Feeder is a simple program (less than a hundred lines of code) written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends on the Explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain. We can create multiple Feeders for single blockchain, but we need to provide some deterministic algorithm, that insures that each block is parsed by only one Feeder. This can be done by providing \texttt{FeederId} and \texttt{FeedersCount}  in \texttt{.env} config file. If those values are provided, Feeder parses only blocks that have height modulo \texttt{FeedersCount} equals to \texttt{FeederId}. 
 
 
 \begin{algorithm}[H]
@@ -68,7 +96,7 @@ A Feeder is a simple program (less than a hundred lines of code) written in Type
             }
           save block\;
      }
-    \caption{Feeder algorithm}
+    \caption{Simplified Feeder algorithm}
     \label{feederAlgo}
 \end{algorithm}
 
