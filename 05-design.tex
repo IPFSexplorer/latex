@@ -99,8 +99,10 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
     \label{systemArchitecture}
 \end{figure}
 
+\subsection{Database design}
+ER-ko
 
-\section{Feeder}
+\subsection{Feeder}
 A Feeder is a service that stores data in IPFS and indexes them in our database system. Feeder stores data in an acyclic structure (see Figure \ref{feederDataStorageStructure}). Every block has links to transactions that are confirmed in this block. An address also has links to all its transactions. This scheme allows storing blockchain data in IPFS in small objects with size less than 256kB (a limit for storing objects directly in DHT). Cyclic references (for example between next/previous blocks) are not possible, because links are changing CID of an object. Therefore if we store object \texttt{A} with a link to the object \texttt{B}, CID of \texttt{A} will change. Then if we add backlink from \texttt{B} to \texttt{A}, CID of \texttt{B} will be changed and so \texttt{A} has now link to an old version of \texttt{B}. If we update link of object \texttt{A} to point on the new version of object \texttt{B}, CID of object \texttt{A} will change and therefore object \texttt{B} is now pointing to the old version of object \texttt{A}. From this example, it appears that there is no way of making cyclic references in IPFS.
 
 A Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
@@ -119,14 +121,15 @@ A Feeder can use different sources for obtaining blockchains data. It can be con
 
 
 
-\section{Explorer}
+\subsection{Explorer}
 Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
 
-\subsection{ExplorerGUI}
+\subsubsection{ExplorerGUI}
 ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties is supported.
 
+\todo{Add mockups}
 
-\subsection{ExplorerAPI}
+\subsubsection{ExplorerAPI}
 \label{explorerAPIroutes}
 ExplorerAPI is a node.js application provides several endpoints for obtaining the data:
 \begin{itemize}
