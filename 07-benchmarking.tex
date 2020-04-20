@@ -14,7 +14,6 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
 
 \begin{figure}[h]
     \begin{subfigure}{.3\textwidth}
-        \centering
         \begin{lstlisting}[language=SQL,basicstyle=\tiny]
             CREATE TABLE `authors` (
                 `id` int(11) PRIMARY KEY,
@@ -40,7 +39,6 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
         \caption{MySQL}
     \end{subfigure}%
     \begin{subfigure}{.3\textwidth}
-        \centering
         \begin{lstlisting}[language=SQL,basicstyle=\tiny]
             CREATE TABLE authors (
                 id serial PRIMARY KEY,
@@ -63,7 +61,6 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
         \caption{PostgreSQL}
     \end{subfigure}
     \begin{subfigure}{.3\textwidth}
-        \centering
         \begin{lstlisting}[language=python,basicstyle=\tiny]
             class Author {
                 @PrimaryKey() id: number;
@@ -135,76 +132,83 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
 \subsection{Single connected client}
 With a single connected client PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client there is no advantage of p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same - about 20\% (see Figure \ref{bench1cpu}). For our database system it is only 3\% due to lots of IO operations. 
 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/1per.pdf}
-    \caption{Performance with a single connected client}
-    \label{bench1per}
+\begin{figure}[h]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/1per.pdf}
+        \caption{Performance}
+        \label{bench1per}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/1cpu.pdf}
+        \caption{CPU usage with}
+        \label{bench1cpu}
+    \end{subfigure}
+    \caption{Single connected client benchmark plots}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/1cpu.pdf}
-    \caption{CPU usage with a single connected client}
-    \label{bench1cpu}
-\end{figure}
 
 
 \subsection{20 connected clients}
 With 20 connected clients, PostgreSQL performance dropped to 50 queries per seconds and MySQL to 10 queries per seconds. At the end of benchmarking, our database system is more powerful than PostgreSQL and MySQL, because data gets distributed to clients (see \ref{bench20per}). Our database system also requires less processor time thanks to p2p network. Data are not obtained only from the server (as opposed to MySQL and PostgreSQL) but also from other clients. Thanks to this our system only using less than 20\% CPU power (see Figure \ref{bench20cpu}).
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/20per.pdf}
-    \caption{Performance with a single connected client}
-    \label{bench20per}
+\begin{figure}[h]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/20per.pdf}
+        \caption{Performance}
+        \label{bench20per}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/20cpu.pdf}
+        \caption{CPU usage with}
+        \label{bench20cpu}
+    \end{subfigure}
+    \caption{20 connected clients benchmark plots}
 \end{figure}
 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/20cpu.pdf}
-    \caption{CPU usage with a single connected client}
-    \label{bench20cpu}
-\end{figure}
 
 \subsection{80 connected clients}
 With 80 connected clients, our database system outperforms MySQL and PostgreSQL after few seconds. Every client of our database system performs 100 queries per second. PostgreSQL client performs only 10 queries per second and MySQL only 2 queries per second (see \ref{bench80per}). CPU usage is in our database system also very low. At the beginning, when content is not distributed on the clients, the central node uses 60 percents of CPU but it decreases over time (see \ref{bench80cpu}).
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/80per.pdf}
-    \caption{Performance with a single connected client}
-    \label{bench80per}
+
+\begin{figure}[h]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/80per.pdf}
+        \caption{Performance}
+        \label{bench80per}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/80cpu.pdf}
+        \caption{CPU usage with}
+        \label{bench80cpu}
+    \end{subfigure}
+    \caption{80 connected clients benchmark plots}
 \end{figure}
 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/80cpu.pdf}
-    \caption{CPU usage with a single connected client}
-    \label{bench80cpu}
-\end{figure}
 
 \subsection{150 connected clients}
 To connects more than 100 clients to the PostgreSQL, we need to change  default PostgreSQL setting for maximum connections. Our system can handle 150 clients very well (opposite to MySQL and PostgreSQL). Each client connected to our database system can make up to 150 queries per second, and it increases by the time (see \ref{bench150per}). For the first seconds, CPU usage on the central node is high (near 100\%), but it decreases over the time (see \ref{bench150cpu}).
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/150per.pdf}
-    \caption{Performance with a single connected client}
-    \label{bench150per}
+\begin{figure}[h]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/150per.pdf}
+        \caption{Performance}
+        \label{bench150per}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[trim={1.78cm 2cm 2.08cm 1cm},clip,width=1.0\linewidth]{excel/150cpu.pdf}
+        \caption{CPU usage with}
+        \label{bench150cpu}
+    \end{subfigure}
+    \caption{150 connected clients benchmark plots}
 \end{figure}
- 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\linewidth]{excel/150cpu.pdf}
-    \caption{CPU usage with a single connected client}
-    \label{bench150cpu}
-\end{figure}
-
 
 \subsection{Benchmark conclusion}
 We can see that with more than 20 connected clients, our database system became more effective than traditional ones. Thanks to IPFS and its p2p network, a content of the database is distributed on the clients. This reduces load on central node.

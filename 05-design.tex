@@ -30,7 +30,7 @@ In centralized systems such as git, conflicts are detected on write (for example
 
 
 \subsubsection{Indexes}
-An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. Primary Index - We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it. Value of the primary key for an entity can not be changed (because we would need to scan all tables where the entity is referenced and change the referenced value to a new one). Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
+An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has type of Guid. Value of the primary key for an entity can not be changed (because we would need to scan all tables where the entity is referenced and change the referenced value to a new one). Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
 \begin{itemize}
     \item \textbf{Comparator} - is a function that has two parameters (two keys of B-tree) and outputs a number. An index is using a comparator to search records and insert record to the right place in B-tree.
     \item \textbf{Key-getter} - is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index comparator). Every index has key-getter that is using to obtain keys for B-tree.
@@ -100,32 +100,19 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
 \end{figure}
 
 \subsection{Database design}
-ER-ko
+\todo{Describe used indexes and database structure that is present in the Feeder, ER-diagram}
 
 \subsection{Feeder}
-A Feeder is a service that stores data in IPFS and indexes them in our database system. Feeder stores data in an acyclic structure (see Figure \ref{feederDataStorageStructure}). Every block has links to transactions that are confirmed in this block. An address also has links to all its transactions. This scheme allows storing blockchain data in IPFS in small objects with size less than 256kB (a limit for storing objects directly in DHT). Cyclic references (for example between next/previous blocks) are not possible, because links are changing CID of an object. Therefore if we store object \texttt{A} with a link to the object \texttt{B}, CID of \texttt{A} will change. Then if we add backlink from \texttt{B} to \texttt{A}, CID of \texttt{B} will be changed and so \texttt{A} has now link to an old version of \texttt{B}. If we update link of object \texttt{A} to point on the new version of object \texttt{B}, CID of object \texttt{A} will change and therefore object \texttt{B} is now pointing to the old version of object \texttt{A}. From this example, it appears that there is no way of making cyclic references in IPFS.
+A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodicly publishing most updated database version. This way new clients synchronize database more quickly. For optimalization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consists of hundreds of transactions.  
 
 A Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
-
-
-\todo{Describe used indexes and database structure that is present in feeder}
-
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=12cm]{feederDataStorageStructure.png}
-%     \caption{Feeder data storage structure}
-%     \label{feederDataStorageStructure}
-%     \todo{change image to represent real scheme described}
-% \end{figure}
-
 
 
 \subsection{Explorer}
 Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
 
 \subsubsection{ExplorerGUI}
-ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties is supported.
+ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties that has index is supported. UI of ExplorerGUI needs to be 
 
 \todo{Add mockups}
 
