@@ -18,7 +18,7 @@ After some research, we concluded that currently for storing and indexing data i
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
 
-In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody does not update it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just needs to look at the previous entry and compute increment for both country. Then update the record with final increment.
+In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody does not update it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just needs to look at the previous entry and compute increment for both countries. Then update the record with final increment.
 
 
 \begin{figure}[h]
@@ -30,7 +30,7 @@ In centralized systems such as git, conflicts are detected on write (for example
 
 
 \subsubsection{Indexes}
-An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has type of Guid. Value of the primary key for an entity can not be changed (because we would need to scan all tables where the entity is referenced and change the referenced value to a new one). Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
+An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed (because we would need to scan all tables where the entity is referenced and change the referenced value to a new one). Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
 \begin{itemize}
     \item \textbf{Comparator} - is a function that has two parameters (two keys of B-tree) and outputs a number. An index is using a comparator to search records and insert record to the right place in B-tree.
     \item \textbf{Key-getter} - is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index comparator). Every index has key-getter that is using to obtain keys for B-tree.
@@ -46,7 +46,7 @@ We use foreign keys to represent relationships between tables. A foreign key is 
 When we commit a transaction, it is inserted to the transactions queue. If there are more transactions in the queue, a database performs it one by one. We can not execute more transactions in one moment, because it could cause data inconsistency. There are five types of transactions:
 \begin{itemize}
     \item \texttt{read} - transaction for reading data from table. It is not logged in a database log (other peers don't have to know what we are reading from database).
-    \item \texttt{sync} - when some peer publishes a new version of the database, all other peers have to migrate to it. This transaction has the biggest priority, and therefore it is inserted at the beginning of the transactions queue. After a migration is done, transactions queue can continue working normally.
+    \item \texttt{sync} - when some peer publishes a new version of the database, all other peers have to migrate to it. This transaction has the biggest priority, and therefore it is inserted at the beginning of the transactions queue. After migration is done, transactions queue can continue working normally.
     \item \texttt{insert}, \texttt{update}, \texttt{delete} - other types of transactions are written to database logs, because they are modifying the database.
 \end{itemize}
 
@@ -109,7 +109,7 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
     \label{er}
 \end{figure}
 
-Both, Explorer and Feeder uses same database schema. The database schema is designed in the way to optimalize typical queries. It consists of five tables:
+Both, Explorer and Feeder uses the same database schema. The database schema is designed in the way to optimalize typical queries. It consists of five tables:
 \begin{itemize}
     \item \textbf{Block} - table for storing blockchain blocks. It has a primary key on unique block hash, and indexes on height and time. With these indexes we can perform queries like search block by its hash or heigh very efficiently. Also filtering or ordering blocks by time has good performance.
     \item \textbf{Transaction} - a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
@@ -121,7 +121,7 @@ Both, Explorer and Feeder uses same database schema. The database schema is desi
 
 
 \subsection{Feeder}
-A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodicly publishing most updated database version. This way new clients synchronize database more quickly. For optimalization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consists of hundreds of transactions.  
+A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most updated database version. This way new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consists of hundreds of transactions.  
 
 A Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
 

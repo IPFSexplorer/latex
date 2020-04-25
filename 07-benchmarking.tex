@@ -13,7 +13,7 @@ PostgreSQL also known as Postgres, is a free and open-source relational database
 We compare MySQL and PostgresSQL with our p2p database system. These database systems run virtualized in Docker containers on hardware with 4 core's processor Intel Pentium G4560 3.50GHz and 16GB of RAM. On another hardware we starts clients, that connects to these database systems a preforms queries. Than we measure average queries per seconds that clients execute. Clients are written in javascript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10000 records and table \texttt{posts} contains 50000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
 
 \begin{figure}[h]
-    \begin{subfigure}{.3\textwidth}
+    \begin{subfigure}[t]{.3\textwidth}
         \begin{lstlisting}[language=SQL,basicstyle=\tiny]
             CREATE TABLE `authors` (
                 `id` int(11) PRIMARY KEY,
@@ -38,7 +38,7 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
         \end{lstlisting}
         \caption{MySQL}
     \end{subfigure}%
-    \begin{subfigure}{.3\textwidth}
+    \begin{subfigure}[t]{.3\textwidth}
         \begin{lstlisting}[language=SQL,basicstyle=\tiny]
             CREATE TABLE authors (
                 id serial PRIMARY KEY,
@@ -60,7 +60,7 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
         \end{lstlisting}
         \caption{PostgreSQL}
     \end{subfigure}
-    \begin{subfigure}{.3\textwidth}
+    \begin{subfigure}[t]{.3\textwidth}
         \begin{lstlisting}[language=python,basicstyle=\tiny]
             class Author {
                 @PrimaryKey() id: number;

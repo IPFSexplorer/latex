@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  25 APR 2020 19:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  25 APR 2020 19:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1018,21 +1018,8 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 59.
-
-
-LaTeX Warning: Reference `design' on page 23 undefined on input line 80.
-
-! Extra }, or forgotten \endgroup.
-l.80 ...llbacks (described in design \ref{design}}
-                                                  ).
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-[23]
-<images/ExplorerArchitecture.png, id=657, 693.59125pt x 422.57875pt>
+ [23]
+<images/ExplorerArchitecture.png, id=658, 693.59125pt x 422.57875pt>
 File: images/ExplorerArchitecture.png Graphic file (type png)
 <use images/ExplorerArchitecture.png>
 Package pdftex.def Info: images/ExplorerArchitecture.png  used on input line 11
@@ -1045,12 +1032,12 @@ Overfull \hbox (3.8962pt too wide) in paragraph at lines 139--140
  []
 
 [25]
-<images/ipfsBrowser.PNG, id=675, 1120.185pt x 724.7075pt>
+<images/ipfsBrowser.PNG, id=676, 1120.185pt x 724.7075pt>
 File: images/ipfsBrowser.PNG Graphic file (type png)
 <use images/ipfsBrowser.PNG>
 Package pdftex.def Info: images/ipfsBrowser.PNG  used on input line 152.
 (pdftex.def)             Requested size: 341.43306pt x 220.88618pt.
-<images/ipfsNode.PNG, id=682, 636.87938pt x 307.1475pt>
+<images/ipfsNode.PNG, id=683, 636.87938pt x 307.1475pt>
 File: images/ipfsNode.PNG Graphic file (type png)
 <use images/ipfsNode.PNG>
 Package pdftex.def Info: images/ipfsNode.PNG  used on input line 165.
@@ -1190,7 +1177,7 @@ Overfull \hbox (32.6859pt too wide) in paragraph at lines 122--123
 
 pdfTeX warning: pdflatex.exe (file ./excel/1per.pdf): PDF inclusion: found PDF 
 version <1.7>, but at most version <1.5> allowed
-<excel/1per.pdf, id=714, 845.07718pt x 597.55246pt>
+<excel/1per.pdf, id=715, 845.07718pt x 597.55246pt>
 File: excel/1per.pdf Graphic file (type pdf)
 <use excel/1per.pdf>
 Package pdftex.def Info: excel/1per.pdf  used on input line 138.
@@ -1199,7 +1186,7 @@ Package pdftex.def Info: excel/1per.pdf  used on input line 138.
 
 pdfTeX warning: pdflatex.exe (file ./excel/1cpu.pdf): PDF inclusion: found PDF 
 version <1.7>, but at most version <1.5> allowed
-<excel/1cpu.pdf, id=716, 845.07718pt x 597.55246pt>
+<excel/1cpu.pdf, id=717, 845.07718pt x 597.55246pt>
 File: excel/1cpu.pdf Graphic file (type pdf)
 <use excel/1cpu.pdf>
 Package pdftex.def Info: excel/1cpu.pdf  used on input line 144.
@@ -1216,7 +1203,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 pdfTeX warning: pdflatex.exe (file ./excel/20per.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/20per.pdf, id=720, 845.07718pt x 597.55246pt>
+<excel/20per.pdf, id=721, 845.07718pt x 597.55246pt>
 File: excel/20per.pdf Graphic file (type pdf)
 <use excel/20per.pdf>
 Package pdftex.def Info: excel/20per.pdf  used on input line 159.
@@ -1225,7 +1212,7 @@ Package pdftex.def Info: excel/20per.pdf  used on input line 159.
 
 pdfTeX warning: pdflatex.exe (file ./excel/20cpu.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/20cpu.pdf, id=722, 845.07718pt x 597.55246pt>
+<excel/20cpu.pdf, id=723, 845.07718pt x 597.55246pt>
 File: excel/20cpu.pdf Graphic file (type pdf)
 <use excel/20cpu.pdf>
 Package pdftex.def Info: excel/20cpu.pdf  used on input line 165.
@@ -1239,7 +1226,7 @@ Overfull \hbox (2.43332pt too wide) in paragraph at lines 157--169
 
 pdfTeX warning: pdflatex.exe (file ./excel/80per.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/80per.pdf, id=817, 845.07718pt x 597.55246pt>
+<excel/80per.pdf, id=818, 845.07718pt x 597.55246pt>
 File: excel/80per.pdf Graphic file (type pdf)
 <use excel/80per.pdf>
 Package pdftex.def Info: excel/80per.pdf  used on input line 180.
@@ -1248,7 +1235,7 @@ Package pdftex.def Info: excel/80per.pdf  used on input line 180.
 
 pdfTeX warning: pdflatex.exe (file ./excel/80cpu.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/80cpu.pdf, id=819, 845.07718pt x 597.55246pt>
+<excel/80cpu.pdf, id=820, 845.07718pt x 597.55246pt>
 File: excel/80cpu.pdf Graphic file (type pdf)
 <use excel/80cpu.pdf>
 Package pdftex.def Info: excel/80cpu.pdf  used on input line 186.
@@ -1265,7 +1252,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 pdfTeX warning: pdflatex.exe (file ./excel/150per.pdf): PDF inclusion: found PD
 F version <1.7>, but at most version <1.5> allowed
-<excel/150per.pdf, id=823, 845.07718pt x 597.55246pt>
+<excel/150per.pdf, id=824, 845.07718pt x 597.55246pt>
 File: excel/150per.pdf Graphic file (type pdf)
 <use excel/150per.pdf>
 Package pdftex.def Info: excel/150per.pdf  used on input line 200.
@@ -1274,7 +1261,7 @@ Package pdftex.def Info: excel/150per.pdf  used on input line 200.
 
 pdfTeX warning: pdflatex.exe (file ./excel/150cpu.pdf): PDF inclusion: found PD
 F version <1.7>, but at most version <1.5> allowed
-<excel/150cpu.pdf, id=825, 845.07718pt x 597.55246pt>
+<excel/150cpu.pdf, id=826, 845.07718pt x 597.55246pt>
 File: excel/150cpu.pdf Graphic file (type pdf)
 <use excel/150cpu.pdf>
 Package pdftex.def Info: excel/150cpu.pdf  used on input line 206.
@@ -1310,14 +1297,11 @@ Package rerunfilecheck Info: File `projekt.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  18969 strings out of 480994
  281210 string characters out of 5916032
- 774114 words of memory out of 5000000
+ 774164 words of memory out of 5000000
  33717 multiletter control sequences out of 15000+600000
  627546 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1337,10 +1321,10 @@ onts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm
 ive/2019/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texlive/2019/texmf-dis
 t/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publ
 ic/lm/lmtt9.pfb>
-Output written on projekt.pdf (37 pages, 2169969 bytes).
+Output written on projekt.pdf (37 pages, 2169951 bytes).
 PDF statistics:
- 1037 PDF objects out of 1200 (max. 8388607)
- 876 compressed objects within 9 object streams
+ 1038 PDF objects out of 1200 (max. 8388607)
+ 877 compressed objects within 9 object streams
  270 named destinations out of 1000 (max. 500000)
  626 words of extra memory for PDF output out of 10000 (max. 10000000)
 
