@@ -77,7 +77,7 @@ Example of the class User is in Figure \ref{classExample}. It has two indexes. O
 A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \todo{add link}).
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{design}}).
 
 
 

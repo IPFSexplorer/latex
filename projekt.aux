@@ -99,94 +99,106 @@
 \newlabel{databaseConflict}{{4.2}{15}{Synchronization of a database. Note that in time 4, Node1 add two transactions in one DB version.\relax }{figure.caption.15}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}System components}{15}{section.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Database design}{15}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Feeder}{15}{subsection.4.2.2}\protected@file@percent }
+\newlabel{design}{{4.2.1}{15}{Database design}{subsection.4.2.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces System architecture\relax }}{16}{figure.caption.17}\protected@file@percent }
 \newlabel{systemArchitecture}{{4.3}{16}{System architecture\relax }{figure.caption.17}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Explorer}{16}{subsection.4.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{ExplorerGUI}{16}{section*.18}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{ExplorerAPI}{17}{section*.19}\protected@file@percent }
-\newlabel{explorerAPIroutes}{{4.2.3}{17}{ExplorerAPI}{section*.19}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Implementation}{18}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Feeder}{16}{subsection.4.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Entity-relationships diagram\relax }}{17}{figure.caption.18}\protected@file@percent }
+\newlabel{er}{{4.4}{17}{Entity-relationships diagram\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Explorer}{17}{subsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ExplorerGUI}{17}{section*.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{ExplorerAPI}{18}{section*.21}\protected@file@percent }
+\newlabel{explorerAPIroutes}{{4.2.3}{18}{ExplorerAPI}{section*.21}{}}
+\newlabel{homeMockup}{{4.5a}{19}{Home view\relax }{figure.caption.20}{}}
+\newlabel{sub@homeMockup}{{a}{19}{Home view\relax }{figure.caption.20}{}}
+\newlabel{blocksMockup}{{4.5b}{19}{Blocks list view\relax }{figure.caption.20}{}}
+\newlabel{sub@blocksMockup}{{b}{19}{Blocks list view\relax }{figure.caption.20}{}}
+\newlabel{blockDetailMockup}{{4.5c}{19}{Block detail view\relax }{figure.caption.20}{}}
+\newlabel{sub@blockDetailMockup}{{c}{19}{Block detail view\relax }{figure.caption.20}{}}
+\newlabel{addressMockup}{{4.5d}{19}{Address view\relax }{figure.caption.20}{}}
+\newlabel{sub@addressMockup}{{d}{19}{Address view\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces ExplorerGUI mockups\relax }}{19}{figure.caption.20}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Implementation}{20}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{Implementation}{{5}{18}{Implementation}{chapter.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Explorer-core implementation}{18}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Indexes}{18}{subsection.5.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Btree indexing first 100 block by their height\relax }}{19}{figure.caption.20}\protected@file@percent }
-\newlabel{btree}{{5.1}{19}{Btree indexing first 100 block by their height\relax }{figure.caption.20}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Query system}{19}{subsection.5.1.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Data access for performing query that returns blocks that have a height between 38 and 42.\relax }}{20}{figure.caption.21}\protected@file@percent }
-\newlabel{btreeQuery}{{5.2}{20}{Data access for performing query that returns blocks that have a height between 38 and 42.\relax }{figure.caption.21}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Database}{20}{subsection.5.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Tables}{20}{section*.22}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Example of database table abstraction \relax }}{21}{figure.caption.23}\protected@file@percent }
-\newlabel{classExample}{{5.3}{21}{Example of database table abstraction \relax }{figure.caption.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Transactions}{21}{section*.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Synchronization}{21}{section*.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Feeder implementation}{21}{section.5.2}\protected@file@percent }
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Simplified Feeder algorithm\relax }}{22}{algocf.1}\protected@file@percent }
-\newlabel{feederAlgo}{{1}{22}{Feeder implementation}{algocf.1}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Explorer implementation}{22}{section.5.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Explorer architecture\relax }}{22}{figure.caption.26}\protected@file@percent }
-\newlabel{ExplorerArchitecture}{{5.4}{22}{Explorer architecture\relax }{figure.caption.26}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}ExplorerCore}{22}{subsection.5.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Query system}{23}{section*.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}ExplorerGUI}{24}{subsection.5.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IPFS storage in browser\relax }}{24}{figure.caption.28}\protected@file@percent }
-\newlabel{browserIPFS}{{5.5}{24}{IPFS storage in browser\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}ExplorerAPI}{24}{subsection.5.3.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces IPFS storage in node.js\relax }}{25}{figure.caption.29}\protected@file@percent }
-\newlabel{nodeIPFS}{{5.6}{25}{IPFS storage in node.js\relax }{figure.caption.29}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Benchmarking}{26}{chapter.6}\protected@file@percent }
+\newlabel{Implementation}{{5}{20}{Implementation}{chapter.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Explorer-core implementation}{20}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Indexes}{20}{subsection.5.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Btree indexing first 100 block by their height\relax }}{21}{figure.caption.22}\protected@file@percent }
+\newlabel{btree}{{5.1}{21}{Btree indexing first 100 block by their height\relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Query system}{21}{subsection.5.1.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Data access for performing query that returns blocks that have a height between 38 and 42.\relax }}{22}{figure.caption.23}\protected@file@percent }
+\newlabel{btreeQuery}{{5.2}{22}{Data access for performing query that returns blocks that have a height between 38 and 42.\relax }{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Database}{22}{subsection.5.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Tables}{22}{section*.24}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Example of database table abstraction \relax }}{23}{figure.caption.25}\protected@file@percent }
+\newlabel{classExample}{{5.3}{23}{Example of database table abstraction \relax }{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Transactions}{23}{section*.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Synchronization}{23}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Feeder implementation}{23}{section.5.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Simplified Feeder algorithm\relax }}{24}{algocf.1}\protected@file@percent }
+\newlabel{feederAlgo}{{1}{24}{Feeder implementation}{algocf.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Explorer implementation}{24}{section.5.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Explorer architecture\relax }}{24}{figure.caption.28}\protected@file@percent }
+\newlabel{ExplorerArchitecture}{{5.4}{24}{Explorer architecture\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}ExplorerCore}{24}{subsection.5.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Query system}{25}{section*.29}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}ExplorerGUI}{26}{subsection.5.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces IPFS storage in browser\relax }}{26}{figure.caption.30}\protected@file@percent }
+\newlabel{browserIPFS}{{5.5}{26}{IPFS storage in browser\relax }{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}ExplorerAPI}{26}{subsection.5.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces IPFS storage in node.js\relax }}{27}{figure.caption.31}\protected@file@percent }
+\newlabel{nodeIPFS}{{5.6}{27}{IPFS storage in node.js\relax }{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Benchmarking}{28}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Comparing to other database systems}{26}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}MySQL}{26}{subsection.6.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}PostgreSQL}{26}{subsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Environment}{26}{subsection.6.1.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Database structures for benchmarking\relax }}{27}{figure.caption.30}\protected@file@percent }
-\newlabel{benchDatabaseStructure}{{6.1}{27}{Database structures for benchmarking\relax }{figure.caption.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Test query\relax }}{27}{figure.caption.31}\protected@file@percent }
-\newlabel{benchQuery}{{6.2}{27}{Test query\relax }{figure.caption.31}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.4}Single connected client}{27}{subsection.6.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.5}20 connected clients}{27}{subsection.6.1.5}\protected@file@percent }
-\newlabel{bench1per}{{6.3a}{28}{Performance\relax }{figure.caption.32}{}}
-\newlabel{sub@bench1per}{{a}{28}{Performance\relax }{figure.caption.32}{}}
-\newlabel{bench1cpu}{{6.3b}{28}{CPU usage with\relax }{figure.caption.32}{}}
-\newlabel{sub@bench1cpu}{{b}{28}{CPU usage with\relax }{figure.caption.32}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Single connected client benchmark plots\relax }}{28}{figure.caption.32}\protected@file@percent }
-\newlabel{bench20per}{{6.4a}{28}{Performance\relax }{figure.caption.33}{}}
-\newlabel{sub@bench20per}{{a}{28}{Performance\relax }{figure.caption.33}{}}
-\newlabel{bench20cpu}{{6.4b}{28}{CPU usage with\relax }{figure.caption.33}{}}
-\newlabel{sub@bench20cpu}{{b}{28}{CPU usage with\relax }{figure.caption.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces 20 connected clients benchmark plots\relax }}{28}{figure.caption.33}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.6}80 connected clients}{28}{subsection.6.1.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.7}150 connected clients}{28}{subsection.6.1.7}\protected@file@percent }
-\newlabel{bench80per}{{6.5a}{29}{Performance\relax }{figure.caption.34}{}}
-\newlabel{sub@bench80per}{{a}{29}{Performance\relax }{figure.caption.34}{}}
-\newlabel{bench80cpu}{{6.5b}{29}{CPU usage with\relax }{figure.caption.34}{}}
-\newlabel{sub@bench80cpu}{{b}{29}{CPU usage with\relax }{figure.caption.34}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 80 connected clients benchmark plots\relax }}{29}{figure.caption.34}\protected@file@percent }
-\newlabel{bench150per}{{6.6a}{29}{Performance\relax }{figure.caption.35}{}}
-\newlabel{sub@bench150per}{{a}{29}{Performance\relax }{figure.caption.35}{}}
-\newlabel{bench150cpu}{{6.6b}{29}{CPU usage with\relax }{figure.caption.35}{}}
-\newlabel{sub@bench150cpu}{{b}{29}{CPU usage with\relax }{figure.caption.35}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 150 connected clients benchmark plots\relax }}{29}{figure.caption.35}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.8}Benchmark conclusion}{29}{subsection.6.1.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Comparing with blockchain explorers}{30}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Blockbook}{30}{subsection.6.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Writing}{30}{subsection.6.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Reading}{30}{subsection.6.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Filtering}{30}{subsection.6.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Comparing to other database systems}{28}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}MySQL}{28}{subsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}PostgreSQL}{28}{subsection.6.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Environment}{28}{subsection.6.1.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces Database structures for benchmarking\relax }}{29}{figure.caption.32}\protected@file@percent }
+\newlabel{benchDatabaseStructure}{{6.1}{29}{Database structures for benchmarking\relax }{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces Test query\relax }}{29}{figure.caption.33}\protected@file@percent }
+\newlabel{benchQuery}{{6.2}{29}{Test query\relax }{figure.caption.33}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.4}Single connected client}{29}{subsection.6.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.5}20 connected clients}{29}{subsection.6.1.5}\protected@file@percent }
+\newlabel{bench1per}{{6.3a}{30}{Performance\relax }{figure.caption.34}{}}
+\newlabel{sub@bench1per}{{a}{30}{Performance\relax }{figure.caption.34}{}}
+\newlabel{bench1cpu}{{6.3b}{30}{CPU usage with\relax }{figure.caption.34}{}}
+\newlabel{sub@bench1cpu}{{b}{30}{CPU usage with\relax }{figure.caption.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces Single connected client benchmark plots\relax }}{30}{figure.caption.34}\protected@file@percent }
+\newlabel{bench20per}{{6.4a}{30}{Performance\relax }{figure.caption.35}{}}
+\newlabel{sub@bench20per}{{a}{30}{Performance\relax }{figure.caption.35}{}}
+\newlabel{bench20cpu}{{6.4b}{30}{CPU usage with\relax }{figure.caption.35}{}}
+\newlabel{sub@bench20cpu}{{b}{30}{CPU usage with\relax }{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces 20 connected clients benchmark plots\relax }}{30}{figure.caption.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.6}80 connected clients}{30}{subsection.6.1.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.7}150 connected clients}{30}{subsection.6.1.7}\protected@file@percent }
+\newlabel{bench80per}{{6.5a}{31}{Performance\relax }{figure.caption.36}{}}
+\newlabel{sub@bench80per}{{a}{31}{Performance\relax }{figure.caption.36}{}}
+\newlabel{bench80cpu}{{6.5b}{31}{CPU usage with\relax }{figure.caption.36}{}}
+\newlabel{sub@bench80cpu}{{b}{31}{CPU usage with\relax }{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces 80 connected clients benchmark plots\relax }}{31}{figure.caption.36}\protected@file@percent }
+\newlabel{bench150per}{{6.6a}{31}{Performance\relax }{figure.caption.37}{}}
+\newlabel{sub@bench150per}{{a}{31}{Performance\relax }{figure.caption.37}{}}
+\newlabel{bench150cpu}{{6.6b}{31}{CPU usage with\relax }{figure.caption.37}{}}
+\newlabel{sub@bench150cpu}{{b}{31}{CPU usage with\relax }{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces 150 connected clients benchmark plots\relax }}{31}{figure.caption.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.8}Benchmark conclusion}{31}{subsection.6.1.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Comparing with blockchain explorers}{32}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Blockbook}{32}{subsection.6.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Writing}{32}{subsection.6.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.3}Reading}{32}{subsection.6.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.4}Filtering}{32}{subsection.6.2.4}\protected@file@percent }
 \bibstyle{bib-styles/Pysny/enplain}
 \bibdata{20-bibliography}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{31}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Conclusion}{33}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\newlabel{Conclusion}{{7}{31}{Conclusion}{chapter.7}{}}
+\newlabel{Conclusion}{{7}{33}{Conclusion}{chapter.7}{}}
 \bibcite{IPFSwhitepaper}{1}
 \bibcite{digibyteBook}{2}
 \bibcite{newYorkerBTC}{3}
@@ -199,6 +211,6 @@
 \bibcite{moneroTracebility}{10}
 \bibcite{wayner1997digital}{11}
 \bibcite{wood2014ethereum}{12}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{32}{chapter*.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{34}{chapter*.38}\protected@file@percent }
 \ttl@writefile{ptc}{\ttl@starttoc{chapters@1}}
 \ttl@finishall

@@ -100,7 +100,25 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
 \end{figure}
 
 \subsection{Database design}
-\todo{Describe used indexes and database structure that is present in the Feeder, ER-diagram}
+\label{design}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{ER.png}
+    \caption{Entity-relationships diagram}
+    \label{er}
+\end{figure}
+
+Both, Explorer and Feeder uses same database schema. The database schema is designed in the way to optimalize typical queries. It consists of five tables:
+\begin{itemize}
+    \item \textbf{Block} - table for storing blockchain blocks. It has a primary key on unique block hash, and indexes on height and time. With these indexes we can perform queries like search block by its hash or heigh very efficiently. Also filtering or ordering blocks by time has good performance.
+    \item \textbf{Transaction} - a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
+    \item \textbf{Vin} - every transactions can have multiple inputs. These inputs are stored in Vin table. Every Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because an input can mined block reward.
+    \item \textbf{Vout} - transactions can have multiple outputs. Every output has a foreign key to transaction and address. If an output is already spent, it has a link to the transaction where this output is used as an input.
+    \item \textbf{Address} - Adress contains multiple columns. As primary key it uses address's hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
+\end{itemize}
+
+
 
 \subsection{Feeder}
 A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodicly publishing most updated database version. This way new clients synchronize database more quickly. For optimalization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consists of hundreds of transactions.  
@@ -112,26 +130,54 @@ A Feeder can use different sources for obtaining blockchains data. It can be con
 Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval. Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
 
 \subsubsection{ExplorerGUI}
-ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties that has index is supported. UI of ExplorerGUI needs to be 
+ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visit a different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties that has index is supported. Every user of ExplorerGUI keeps part of the database that he use in his local storage. This principle helps balance Feeders load, and helps to distribute data for other users.  Authentication to the ExplorerGUI is not necessary, because users can not modify data from there. They can only explore multiple blockchain data. All views have the same top toolbar, to allow user performs quick searches. User can see enabled cryptocurrencies at the home screen (see Figure \ref{homeMockup}). When a user selects cryptocurrency that he wants to explore, he will be redirected to the Blocks view where he can see and filter all parsed blocks from a selected cryptocurrency (see Figure \ref{blocksMockup}). User can select block by clicking on them. This action redirect a user to Block detail view where he can see all blocks transactions (see Figure \ref{blockDetailMockup}). User can also navigate to the next/previous block from this view. A user gets to the Address view every time he clicks on transaction input or output address. In this view, a user can see the current balance of the address and transaction which this address was part of (see Figure \ref{addressMockup}). Thanks to the database design, a user can also see the history of the address. 
 
-\todo{Add mockups}
+
+\begin{figure}[h]
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{mockups/home.png}
+        \caption{Home view}
+        \label{homeMockup}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{mockups/blocks.png}
+        \caption{Blocks list view}
+        \label{blocksMockup}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{mockups/blockDetail.png}
+        \caption{Block detail view}
+        \label{blockDetailMockup}
+    \end{subfigure}
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{mockups/address.png}
+        \caption{Address view}
+        \label{addressMockup}
+    \end{subfigure}
+    \caption{ExplorerGUI mockups}
+\end{figure}
 
 \subsubsection{ExplorerAPI}
 \label{explorerAPIroutes}
-ExplorerAPI is a node.js application provides several endpoints for obtaining the data:
+ExplorerAPI is a server-side application that provides simple RESTapi for obtaining data. It is much less demanding on performance than ExplorerGUI and can be used for integrations with other applications. It has several endpoints:
 \begin{itemize}
-    \item \texttt{GET /tx} - get collection of transaction, 
-    \item \texttt{GET /tx/[:txHash]} - get transaction by hash,
-    \item \texttt{GET /block} - get block collection,
-    \item \texttt{GET /block/[:blockHeightOrHash]} - get block by height or hash,
-    \item \texttt{GET /address} - get address collection,
-    \item \texttt{GET /address/[:hash]} - get address by hash.
+    \item \texttt{GET /currency/[:currencyUnit]/tx/[:txHash]} - get transaction by hash,
+    \item \texttt{GET /currency/[:currencyUnit]/block} - get block collection,
+    \item \texttt{GET /currency/[:currencyUnit]/block/[:blockHeightOrHash]} - get block by height or hash,
+    \item \texttt{GET /currency/[:currencyUnit]/address} - get address collection,
+    \item \texttt{GET /currency/[:currencyUnit]/address/[:hash]} - get address by hash.
 \end{itemize}
-All endpoints support more detailed path specification by providing multiple parameters at the end of the path (for example, it is possible to request only a block hash by calling \texttt{/block/42/hash}). Also, every endpoint supports query parameters
+
+Every endpoint supports query parameters:
 \begin{itemize}
     \item \texttt{filter} where value of this parameter can be simple arithmetic expression like \texttt{height>50},
     \item \texttt{limit} parameter for pagination with default value set to \texttt{20},
     \item \texttt{orderBy} sorts results of a sequence in ascending order.
+    \item \todo{Paginate}
 \end{itemize}
  
 
