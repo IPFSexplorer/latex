@@ -109,7 +109,17 @@ A database can be executing only a single transaction at the time to prevent dat
 
 \subsubsection{Synchronization}
 There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{designSync}).
+
+
 \todo{popisat algoritmus synchronizacie}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=10cm]{syncDB.png}
+    \caption{Database synchronization}
+    \label{syncDB}
+\end{figure}
 
 \section{Feeder}
 A Feeder is a simple command-line application written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends on the Explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain. We can create multiple Feeders for single blockchain, but we need to provide some deterministic algorithm, that insures that each block is parsed by only one Feeder. This can be done by providing \texttt{FeederId} and \texttt{FeedersCount}  in \texttt{.env} config file. If those values are provided, Feeder parses only blocks that have height modulo \texttt{FeedersCount} equals to \texttt{FeederId}. 
