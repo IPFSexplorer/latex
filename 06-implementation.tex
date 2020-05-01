@@ -1,10 +1,19 @@
 \chapter{Implementation}
 \label{Implementation}
-This chapter describes the implementation details of the system, shows the internal
-architecture. As mentioned in the previous chapter, the program was created in Typescript, and they are using js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation of IPFS node. This selection of tools enables code sharing between these two separated applications.
+This chapter describes the implementation details of the system and shows the internal
+architecture. All system components are implemented in Typescript that is later compiled to Javascript. This choose of language enables code sharing between individual components and allow us to support multiple platforms (desktop via Node.js, and browser). All system components are dependent on Explorer-core module where is the whole database system implemented (see Figure \ref{systemArchitecture}). 
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{ExplorerArchitecture.png}
+    \caption{System architecture}
+    \label{systemArchitecture}
+\end{figure}
+
 
 \section{Explorer-core implementation}
-Explorer-core is the most complex module of a whole system with more than 5000 lines of code. The database is a main part of the explorer-core module. Database system consists of a query system, indexes and a database abstract layer. 
+Explorer-core is the most complex module of a whole system with more than 5000 lines of code. The database is a main part of the explorer-core module. Database system consists of a query system, indexes and a database abstract layer. Explorer-core is only system components that communicates with ipfs via js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation.
 
 \subsection{Indexes}
 For indexing there is currently implemented only B-tree, but different structures such as tries\footnote{\url{https://en.wikipedia.org/wiki/Trie}} can be implemented easily. They only need to implement index's interface (function such as \texttt{insert}, \texttt{delete}, \texttt{update}, \texttt{find}). We can create indexes on database entities with decorators\footnote{\url{https://www.typescriptlang.org/docs/handbook/decorators.html}}, which are part of ECMAScript 6 standard. Every database entity has to have \texttt{PrimaryKey} decorator on property that is used as a primary index. Index has three parameters:
@@ -26,7 +35,7 @@ All search queries (equal, less, greater, between) has two steps:
 \begin{figure}[h]
     \centering
     \includegraphics[width=13cm]{btreeindex.png}
-    \caption{Btree indexing first 100 block by their height}
+    \caption{Btree indexing first 100 blocks by their height}
     \label{btree}
 \end{figure}
 
@@ -40,32 +49,54 @@ Database system offers a complex query system. A query can consist of multiple c
     \label{btreeQuery}
 \end{figure}
 
+
+We can make queries with every database table model (such as model on Figure \ref{classExample}). When object inherits from \texttt{Queriable} class, it gets access to these query methods:
+\begin{itemize}
+    \item \texttt{where(propertyName)} - create a condition on the property. There can be multiple conditions in one query. A condition hash to be followed by one of the functions: 
+    \begin{itemize}
+        \item \texttt{gt(value)} - property is greater or equal than \texttt{value}. The QueryPlanner finds in an index first object that has property (set by \texttt{propertyName} in \texttt{where} function) equal or greater than \texttt{value}, and traverse index to the right (to bigger objects).
+        \item \texttt{lt(value)} - property is less or equal than \texttt{value}. Similar as in the \texttt{gt} function, the QueryPlanner finds the closest object that has property equal or less than \texttt{value}. Then, the query traverses index to the smaller objects with smaller index value (to the left).
+        \item \texttt{between(min, max)} - property is greater or equal than \texttt{min} and less or equal than \texttt{max}. 
+        \item \texttt{equal(value)} - returns all objects that \texttt{keyGetter} function returns same key as \texttt{value}. 
+    \end{itemize}
+    \item \texttt{skip(offsetValue)} - query will skip \texttt{offsetValue} number of results,
+    \item \texttt{limit(limitValue)} - set maximum number of results. After query has \texttt{limitValue} count of matched objects it will stop browsing the index,
+    \item \texttt{all()} - return all objects that matched query,
+    \item \texttt{first()} - return the first object that matched a query,
+    \item \texttt{and(childQuery)} - logical and between two queries. Parent query resolves \texttt{childQuery} (call \texttt{all()} function) and add its results to \texttt{AND-hashset}.
+    \item \texttt{or(childQuery)} - logical or between two queries. \texttt{childQuery} will be resolved by parent query, and its results stored in \texttt{OR-hashset} of parent query. 
+    \item \texttt{[Symbol.iterator]()} - iterator that is used in cycle \texttt{for (result of query)}.
+\end{itemize}
+
+
+
 \subsection{Database}
-The most important part of the explorer-core module is a Database system which connects query system with indexes. When we make a query, it translates to the database, and data are obtained from the indexes.
+The most important part of the Explorer-core module is the database system which connects the query system with indexes. When we make a query, it translates to the database, and data are obtained with a help of the indexes.
 
 \subsubsection{Tables}
-A database contains tables. A table contains indexes and table name and implements operations that modifies its state:
+A database contains tables that consists of indexes. A table has interface that provide basic CRUD operations on its data:
 \begin{itemize}
-    \item \texttt{insert} - creates history log for entity with first entity version. Then adds it to every table index.
+    \item \texttt{create} - creates history log for entity with first entity version. Then adds it to every table index.
     \item \texttt{update} - adds new version of the entity to its history log. Than update every index of the table.
     \item \texttt{delete} - removes entity from every table index. From now, an entity can not be find in this table.
+    \item \texttt{select} - obtain data. If no condition is set, table uses primary key index.
 \end{itemize}
 
 Example of the class User is in Figure \ref{classExample}. It has two indexes. One primary on property \texttt{name} and one normal index on property \texttt{age}. The second index has also specified \texttt{comparator} that is a bit faster than default one, but works only on numbers, and \texttt{keygetter} that returns a year when a user has born. 
 
 \begin{figure}[h]
     \centering
-    \begin{lstlisting}[language=python]
-        class User extends Queriable<User> {
-            @PrimaryKey()
-            name: string;
-    
-            @Index(
-                (a, b) => a - b,
-                u => new Date().getFullYear() - u.age,
-            )
-            age: number;
-        }
+    \begin{lstlisting}[style=ES6]
+    class User extends Queriable<User> {
+        @PrimaryKey()
+        name: string;
+
+        @Index(
+            (a, b) => a - b,
+            u => new Date().getFullYear() - u.age,
+        )
+        age: number;
+    }
     \end{lstlisting}
     \caption{Example of database table abstraction }
     \label{classExample}
@@ -77,13 +108,11 @@ Example of the class User is in Figure \ref{classExample}. It has two indexes. O
 A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{read}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{design}).
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{designSync}).
+\todo{popisat algoritmus synchronizacie}
 
-
-
-
-\section{Feeder implementation}
-A Feeder is a simple program (less than a hundred lines of code) written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends on the Explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain. We can create multiple Feeders for single blockchain, but we need to provide some deterministic algorithm, that insures that each block is parsed by only one Feeder. This can be done by providing \texttt{FeederId} and \texttt{FeedersCount}  in \texttt{.env} config file. If those values are provided, Feeder parses only blocks that have height modulo \texttt{FeedersCount} equals to \texttt{FeederId}. 
+\section{Feeder}
+A Feeder is a simple command-line application written in Typescript (see Algorithm \ref{feederAlgo}). It strongly depends on the Explorer-core module. Currently, we support only Blockbook connector as a source of blockchain's data, but Feeder can be simply expanded to support more data source such as InsightAPI or direct connection to a blockchain as a full node. Each Feeder has configuration file (usually called \texttt{.env}) with Feeder's settings. Main Feeder settings are \texttt{URL} of the source for the blockchain's data and \texttt{DB\_NAME} which is a name of the database where Feeder inserts new blocks. A Feeder can be connected to only one blockchain. We can create multiple Feeders for single blockchain, but we need to provide some deterministic algorithm, that insures that each block is parsed by only one Feeder. This can be done by providing \texttt{FeederId} and \texttt{FeedersCount}  in \texttt{.env} config file. If those values are provided, Feeder parses only blocks that have height modulo \texttt{FeedersCount} equals to \texttt{FeederId}. 
 
 
 \begin{algorithm}[H]
@@ -101,58 +130,39 @@ A Feeder is a simple program (less than a hundred lines of code) written in Type
 \end{algorithm}
 
 
-
-\section{Explorer implementation}
-We can split Explorer to several modules. The central part is ExplorerCore which communicates with IPFS and provides an interface to explore blockchain and to perform queries. There can be ExplorerGUI or ExplorerAPI on the top of the ExplorerCore. These modules are providing communication with user or other systems. This architecture is shown in Figure \ref{ExplorerArchitecture}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=13cm]{ExplorerArchitecture.png}
-    \caption{Explorer architecture}
-    \label{ExplorerArchitecture}
-\end{figure}
-
-\subsection{ExplorerCore}
-ExplorerCore is main module of the Explorer. It is responsible for obtaining and resolving data from IPFS and performing queries. It has simple interface:
-\begin{itemize}
-    \item \texttt{getObject(CID[, path])} - gets object from IPFS with optional path,
-    \item \texttt{getTx(txHash)} - gets transaction by its hash,
-    \item \texttt{getBlock(blockHash)} - gets block by its hash,
-    \item \texttt{getBlock(blockHeight)} - gets block by its height,
-    \item \texttt{getAddress(addressHash)} - gets address by its hash.
-\end{itemize}
-All ExplorerCore methods except \texttt{getObject} are returning \texttt{QueryObject}.
-
-\subsubsection{Query system}
-Explorer supports a simple query system. Every queriable object (address, transaction, block) has methods:
-\begin{itemize}
-    \item \texttt{where(propertyName)} - create a condition on the property. There can be multiple conditions in one query. A condition hash to be followed by one of the functions: 
-    \begin{itemize}
-        \item \texttt{gt(value)} - property is greater or equal than \texttt{value}. The query finds in an index first object that has property (set by \texttt{propertyName} in condition) equal or greater than \texttt{value}, and traverse index to the right (to bigger objects).
-        \item \texttt{lt(value)} - property is less or equal than \texttt{value}. Similar as in the \texttt{gt} function, the query finds the closest object that has property equal or less than \texttt{value}. Then, the query traverses index to the smaller objects with smaller index value (to the left).
-        \item \texttt{between(min, max)} - property is greater or equal than \texttt{min} and less or equal than \texttt{max}. 
-    \end{itemize}
-    \item \texttt{offset(offsetValue)} - query will skip \texttt{offsetValue} number of results,
-    \item \texttt{limit(limitValue)} - set maximum number of results. After query has \texttt{limitValue} count of matched objects it will stop browsing the index,
-    \item \texttt{all()} - return all objects that matched query,
-    \item \texttt{first()} - return the first object that matched a query,
-    \item \texttt{and(childQuery)} - logical and between two queries. Parent query resolves \texttt{childQuery} (call \texttt{all()} function) and makes a hashtable from its results. Later, when parent query being resolved, query checks if the result exists in the hashtable for every result.
-    \item \texttt{or(childQuery)} - logical or between two queries. \texttt{childQuery} will be resolved by parent query, and its results stores in hashtable. When the parent query is resolved, its results will be added to the hashtable. This will remove duplicates in the final results.
-    \item \texttt{[Symbol.iterator]()} - iterator that is used in cycle \texttt{for (result of query)}.
-
-\end{itemize}
-
-The data obtaining will happen only when we access the data inside the Query object (for example, in for-loop) or by calling \texttt{all()} or \texttt{first()} method. Index is used only for the first condition in a query, that is on the property, that has created index. Other conditions are performed client-side.
-
 \subsection{ExplorerGUI}
-ExplorerGUI is a single page application with simple user interface that runs in browser implemented with Vue.js\footnote{\url{https://vuejs.org/}}. Browser's implementation of IndexedDB is used as a storage for IPFS as can be seen in Figure \ref{browserIPFS}. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} or WebSockets. Every tab opened in the browser is the same IPFS node. Opening a new tab in Incognito mode or different browser will spawn different IPFS node.
+ExplorerGUI is a single page application with a simple user interface implemented with Vue.js\footnote{\url{https://vuejs.org/}} that runs in a browser. We use browser implementation of IndexedDB\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API}} as a storage for IPFS. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} and WebSockets because a webpage in a browser can not open TCP socket. Every opened ExplorerGUI browser tab is the same IPFS node instance. Opening a new tab in incognito mode or different browser will spawn new IPFS node.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=12cm]{ipfsBrowser.PNG}
-    \caption{IPFS storage in browser}
-    \label{browserIPFS}
+    \includegraphics[width=13cm]{blocksView.png}
+    \caption{Blocks view}
+    \label{blocksView}
 \end{figure}
+
+After page with ExplorerGUI is loaded, it tries to connect to all supported blockchains. The home screen contains all enabled cryptocurrencies. Blocks list view is displayed when a user selects specific cryptocurrency. A user can filter blocks by all blocks indexes in this view. A default filter get all blocks that height is less than infinity. This query sorts blocks from the newest (highest) to the oldest (see Figure \ref{blocksView}). When a user clicks on the Execute button, ExplorerGUI starts loading blocks that match the selected query by the asynchronous algorithm shown on Figure \ref{blocksLoading}. First, we use \texttt{iterate} function (implemented in ExplorerCore module) to obtain iterator over subtree of all results. This function is asynchronous, so it does not block the main Javascript thread while it is searching whole index and looking for the subtree. Then we create an array of promises\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise}} in which the individual blocks that are displayed on the page are loaded. In for cycle, we push asynchronous tasks to the array. A task contains single parameter that is \texttt{pagePosition}. This parameter is the order of the block that tasks loads. Every task for each block then runs in parallel. First, task call \texttt{next} function on subtree iterator. This function returns the next block in the subtree. \texttt{next} function can return left or right sibling of the current block. It depends on the condition. A subtree is traversed to the left if \texttt{greaterThan} or \texttt{between} condition is used and to the right if there is \texttt{lessThan} condition. \texttt{next} function returns a pair value. \texttt{blockPromise} is a task that loads blockchain block from IPFS and \texttt{done} is boolean, which signals if there are any more results in the subtree. Finally, task waits until blocks is loaded, and then assigns block in the right index of the blocks array. Thanks to this optimized asynchronous algorithm, all blocks that are displayed on the page are loaded in parallel.
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}[style=ES6]
+const subtree = await query.iterate()
+const tasks = [];
+for (let i = 0; i < pageSize; i++) {
+    tasks.push(
+        (async pagePosition => {
+            const { blockPromise, done } = await subtree.iterator.next();
+            if (done)
+                return;
+            blocks[page - 1 * pageSize + pagePosition] = await blockPromise;
+        })(i),
+    );
+}
+await Promise.all(tasks);
+    \end{lstlisting}
+    \caption{Loading blocks from database}
+    \label{blocksLoading}
+\end{figure}
+
 
 
 \subsection{ExplorerAPI}
@@ -160,9 +170,3 @@ Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesyst
 
 Rest API supports optional path param \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=12cm]{ipfsNode.PNG}
-    \caption{IPFS storage in node.js}
-    \label{nodeIPFS}
-\end{figure}

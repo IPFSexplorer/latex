@@ -51,6 +51,7 @@ When we commit a transaction, it is inserted to the transactions queue. If there
 \end{itemize}
 
 \subsubsection{Synchronization} 
+\label{designSync}
 Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version was created. Database versions create an append-only log called database log. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS and each points to a hash of previous version(s) forming a graph. Database logs can be forked and joined back together.\cite{crdtLog}
 
 If more than one peer publishes a new version of the database that has been created from the same database version, other peers needs to decide which version they would accept. Opposite to records conflicts, we needs to solve database versions conflict fast and automatically. There are multiple ways to solve them. For example: 
