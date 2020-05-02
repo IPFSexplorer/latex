@@ -1,7 +1,6 @@
 \chapter{Implementation}
 \label{Implementation}
-This chapter describes the implementation details of the system and shows the internal
-architecture. All system components are implemented in Typescript that is later compiled to Javascript. This choose of language enables code sharing between individual components and allow us to support multiple platforms (desktop via Node.js, and browser). All system components are dependent on Explorer-core module where is the whole database system implemented (see Figure \ref{systemArchitecture}). 
+This chapter describes the implementation details of the system and shows the internal architecture. All system components are implemented in Typescript that is later compiled to Javascript. This choose of language enables code sharing between individual components and allow us to support multiple platforms (desktop via Node.js, and browser). All system components are dependent on Explorer-core module where is the whole database system implemented (see Figure \ref{systemArchitecture}). 
 
 
 \begin{figure}[h]
@@ -13,7 +12,11 @@ architecture. All system components are implemented in Typescript that is later 
 
 
 \section{Explorer-core implementation}
-Explorer-core is the most complex module of a whole system with more than 5000 lines of code. The database is a main part of the explorer-core module. Database system consists of a query system, indexes and a database abstract layer. Explorer-core is only system components that communicates with ipfs via js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation.
+Explorer-core is the most complex module of a whole system with more than 5000 lines of code. The database is a main part of the explorer-core module. Database system consists of a query system, indexes and a database abstract layer. Explorer-core is only system components that communicates with IPFS via js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation.
+
+\subsection{IPFS connector}
+IPFS connector is a singleton class that provides a connection to IPFS. It has a method \texttt{getInstanceAsync} which will returns promise that resolves into IPFS node instance. This instance is stored in a private static class variable. Next call of function \texttt{getInstanceAsync} returns that static class variable.
+Also, swarm key is present in IPFS connector. This key is used to make private IPFS network with only Explorers and Feeders peers. Other peers (without swarm key) can not connect to our network. IPFS connector contains settings for node.js and browser IPFS peer. Browser peers use WebRTC and Websockets for transport. Node.js peers use TCP and WebSockets. That means that Feeders (a node.js application) can communicate with each other with TCP. Explorer communicate with other explorers with WebSockets or WebRTC. Explorer uses WebSockets when communicating with Feeders.
 
 \subsection{Indexes}
 For indexing there is currently implemented only B-tree, but different structures such as tries\footnote{\url{https://en.wikipedia.org/wiki/Trie}} can be implemented easily. They only need to implement index's interface (function such as \texttt{insert}, \texttt{delete}, \texttt{update}, \texttt{find}). We can create indexes on database entities with decorators\footnote{\url{https://www.typescriptlang.org/docs/handbook/decorators.html}}, which are part of ECMAScript 6 standard. Every database entity has to have \texttt{PrimaryKey} decorator on property that is used as a primary index. Index has three parameters:
@@ -40,7 +43,7 @@ All search queries (equal, less, greater, between) has two steps:
 \end{figure}
 
 \subsection{Query system}
-Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results. Example query returning blocks between 38 and 42 is shown in Figure \ref{btreeQuery}. A peer needs to download only data that are highlighted in green. After downloading them, they are stored on peer's filesystem and are offered to other peers. 
+Database system offers a complex query system. A query can consist of multiple conditions and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter, and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results. Example query returning blocks between 38 and 42 is shown in Figure \ref{btreeQuery}. A peer needs to download only data that are highlighted in green. After downloading them, they are stored on peer's filesystem and are offered to other peers. 
 
 \begin{figure}[h]
     \centering
@@ -68,13 +71,11 @@ We can make queries with every database table model (such as model on Figure \re
     \item \texttt{[Symbol.iterator]()} - iterator that is used in cycle \texttt{for (result of query)}.
 \end{itemize}
 
-
-
 \subsection{Database}
 The most important part of the Explorer-core module is the database system which connects the query system with indexes. When we make a query, it translates to the database, and data are obtained with a help of the indexes.
 
 \subsubsection{Tables}
-A database contains tables that consists of indexes. A table has interface that provide basic CRUD operations on its data:
+A database contains tables that consists of indexes. A table has a interface that provide basic CRUD operations on its data:
 \begin{itemize}
     \item \texttt{create} - creates history log for entity with first entity version. Then adds it to every table index.
     \item \texttt{update} - adds new version of the entity to its history log. Than update every index of the table.
@@ -105,20 +106,82 @@ Example of the class User is in Figure \ref{classExample}. It has two indexes. O
 
 
 \subsubsection{Transactions}
-A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 100ms for more transactions to come.  
+A database can be executing only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 50ms for more transactions to come. Transactions in our system are represented by classes \texttt{Transaction} and \texttt{TransactionsBulk}. Both classes implements \texttt{ITrasnaction} interface with \texttt{run} function. Transactions bulk are treated the same way as a single transaction thanks to Composite pattern\footnote{\url{https://en.wikipedia.org/wiki/Composite_pattern}} (see Figure \ref{transactionsComposite}). After executing, each transaction is appended to the database log. After we execute all transactions in transactions queue (transaction queue is empty), we publish a new database version to all connected peers.
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}[style=ES6]
+        interface ITransaction{
+            run();
+        }
+        
+        public class Transaction implements ITransaction {
+            operation: DbOperation;
+            data: any;
+            run() {
+                ...
+            }
+        }
+        
+        public class TransactionsBulk implements ITransaction {
+            public transactions: ITransaction[];
+            public run() {
+                for (const transaction of this.transactions)
+                    await transaction.run(database);
+            }
+        }
+    \end{lstlisting}
+    \caption{Transactions use composite pattern. Body of function \texttt{run} of the \texttt{Transaction} class is omitted due to complexity.}
+    \label{transactionsComposite}
+\end{figure}
+
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{designSync}).
-
-
-\todo{popisat algoritmus synchronizacie}
-
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
+\begin{itemize}
+    \item \textbf{hash} - an IPFS hash of this entry,
+    \item \textbf{payload} - payload is object that contains all entry data. Usually, there is a transaction (or transactions bulk if in this entry is published more transactions) and an IPFS hash of the database.
+    \item \textbf{parent} - an IPFS hash to previous entry. We can re-create a whole database log from a head entry be accessing parent property until it is \texttt{null}.
+    \item \textbf{clock} - A Lamport clock \footnote{\url{https://en.wikipedia.org/wiki/Lamport_timestamps}} with entry create time.
+\end{itemize}
+There can be only one valid database transaction in every point in time. There are several strategies to choose which transaction is globally accepted and which transactions need to rollbacks (described in design \ref{designSync}). Merging database logs is a common operation in our database system. Every time a peer publishes new database version, other peers needs merge this version with theirs. Example of merging database logs can be seen on Figure \ref{syncDB}. In this example there are two peers (\texttt{Node A} and \texttt{Node B}). First three database version (\texttt{A1}, \texttt{B1}, \texttt{A2}) follows each other and there is no problem with them. But versions \texttt{A3} and \texttt{B2} are published in the same time. Node A and B do not known about this issue yet, so they both publish another version (\texttt{A4} and \texttt{B3}) on top of their head. After nodes get notified about each other versions, their logs are merged by database log class function \texttt{merge} which accepts another log as a parameter (see Figure \ref{dblogMergeAlgo}). At first, we create a new instance of \texttt{TransactionsBulk} where we store transactions that we may need to rollback. Then we check if both logs heads are published at the same time. If one head clock time is greater than another head clock time, we need to get previous database log entry from this log with the same time as another log head to be able to compare these versions. Luckily, both logs heads from our example (\texttt{A4}, \texttt{B3}) are published in the same time. We can get a previous entry from accessing \texttt{parent} property of database log entry. Finally, after we got both logs heads from the same time, we can start traversing them and comparing their parents. If logs have the same parent (in our example it is version \texttt{A2}), we found a database version where the fork began. Now, peers need to decide which version of the database to accept. The simplest method is to compare hashes of database log entries. In our example \texttt{A3} entry has bigger hash than \texttt{B2}. This means that \texttt{Node B} needs to rollback transactions published in versions \texttt{B2} and \texttt{B3} and apply them after \texttt{A4}. After the merge, database log has a single head again and all published transactions has been applied.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=10cm]{syncDB.png}
     \caption{Database synchronization}
     \label{syncDB}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}[style=ES6]
+public async merge(log) {
+    let thisHead = this.head;
+    let otherHead = log.head;
+    const rollbackOperations = new TransactionsBulk();
+    while (thisHead.clock.time != otherHead.clock.time) {
+        if (thisHead.clock.time > otherHead.clock.time) {
+            if (thisHead.identity.isMe())
+                rollbackOperations.push(thisHead.transaction);
+            thisHead = await this.get(thisHead.parent);
+        } else {
+            otherHead = await log.get(otherHead.parent);
+        }
+    }
+    while (thisHead.payload.parent != otherHead.parent) {
+        if (thisHead.identity.isMe())
+            rollbackOperations.push(thisHead.payload.transaction);
+        otherHead = await log.get(otherHead.parent);
+        thisHead = await this.get(thisHead.parent);
+    }
+    if (otherHead.compare(thisHead.hash)) {
+        await this.migrate(log, rollbackOperations);
+    }
+}
+    \end{lstlisting}
+    \caption{Algorithm for merging database logs}
+    \label{dblogMergeAlgo}
 \end{figure}
 
 \section{Feeder}
