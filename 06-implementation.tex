@@ -53,7 +53,7 @@ Database system offers a complex query system. A query can consist of multiple c
 \end{figure}
 
 
-We can make queries with every database table model (such as model on Figure \ref{classExample}). When object inherits from \texttt{Queriable} class, it gets access to these query methods:
+We can make queries with every database table model (such as model on Figure \ref{classExample}). Whole query system is displayed in the state diagram on Figure \ref{queryStateDiagram}. The query system consists of these functions: 
 \begin{itemize}
     \item \texttt{where(propertyName)} - create a condition on the property. There can be multiple conditions in one query. A condition hash to be followed by one of the functions: 
     \begin{itemize}
@@ -67,9 +67,20 @@ We can make queries with every database table model (such as model on Figure \re
     \item \texttt{all()} - return all objects that matched query,
     \item \texttt{first()} - return the first object that matched a query,
     \item \texttt{and(childQuery)} - logical and between two queries. Parent query resolves \texttt{childQuery} (call \texttt{all()} function) and add its results to \texttt{AND-hashset}.
-    \item \texttt{or(childQuery)} - logical or between two queries. \texttt{childQuery} will be resolved by parent query, and its results stored in \texttt{OR-hashset} of parent query. 
-    \item \texttt{[Symbol.iterator]()} - iterator that is used in cycle \texttt{for (result of query)}.
+    \item \texttt{and(property)} - Thanks to available generic programming\footnote{\url{https://en.wikipedia.org/wiki/Generic_programming}} in Typescript, \texttt{and} can be also called with string argument. This register another query condition.
+    \item \texttt{or(childQuery)} - logical or between two queries. \texttt{childQuery} will be resolved when parent query needs it, and its results stored in \texttt{OR-hashset} of parent query. 
+    \item \texttt{or(property)} - similar as \texttt{and} function, \texttt{or} can be also called with string parameter. This register another condition to query.
+    \item \texttt{iterate()} - returns iterator that can be used in \texttt{for (result of query)} cycle.
 \end{itemize}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{queryStateDiagram.png}
+    \caption{State diagram of the query system}
+    \label{queryStateDiagram}
+\end{figure}
+
 
 \subsection{Database}
 The most important part of the Explorer-core module is the database system which connects the query system with indexes. When we make a query, it translates to the database, and data are obtained with a help of the indexes.
@@ -239,7 +250,7 @@ await Promise.all(tasks);
 
 
 \subsection{ExplorerAPI}
-Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data (see Figure \ref{nodeIPFS}). On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
+Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data. On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently, available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
 
-Rest API supports optional path param \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.
+% Rest API supports optional path param \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.
 

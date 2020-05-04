@@ -39,12 +39,12 @@
 \contentsline {subsection}{\numberline {5.1.2}Indexes}{21}{subsection.5.1.2}%
 \contentsline {subsection}{\numberline {5.1.3}Query system}{22}{subsection.5.1.3}%
 \contentsline {subsection}{\numberline {5.1.4}Database}{24}{subsection.5.1.4}%
-\contentsline {subsubsection}{Tables}{24}{section*.25}%
-\contentsline {subsubsection}{Transactions}{25}{section*.27}%
-\contentsline {subsubsection}{Synchronization}{25}{section*.29}%
-\contentsline {section}{\numberline {5.2}Feeder}{26}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}ExplorerGUI}{27}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}ExplorerAPI}{29}{subsection.5.2.2}%
+\contentsline {subsubsection}{Tables}{24}{section*.26}%
+\contentsline {subsubsection}{Transactions}{25}{section*.28}%
+\contentsline {subsubsection}{Synchronization}{25}{section*.30}%
+\contentsline {section}{\numberline {5.2}Feeder}{27}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}ExplorerGUI}{28}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}ExplorerAPI}{30}{subsection.5.2.2}%
 \contentsline {chapter}{\numberline {6}Benchmarking}{31}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Comparing to other database systems}{31}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}MySQL}{31}{subsection.6.1.1}%
@@ -61,6 +61,6 @@
 \contentsline {subsection}{\numberline {6.2.3}Reading}{35}{subsection.6.2.3}%
 \contentsline {subsection}{\numberline {6.2.4}Filtering}{35}{subsection.6.2.4}%
 \contentsline {chapter}{\numberline {7}Conclusion}{36}{chapter.7}%
-\contentsline {chapter}{Bibliography}{37}{chapter*.40}%
+\contentsline {chapter}{Bibliography}{37}{chapter*.41}%
 \ttl@starttoc {chapters@1}
 \contentsfinish 
