@@ -191,7 +191,7 @@ public async merge(log) {
     }
 }
     \end{lstlisting}
-    \caption{Algorithm for merging database logs}
+    \caption{\todo{Zapisat algoritmom. Nie kodom}Algorithm for merging database logs}
     \label{dblogMergeAlgo}
 \end{figure}
 
@@ -215,16 +215,43 @@ A Feeder is a simple command-line application written in Typescript (see Algorit
 
 
 \subsection{ExplorerGUI}
-ExplorerGUI is a single page application with a simple user interface implemented with Vue.js\footnote{\url{https://vuejs.org/}} that runs in a browser. We use browser implementation of IndexedDB\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API}} as a storage for IPFS. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} and WebSockets because a webpage in a browser can not open TCP socket. Every opened ExplorerGUI browser tab is the same IPFS node instance. Opening a new tab in incognito mode or different browser will spawn new IPFS node.
+ExplorerGUI is a single page application with a simple user interface implemented with Vue.js\footnote{\url{https://vuejs.org/}} that runs in a browser. We use Vuetify\footnote{\url{https://vuetifyjs.com/}} as a user interface library and browser implementation of IndexedDB\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API}} as a storage for IPFS. Communication with other peers is provided though WebRTC\footnote{\url{https://webrtc.org/}} and WebSockets because a webpage in a browser can not open TCP socket. Every opened ExplorerGUI browser tab is the same IPFS node instance. Opening a new tab in incognito mode or different browser will spawn new IPFS node.
+
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=13cm]{blocksView.png}
-    \caption{Blocks view}
-    \label{blocksView}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{explorerGuiHomeFrame.png}
+        \caption{Home view}
+        \label{homeView}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{explorerGuiBlockDetailFrame.png}
+        \caption{Block detail view}
+        \label{blockDetailView}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{explorerGuiAddressFrame.png}
+        \caption{Address view}
+        \label{addressView}
+    \end{subfigure}%
+    \begin{subfigure}[t]{.5\textwidth}
+        \centering
+        \includegraphics[width=1.0\linewidth]{explorerGuiBlocksFrame.png}
+        \caption{Blocks view}
+        \label{blocksView}
+    \end{subfigure}
+    \caption{ExplorerGUI views}
 \end{figure}
 
-After page with ExplorerGUI is loaded, it tries to connect to all supported blockchains. The home screen contains all enabled cryptocurrencies. Blocks list view is displayed when a user selects specific cryptocurrency. A user can filter blocks by all blocks indexes in this view. A default filter get all blocks that height is less than infinity. This query sorts blocks from the newest (highest) to the oldest (see Figure \ref{blocksView}). When a user clicks on the Execute button, ExplorerGUI starts loading blocks that match the selected query by the asynchronous algorithm shown on Figure \ref{blocksLoading}. First, we use \texttt{iterate} function (implemented in ExplorerCore module) to obtain iterator over subtree of all results. This function is asynchronous, so it does not block the main Javascript thread while it is searching whole index and looking for the subtree. Then we create an array of promises\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise}} in which the individual blocks that are displayed on the page are loaded. In for cycle, we push asynchronous tasks to the array. A task contains single parameter that is \texttt{pagePosition}. This parameter is the order of the block that tasks loads. Every task for each block then runs in parallel. First, task call \texttt{next} function on subtree iterator. This function returns the next block in the subtree. \texttt{next} function can return left or right sibling of the current block. It depends on the condition. A subtree is traversed to the left if \texttt{greaterThan} or \texttt{between} condition is used and to the right if there is \texttt{lessThan} condition. \texttt{next} function returns a pair value. \texttt{blockPromise} is a task that loads blockchain block from IPFS and \texttt{done} is boolean, which signals if there are any more results in the subtree. Finally, task waits until blocks is loaded, and then assigns block in the right index of the blocks array. Thanks to this optimized asynchronous algorithm, all blocks that are displayed on the page are loaded in parallel.
+
+\begin{figure}[h]
+
+
+After page with ExplorerGUI is loaded, it tries to connect to all supported blockchains. The home screen contains all enabled cryptocurrencies with their statuses (see Figure \ref{homeView}). Blocks list view (Figure \ref{blocksView}) is displayed when a user selects specific cryptocurrency. A user can filter blocks by all blocks indexes in this view. A default filter get all blocks that height is less than infinity. This query sorts blocks from the newest (highest) to the oldest (see Figure \ref{blocksView}). When a user clicks on the Execute button, ExplorerGUI starts loading blocks that match the selected query by the asynchronous algorithm shown on Figure \ref{blocksLoading}. First, we use \texttt{iterate} function (implemented in ExplorerCore module) to obtain iterator over subtree of all results. This function is asynchronous, so it does not block the main Javascript thread while it is searching the whole index and looking for the subtree. Then we create an array of promises\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise}} in which the individual blocks that are displayed on the page are loaded. In for cycle, we push asynchronous tasks to the array. A task contains single parameter that is \texttt{pagePosition}. This parameter is the order of the block that tasks loads. Every task for each block then runs in parallel. First, task call \texttt{next} function on subtree iterator. This function returns the next block in the subtree. \texttt{next} function can return left or right sibling of the current block. It depends on the condition. A subtree is traversed to the left if \texttt{greaterThan} or \texttt{between} condition is used and to the right if there is \texttt{lessThan} condition. \texttt{next} function returns a pair value. \texttt{blockPromise} is a task that loads blockchain block from IPFS and \texttt{done} is boolean, which signals if there are any more results in the subtree. Finally, task waits until blocks is loaded, and then assigns block in the right index of the blocks array. Thanks to this optimized asynchronous algorithm, all blocks that are displayed on the page are loaded in parallel.
 
 \begin{figure}[h]
     \centering
@@ -249,8 +276,18 @@ await Promise.all(tasks);
 
 
 
-\subsection{ExplorerAPI}
-Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data. On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently, available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
+When a user clicks on a block from the Block view, he is redirected to the Block detail view (see Figure \ref{blockDetailView}). All transactions that are confirmed in this block are listed here. Transactions has inputs and output that are usually addresses (input can be also a coinbase). Every address in a transaction in link to the Address View (see Figure \ref{addressView}). The Address view contains all transactions that address is part of as input or output.
 
-% Rest API supports optional path param \texttt{path} that is useful for traversing objects in IPFS. If we want to get fifth transaction of the block with height 1000 one of the way is request URL \texttt{/block/998/next\_block/next\_block/txs/5} (get block with height 998, get next block two times, get transaction, a get fifth item from array of transactions). This approach allows the user to explore IPFS storage as graph very quickly by objects links.
+\centering
+\includegraphics[width=13cm]{explorerGuiPlaygroundFrame.png}
+\caption{Playground view}
+\label{playgroundView}
+\end{figure}
+
+The last view that we implemented in ExplorerGUI is Playground (see Figure \ref{playgroundView}). In this view user can write a query to the web editor and execute it. Syntax highlighting in editor is done by Prism\footnote{\url{https://prismjs.com/}}.
+
+
+\subsection{ExplorerAPI}
+\todo{Prepisat}
+Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data. On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently, available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
 

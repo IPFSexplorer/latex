@@ -58,6 +58,18 @@
 \newblock Available at:
   ~{\small\url{http://lutpub.lut.fi/handle/10024/147666}}.
 
+\bibitem{filecoinWhitepaper}
+{\sc\bgroup}Labs{\egroup}, P.
+\newblock {Filecoin} - A Decentralized Storage Network.
+\newblock 2017.
+\newblock Available at: ~{\small\url{https://filecoin.io/filecoin.pdf}}.
+
+\bibitem{OrbitDBManual}
+{\sc\bgroup}Mark Robert Henderson{\egroup}, S.~P.
+\newblock {\em The OrbitDB Field Manual}.
+\newblock 2019.
+\newblock Available at: ~{\small\url{https://github.com/orbitdb/field-manual}}.
+
 \bibitem{kademlia}
 {\sc\bgroup}Maymounkov{\egroup}, P. and~{\sc\bgroup}Mazieres{\egroup}, D.
 \newblock Kademlia: A peer-to-peer information system based on the xor metric.
@@ -77,6 +89,14 @@
 \newblock Ring SIgnature Confidential Transactions for Monero.
 \newblock {\em IACR Cryptology ePrint Archive}.
 \newblock 2015, vol.~2015, p.~1098.
+
+\bibitem{TextileWhitePaper}
+{\sc\bgroup}Pick{\egroup}, S. and~{\sc\bgroup}Hagopian{\egroup}.
+\newblock {\em A protocol and event-sourced database for decentralized
+  user-siloed data}.
+\newblock 2019.
+\newblock Available at:
+  ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
 
 \bibitem{wayner1997digital}
 {\sc\bgroup}Wayner{\egroup}, P.

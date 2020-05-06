@@ -6,11 +6,11 @@ This chapter describes the proposed design of the whole system for storing and e
 We need a database in our system to store and index data. Database system needs to be decentralized and distributed. There are several databases build on top of IPFS already implemented. The two most known are OrbitDB and Textile.
 
 \subsection{OrbitDB}
-OrbitDB is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases, but it is still in the alpha stage of developing, and it is not well optimized to store hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to selects only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
+OrbitDB\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases, but it is still in the alpha stage of developing, and it is not well optimized to store hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to selects only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.\cite{OrbitDBManual}
 
 \subsection{Textile}
-Textile is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provides backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client.
-Neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed.
+Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provides backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client.
+Neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed.\cite{TextileWhitePaper}
 
 \subsection{Database system design}
 After some research, we concluded that currently for storing and indexing data in IPFS without large harddisk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes. A database system that fits our needs is distributed and decentralized. That brings us lots of synchronization problems to solve. This database system consists of tables that contain records. For faster searching, tables have indexes. Relations between tables are represented via foreign keys. Also, this database system supports fluent query language, used for performing complex queries.
@@ -135,28 +135,29 @@ ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{
 
 
 \begin{figure}[h]
-    \begin{subfigure}{.5\textwidth}
+    \centering
+    \begin{subfigure}[b]{.4\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{mockups/home.png}
         \caption{Home view}
         \label{homeMockup}
     \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}[b]{.4\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{mockups/blocks.png}
         \caption{Blocks list view}
         \label{blocksMockup}
     \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}[b]{.4\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{mockups/blockDetail.png}
         \caption{Block detail view}
         \label{blockDetailMockup}
     \end{subfigure}
-    \begin{subfigure}{.5\textwidth}
+    \begin{subfigure}[b]{.4\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{mockups/address.png}
-        \caption{Address view}
+        \caption{Address view \todo{dorobit mockup}}
         \label{addressMockup}
     \end{subfigure}
     \caption{ExplorerGUI mockups}
@@ -164,22 +165,80 @@ ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{
 
 \subsubsection{ExplorerAPI}
 \label{explorerAPIroutes}
-ExplorerAPI is a server-side application that provides simple RESTapi for obtaining data. It is much less demanding on performance than ExplorerGUI and can be used for integrations with other applications. It has several endpoints:
+ExplorerAPI is a server-side application that provides a simple API for obtaining data. Although our system is decentralized and therefore does not need servers, ExplorerAPI can be used with older devices on which it is not possible to run an IPFS node, or when integrating with other applications. Through RestApi we could not use the full potential of our database system so we get inspired by GraphQL\footnote{\url{https://graphql.org/}} during the design. ExplorerAPI provides endpoints for these database tables:
 \begin{itemize}
-    \item \texttt{GET /currency/[:currencyUnit]/tx/[:txHash]} - get transaction by hash,
-    \item \texttt{GET /currency/[:currencyUnit]/block} - get block collection,
-    \item \texttt{GET /currency/[:currencyUnit]/block/[:blockHeightOrHash]} - get block by height or hash,
-    \item \texttt{GET /currency/[:currencyUnit]/address} - get address collection,
-    \item \texttt{GET /currency/[:currencyUnit]/address/[:hash]} - get address by hash.
+    \item \texttt{/:currency/block} - endopint for obtaining blocks. Each endpoint hash \texttt{currency} path parameter that can be currency unit (for example \texttt{btc}) or currency name (for example \texttt{bitcoin}).
+    \item \texttt{/:currency/transaction} - endpoint for retrieving transactions.  
+    \item \texttt{/:currency/address} - endpoint for obtaining data from address.
 \end{itemize}
+Every endpoint can be accessed with \texttt{GET} or \texttt{POST} HTTP method. A request contains a query object that consists of conditions, filters, skip and resolver (see Figure \ref{explorerApiRequest}). This query object is translated to our query system and executed. Query results in JSON format are returned (example resukt is on Figure \ref{explorerApiResponse}). If a request is sent by \texttt{GET} method, a query object is stringified and urlencoded\footnote{\url{https://en.wikipedia.org/wiki/Percent-encoding}} JSON in query parameters (for example \texttt{/block?query=\%3D\%7Bconditions...\%7D}). If \texttt{POST} method is used, query object is in request body (like on Figure \ref{explorerApiRequest}). With this design we can use multiple conditions and filter in query. 
 
-Every endpoint supports query parameters:
-\begin{itemize}
-    \item \texttt{filter} where value of this parameter can be simple arithmetic expression like \texttt{height>50},
-    \item \texttt{limit} parameter for pagination with default value set to \texttt{20},
-    \item \texttt{orderBy} sorts results of a sequence in ascending order.
-    \item \todo{Paginate}
-\end{itemize}
+
+
+
+
+\begin{figure}[h]
+    \begin{subfigure}[t]{.5\textwidth}
+        \begin{lstlisting}[language=json]
+{
+    "query": {
+        "conditions": [
+            {
+                "type": "and",
+                "comparator": "between",
+                "property": "height",
+                "values": [11990, 12000]
+            }
+        ],
+        "filters": [
+            "(b) => b.height % 2"
+        ],
+        "resolver": {
+            "type": "all"
+        }
+    }
+}
+        \end{lstlisting}
+        \label{explorerApiRequest}
+        \caption{Request that returns blocks with an odd height that is between 11990 and 12000.}
+    \end{subfigure}
+    \begin{subfigure}[t]{.5\textwidth}
+        \begin{lstlisting}[language=json]
+[
+    {
+        "hash": "000000001e564...",
+        "height": 11991,
+        ...
+    },
+    {
+        "hash": "00000000b3637...",
+        "height": 11993,
+        ...
+    },
+    {
+        "hash": "000000007b4da...",
+        "height": 11995,
+        ...
+    },
+    {
+        "hash": "00000000e4361...",
+        "height": 11997,
+        ...
+    },
+    {
+        "hash": "00000000e9935...",
+        "height": 11999,
+        ...
+    }
+]
+        \end{lstlisting}
+        \label{explorerApiResponse}
+        \caption{Response}
+    \end{subfigure}
+    \caption{ExplorerAPI example}
+    \label{explorerApiExample}
+\end{figure}
+
  
 
 

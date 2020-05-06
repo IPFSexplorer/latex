@@ -27,53 +27,62 @@ Warning--empty number in newYorkerBTC
 Warning--empty isbn and issn in haber1990time
 Warning--empty edition in decredWhitePaper
 Warning--empty number in decredWhitePaper
+Warning--"{" isn't a brace-balanced string for entry filecoinWhitepaper
+while executing--line 3172 of file bib-styles/Pysny/enplain.bst
+Warning--empty journal in filecoinWhitepaper
+Warning--empty edition in filecoinWhitepaper
+Warning--empty number in filecoinWhitepaper
+Warning--empty edition in OrbitDBManual
+Warning--empty isbn in OrbitDBManual
 Warning--empty isbn and issn in kademlia
 Warning--empty edition in narayanan2016bitcoin
 Warning--empty isbn in narayanan2016bitcoin
 Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
+Warning--empty edition in TextileWhitePaper
+Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-You've used 13 entries,
+You've used 16 entries,
             3715 wiz_defined-function locations,
-            861 strings with 7277 characters,
-and the built_in function-call counts, 5595 in all, are:
-= -- 424
-> -- 182
-< -- 24
-+ -- 61
-- -- 47
-* -- 307
-:= -- 753
-add.period$ -- 40
-call.type$ -- 13
-change.case$ -- 84
+            879 strings with 7773 characters,
+and the built_in function-call counts, 6657 in all, are:
+= -- 505
+> -- 214
+< -- 27
++ -- 74
+- -- 55
+* -- 367
+:= -- 900
+add.period$ -- 49
+call.type$ -- 16
+change.case$ -- 99
 chr.to.int$ -- 26
-cite$ -- 27
-duplicate$ -- 364
-empty$ -- 722
-format.name$ -- 47
-if$ -- 1330
+cite$ -- 37
+duplicate$ -- 438
+empty$ -- 861
+format.name$ -- 55
+if$ -- 1578
 int.to.chr$ -- 0
-int.to.str$ -- 13
+int.to.str$ -- 16
 missing$ -- 0
-newline$ -- 81
-num.names$ -- 26
-pop$ -- 132
+newline$ -- 99
+num.names$ -- 32
+pop$ -- 161
 preamble$ -- 1
-purify$ -- 55
+purify$ -- 66
 quote$ -- 0
-skip$ -- 249
+skip$ -- 299
 stack$ -- 0
-substring$ -- 270
-swap$ -- 65
-text.length$ -- 11
+substring$ -- 300
+swap$ -- 72
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 27
-warning$ -- 15
-while$ -- 40
-width$ -- 15
-write$ -- 144
+type$ -- 33
+warning$ -- 22
+while$ -- 46
+width$ -- 18
+write$ -- 177
 (There were 3 error messages)
