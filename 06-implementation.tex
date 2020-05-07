@@ -248,9 +248,6 @@ ExplorerGUI is a single page application with a simple user interface implemente
 \end{figure}
 
 
-\begin{figure}[h]
-
-
 After page with ExplorerGUI is loaded, it tries to connect to all supported blockchains. The home screen contains all enabled cryptocurrencies with their statuses (see Figure \ref{homeView}). Blocks list view (Figure \ref{blocksView}) is displayed when a user selects specific cryptocurrency. A user can filter blocks by all blocks indexes in this view. A default filter gets all blocks that height is less than infinity. This query sorts blocks from the newest (highest) to the oldest (see Figure \ref{blocksView}). When a user clicks on the Execute button, ExplorerGUI starts loading blocks that match the selected query by the asynchronous algorithm shown in Figure \ref{blocksLoading}. First, we use \texttt{iterate} function (implemented in ExplorerCore module) to obtain iterator over subtree of all results. This function is asynchronous, so it does not block the main Javascript thread while it is searching the whole index and looking for the subtree. Then we create an array of promises\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise}} in which the individual blocks that are displayed on the page are loaded. In for cycle, we push asynchronous tasks to the array. A task contains single parameter that is \texttt{pagePosition}. This parameter is the order of the block that tasks loads. Every task for each block then runs in parallel. First, task call \texttt{next} function on subtree iterator. This function returns the next block in the subtree. \texttt{next} function can return left or right sibling of the current block. It depends on the condition. A subtree is traversed to the left if \texttt{greaterThan} or \texttt{between} condition is used and to the right if there is \texttt{lessThan} condition. \texttt{next} function returns a pair value. \texttt{blockPromise} is a task that loads blockchain block from IPFS and \texttt{done} is boolean, which signals if there are any more results in the subtree. Finally, task waits until blocks are loaded, and then assigns block in the right index of the blocks array. Thanks to this optimized asynchronous algorithm, all blocks that are displayed on the page are loaded in parallel.
 
 \begin{figure}[h]
@@ -278,10 +275,11 @@ await Promise.all(tasks);
 
 When a user clicks on a block from the Block view, he is redirected to the Block detail view (see Figure \ref{blockDetailView}). All transactions that are confirmed in this block are listed here. Transactions have inputs and output that are usually cryptocurrency address (input can also be a coin base). Every address in a transaction in link to the Address View (see Figure \ref{addressView}). The Address view contains all transactions that address is part of as input or output.
 
-\centering
-\includegraphics[width=13cm]{explorerGuiPlaygroundFrame.png}
-\caption{Playground view}
-\label{playgroundView}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=13cm]{explorerGuiPlaygroundFrame.png}
+    \caption{Playground view}
+    \label{playgroundView}
 \end{figure}
 
 The last view that we implemented in ExplorerGUI is Playground (see Figure \ref{playgroundView}). In this view, the user can write a query to the web editor and execute it. Syntax highlighting in editor is done by Prism\footnote{\url{https://prismjs.com/}}.
