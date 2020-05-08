@@ -7,10 +7,10 @@ Comparing our database system with typical database systems is very difficult. W
 MySQL is free and open-source software under the terms of the GNU General Public License and is also available under a variety of proprietary licenses. MySQL was owned and sponsored by the Swedish company MySQL AB, which was bought by Sun Microsystems (now Oracle Corporation). MySQL is used by many database-driven web applications, including Drupal, Joomla, phpBB, and WordPress. MySQL is also used by many popular websites, including Facebook, Flickr, MediaWiki, Twitter, and YouTube.
 
 \subsection{PostgreSQL}
-PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance. It was originally named POSTGRES, referring to its origins as a successor to the Ingres database developed at the University of California, Berkeley. In 1996, the project was renamed to PostgreSQL to reflect its support for SQL. After a review in 2007, the development team decided to keep the name PostgreSQL.PostgreSQL features transactions with Atomicity, Consistency, Isolation, Durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys, and stored procedures. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. It is available for Linux, FreeBSD, OpenBSD, and Windows.
+PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance. It was initially named POSTGRES, referring to its origins as a successor to the Ingres database developed at the University of California, Berkeley. In 1996, the project was renamed to PostgreSQL to reflect its support for SQL. After a review in 2007, the development team decided to keep the name PostgreSQL. PostgreSQL features transactions with Atomicity, Consistency, Isolation, Durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys, and stored procedures. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. It is available for Linux, FreeBSD, OpenBSD, and Windows.
 
 \subsection{Environment}
-We compare MySQL and PostgresSQL with our p2p database system. These database systems run virtualized in Docker containers on hardware with 4 core's processor Intel Pentium G4560 3.50GHz and 16GB of RAM.  We start clients that connect to these database systems and performs queries on different hardware. Then we measure average queries per seconds that clients execute. Clients are written in javascript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10000 records and table \texttt{posts} contains 50000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
+We compare MySQL and PostgresSQL with our p2p database system. These database systems run virtualized in Docker containers on hardware with 4 cores processor Intel Pentium G4560 3.50GHz and 16GB of RAM.  We start clients that connect to these database systems and performs queries on different hardware. Then we measure average queries per seconds that clients execute. Clients are written in javascript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10000 records and table \texttt{posts} contains 50000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.3\textwidth}
@@ -130,7 +130,7 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
 
 
 \subsection*{Single connected client}
-With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same - about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of IO operations. 
+With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same -- about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of IO operations. 
 
 \begin{figure}[h]
     \begin{subfigure}{.5\textwidth}
@@ -214,5 +214,23 @@ We need to change the default PostgreSQL setting for maximum connections to conn
 We can see that with more than 20 connected clients, our database system became more effective than traditional ones. Thanks to IPFS and its p2p network, a content of the database is distributed on the clients. This reduces the load on the central node.
 
 \section{Comparing with blockchain explorers}
+Our blockchain exploration system solution is unique and differs from traditional blockchain explorers in many ways. See the table \ref{comparingTable} to compare traditional blockchain explorers with ours. 
 
-\todo{Najprv je potrebne synchronizovat cely blockchain aby som mohol uskutocnit merania}
+\begin{table}
+    \centering
+    \begin{tabular}{| p{.2\textwidth} | p{.3\textwidth} | p{.3\textwidth} |}
+    \hline
+    --                                     & \textbf{Our system}                                                                    & \textbf{Traditional blockchain explorer (Blockbook, Insight)}      \\ \hline
+    Database system               & Proprietary                                                                         & Typically NoSQL database                                                        \\ \hline
+    Views for blocks, transactions and addresses               & Yes                                                                         & Yes                                                        \\ \hline
+    Complex queries support               & \textbf{Yes}                                                                         & No                                                        \\ \hline
+    Filtering                             & \textbf{Yes}                                                                         & No, but filtering can be made by cycling over results     \\ \hline
+    Sorting                               & \textbf{Yes}                                                                         & No                                                        \\ \hline
+    Blockchain synchronization            & Typically slower but it depends on how many Feeders are working on blockchain & \textbf{Faster}                                                    \\ \hline
+    Get block/transaction/address by hash & Slower                                                                        & \textbf{Faster, but may slow down if multiple nodes are connected} \\ \hline
+    When more user is connected           & \textbf{Works faster}                                                                  & Works slower                                              \\ \hline
+    Multiple coins support                & Yes                                                                          & Yes                                                \\ \hline
+    \end{tabular}
+    \caption{Comparing our system with typical blockchain explorers}
+    \label{comparingTable}
+\end{table}

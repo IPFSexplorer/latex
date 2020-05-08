@@ -1,0 +1,15 @@
+{
+    "ltex.en-US.disabledRules": [
+        "DASH_RULE"
+    ],
+    "ltex.ignoreRuleInSentence": [
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QIt has a method getInstanceAsync which will returns promise that resolves into IPFS node instance.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QAfter downloading them, they are stored on a peer's filesystem and are offered to other peers.\\E$"
+        }
+    ]
+}
