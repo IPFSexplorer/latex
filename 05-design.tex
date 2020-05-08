@@ -6,10 +6,10 @@ This chapter describes the proposed design of the whole system for storing and e
 We need a database in our system to store and index data. Database system needs to be decentralized and distributed. There are several databases build on top of IPFS already implemented. The two most known are OrbitDB and Textile.
 
 \subsection{OrbitDB}
-OrbitDB\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases, but it is still in the alpha stage of developing, and it is not well optimized to store hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to selects only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.\cite{OrbitDBManual}
+OrbitDB\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases, but it is still in the alpha stage of development, and it is not well optimized for storing hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to select only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.\cite{OrbitDBManual}
 
 \subsection{Textile}
-Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provides backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client.
+Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provide backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client.
 Neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed.\cite{TextileWhitePaper}
 
 \subsection{Database system design}
@@ -18,7 +18,7 @@ After some research, we concluded that currently for storing and indexing data i
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
 
-In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody updates it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries. Then update the record with final increment.
+In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody updates it before us (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. If two countries updates data at the same time (their updates pointing to the same previous version of the entry), they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries, then update the record with final increment.
 
 
 \begin{figure}[h]
@@ -30,9 +30,9 @@ In centralized systems such as git, conflicts are detected on write (for example
 
 
 \subsubsection{Indexes}
-An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed (because we would need to scan all tables where the entity is referenced and change the referenced value to a new one). Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
+An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed, because we would need to scan all tables where the entity is referenced and change the referenced value to a new one. Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
 \begin{itemize}
-    \item \textbf{Comparator} - is a function that has two parameters (two keys of B-tree) and outputs a number. An index is using a comparator to search records and insert record to the right place in B-tree.
+    \item \textbf{Comparator} - is a function that has two parameters (two keys of B-tree) and outputs a number as a result. An index is using a comparator to search records and insert record to the right place in B-tree.
     \item \textbf{Key-getter} - is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index comparator). Every index has key-getter that is using to obtain keys for B-tree.
 \end{itemize}
 
@@ -47,7 +47,7 @@ A table contains indexes and table name. Also, it implements operations that mod
     \item \textbf{Update} - save new record version. It consists of:
         \begin{enumerate}
             \item Add new entry to the record log. Save the record log to the IPFS.
-            \item Gets new record key (via Key-getter) and update all table indexes with new IPFS hash as value.
+            \item Get new record key (via Key-getter) and update all table indexes with new IPFS hash as value.
         \end{enumerate}
     \item \textbf{Delete} - remove a record from a table. 
         \begin{enumerate}
@@ -69,26 +69,26 @@ When we commit a transaction, it is inserted to the transactions queue. If there
 
 \subsubsection{Synchronization} 
 \label{designSync}
-Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version was created. Database versions create an append-only log called database log. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS, and each points to a hash of previous version(s) forming a graph. Database logs can be forked and joined back together.\cite{crdtLog}
+Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version it was created. Database versions create an append-only log called database log. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS, and each points to a hash of previous version(s) forming a graph. Database logs can be forked and joined back together.\cite{crdtLog}
 
 If more than one peer publishes a new version of the database that has been created from the same database version, other peers need to decide which version they would accept. Opposite to records conflicts, we need to solve database versions conflict fast and automatically. There are multiple ways to solve them. For example: 
 \begin{itemize}
     \item \textbf{The biggest hash wins} - if there is more than one database version at the same (discrete) time, the one with the biggest hash wins. This strategy is present in Figure \ref{databaseConflict}. 
     \item \textbf{The longest connecting time wins} - a user who is connected to the database for the longest time wins.
 \end{itemize}
-Lots of more strategies can be implemented. But they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).\cite{lamport2019time}
+Lots of more strategies can be implemented, but they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).\cite{lamport2019time}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=13cm]{DBconflict.png}
-    \caption{Synchronization of a database. Note that in time 4, Node1 add two transactions in one DB version.}
+    \caption{Synchronization of a database. Note that in time 4, Node1 adds two transactions in one DB version.}
     \label{databaseConflict}
 \end{figure}
 
 \subsubsection{Queries} 
 A Database system provides query language for performing selects. A query consists of:
 \begin{itemize}
-    \item \textbf{conditions} - query may contains multiple conditions. There are logical operators (and - conjunction, or - disjunction) between conditions. When it is possible (an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between and's conditions and union between or's a disjunction. These types of conditions are supported:
+    \item \textbf{conditions} - query may contain multiple conditions. There are logical operators (and - conjunction, or - disjunction) between conditions. When it is possible (an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between \texttt{AND} conditions and union between \texttt{OR} conditions. These types of conditions are supported:
     \begin{itemize}
         \item \textbf{equal} - record property equals to specified value,
         \item \textbf{greather than} - record property is greather than specified value,
@@ -131,7 +131,7 @@ Both Explorer and Feeder uses the same database schema. The database schema is d
 \begin{itemize}
     \item \textbf{Block} - table for storing blockchain blocks. It has a primary key on unique block hash, and indexes on height and time. With these indexes, we can perform queries like search block by its hash or heigh very efficiently. Also filtering or ordering blocks by time has good performance.
     \item \textbf{Transaction} - a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
-    \item \textbf{Vin} - every transactions can have multiple inputs. These inputs are stored in Vin table. Every Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
+    \item \textbf{Vin} - every transaction can have multiple inputs. These inputs are stored in Vin table. Every Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
     \item \textbf{Vout} - transactions can have multiple outputs. Every output has a foreign key to transaction and address. If the output is already spent, it has a link to the transaction where this output is used as an input.
     \item \textbf{Address} - Adress contains multiple columns. As the primary key, it uses the address hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
 \end{itemize}
