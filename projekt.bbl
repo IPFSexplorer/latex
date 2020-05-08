@@ -129,6 +129,14 @@
 \newblock Available at:
   ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
 
+\bibitem{crdtLog}
+{\sc\bgroup}Shapiro{\egroup}, M., {\sc\bgroup}Pregui{\c c}a{\egroup}, N.,
+  {\sc\bgroup}Baquero{\egroup}, C. and~{\sc\bgroup}Zawirski{\egroup}, M.
+\newblock {A comprehensive study of Convergent and Commutative Replicated Data
+  Types}.
+\newblock january 2011, RR-7506, p.~50.
+\newblock Available at: ~{\small\url{https://hal.inria.fr/inria-00555588}}.
+
 \bibitem{van2013cryptonote}
 {\sc\bgroup}Van Saberhagen{\egroup}, N.
 \newblock {\em CryptoNote v 2.0}.

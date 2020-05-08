@@ -16,8 +16,6 @@ manual is already a type "wizard-defined" function name
  :                 } { techreport }
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: 20-bibliography.bib
-Warning--entry type for "crdtLog" isn't style-file defined
---line 1 of file 20-bibliography.bib
 Warning--"{" isn't a brace-balanced string for entry IPFSwhitepaper
 while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
@@ -50,48 +48,52 @@ Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
 Warning--empty edition in TextileWhitePaper
 Warning--empty isbn in TextileWhitePaper
+Warning--"{" isn't a brace-balanced string for entry crdtLog
+while executing--line 3172 of file bib-styles/Pysny/enplain.bst
+Warning--empty journal in crdtLog
+Warning--empty edition in crdtLog
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
 You've used 22 entries,
             3715 wiz_defined-function locations,
             905 strings with 8486 characters,
-and the built_in function-call counts, 9070 in all, are:
-= -- 681
-> -- 291
-< -- 32
-+ -- 102
-- -- 75
-* -- 485
-:= -- 1216
-add.period$ -- 64
+and the built_in function-call counts, 9468 in all, are:
+= -- 707
+> -- 307
+< -- 35
++ -- 106
+- -- 79
+* -- 511
+:= -- 1268
+add.period$ -- 67
 call.type$ -- 22
-change.case$ -- 134
-chr.to.int$ -- 32
-cite$ -- 52
-duplicate$ -- 605
-empty$ -- 1196
-format.name$ -- 75
-if$ -- 2161
+change.case$ -- 135
+chr.to.int$ -- 36
+cite$ -- 55
+duplicate$ -- 631
+empty$ -- 1250
+format.name$ -- 79
+if$ -- 2266
 int.to.chr$ -- 0
 int.to.str$ -- 22
 missing$ -- 0
-newline$ -- 132
-num.names$ -- 44
-pop$ -- 235
+newline$ -- 138
+num.names$ -- 45
+pop$ -- 246
 preamble$ -- 1
-purify$ -- 90
+purify$ -- 91
 quote$ -- 0
-skip$ -- 413
+skip$ -- 429
 stack$ -- 0
-substring$ -- 397
-swap$ -- 98
-text.length$ -- 16
+substring$ -- 408
+swap$ -- 101
+text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 45
-warning$ -- 31
-while$ -- 62
+warning$ -- 33
+while$ -- 66
 width$ -- 24
-write$ -- 237
+write$ -- 248
 (There were 3 error messages)

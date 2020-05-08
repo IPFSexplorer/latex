@@ -187,7 +187,7 @@ ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{
 
 \subsubsection{ExplorerAPI}
 \label{explorerAPIroutes}
-ExplorerAPI is a server-side application that provides a simple API for obtaining data. Although our system is decentralized and therefore does not need servers, ExplorerAPI can be used with older devices on which it is not possible to run an IPFS node, or when integrating with other applications. Through RestApi we could not use the full potential of our database system so we get inspired by GraphQL\footnote{\url{https://graphql.org/}} during the design. ExplorerAPI provides endpoints for these database tables:
+ExplorerAPI is a server-side application that provides a simple HTTP API for obtaining data. Although our system is decentralized and therefore does not need servers, ExplorerAPI can be used with older devices on which it is not possible to run an IPFS node, or when integrating with other applications. Through RestApi, we could not use the full potential of our database system, so we get inspired by GraphQL\footnote{\url{https://graphql.org/}} during the design. ExplorerAPI provides endpoints for these database tables:
 \begin{itemize}
     \item \texttt{/:currency/block} - endopint for obtaining blocks. Each endpoint hash \texttt{currency} path parameter that can be currency unit (for example \texttt{btc}) or currency name (for example \texttt{bitcoin}).
     \item \texttt{/:currency/transaction} - endpoint for retrieving transactions.  

@@ -282,9 +282,11 @@ When a user clicks on a block from the Block view, he is redirected to the Block
     \label{playgroundView}
 \end{figure}
 
-The last view that we implemented in ExplorerGUI is Playground (see Figure \ref{playgroundView}). In this view, the user can write a query to the web editor and execute it. Syntax highlighting in editor is done by Prism\footnote{\url{https://prismjs.com/}}.
+The last view that we implemented in ExplorerGUI is Playground (see Figure \ref{playgroundView}). In this view, the user can write a query to the web editor and execute it. Syntax highlighting in editor is done by Prism\footnote{\url{https://prismjs.com/}}. Result of a user query is returned in JSON format bellow query.
 
 
 \subsection{ExplorerAPI}
-\todo{Prepisat}
-Node.js\footnote{\url{https://nodejs.org/}} implementation of IPFS uses filesystem to store data. On the top of ExplorerCore, there is a simple web framework Express\footnote{\url{http://expressjs.com/}}, where are routes (endpoints) defined. Currently, available routes are described in Section \ref{explorerAPIroutes}. Every route supports query parameters \texttt{filter} (used for filtering results) and \texttt{limit} (which reduces number of results). Pagination can be made by setting \texttt{filter} to be greater/smaller (depending on ordering) as key of the last displayed object and \texttt{limit} to page size. For example, if a user is looking at a page of transactions ordered by time (ordered from the newest transactions to the oldest), the next page of transactions are first \(N\) transactions that happened before last displayed transaction (where \(N\) is page size).
+ExplorerAPI is a server-side application that provides simple HTTP API.
+After ExplorerAPI starts, it connect to the all enabled cryptocurrency databases (specified in \texttt{.env} file). Then it register all three controllers (for blocks, transactions and addresses) and starts HTTP server on port described in \texttt{.env} file or \texttt{5000} if there is no specific port in the environment file. ExplorerAPI has only three endpoints (\texttt{block}, \texttt{address} and \texttt{transaction}). All these endpoints accepts query param (in case of \texttt{GET} HTTP method) or body param (\texttt{POST} HTTP method) in which query is described (see Figure \ref{explorerApiRequest}). This param can consists of array of conditions and filters, skip property and resolver. The param is translated to the Query system and result is return in JSON format (see Figure \ref{explorerApiResponse}). ExplorerAPI can accept multiple connections at once, because each request is processed in separated promise (task).
+
+
