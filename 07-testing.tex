@@ -1,0 +1,18 @@
+\chapter{Testing}
+Testing is an essential part of the development of any project. As part of my master thesis, I performed two types of testing. Unit testing to ensure that every system module works correctly, and testing the user interface of ExplorerGUI in which I tested how quickly and efficiently the user handles tasks, and how user-friendly the user interface is.
+
+\section{Unit testing}
+We tested all critical parts of the ExplorerCore module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference).
+
+
+\section{Testing of user interface}
+We also test ExplorerGUI by a user. We invited for this type of testing five people whose task was to perform several simple steps:
+\begin{enumerate}
+    \item Load ExplorerGUI web page.
+    \item Select cryptocurrency.
+    \item Make filter that selects all blocks between 1000 and 2000.
+    \item Click on any block to view its transactions.
+    \item Select some address and view its transactions.
+\end{enumerate}
+
+There were almost no problems during testing. As this is a relatively complex system that requires at least a minimum knowledge of cryptocurrencies, the principles of blocks and transactions were not clear to all tested. However, testers completed the tasks in a very short time. The user interface seemed to everyone simple and intuitive. Subsequently, given the test results, we performed a few graphical changes, such as enlarging and highlighting some controls.Also, most testers liked the graphic design and the chosen colors of the application.

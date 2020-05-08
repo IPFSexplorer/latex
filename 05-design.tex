@@ -18,7 +18,7 @@ After some research, we concluded that currently for storing and indexing data i
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
 
-In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody does not update it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries. Then update the record with final increment.
+In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody updates it before (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. It two countries updates data at the same time (their updates pointing to the same previous version of the entry) they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries. Then update the record with final increment.
 
 
 \begin{figure}[h]
@@ -37,7 +37,24 @@ An index is B-tree optimized for IPFS (no cycled references and node size less t
 \end{itemize}
 
 \subsubsection{Table}
-A table contains indexes and table name. Also it implements operations like \texttt{insert}, \texttt{update} and \texttt{delete}.
+A table contains indexes and table name. Also, it implements operations that modify its data:
+\begin{itemize}
+    \item \textbf{Insert} - creates a new record in a table. Insert operation has these steps: 
+        \begin{enumerate}
+            \item Creates record log with a new entry and store it in IPFS
+            \item Gets record key (via Key-getter) and inserts it to all table indexes with IPFS hash as value.
+        \end{enumerate}
+    \item \textbf{Update} - save new record version. It consists of:
+        \begin{enumerate}
+            \item Add new entry to the record log. Save the record log to the IPFS.
+            \item Gets new record key (via Key-getter) and update all table indexes with new IPFS hash as value.
+        \end{enumerate}
+    \item \textbf{Delete} - remove a record from a table. 
+        \begin{enumerate}
+            \item Get old record key and remove it from all table indexes.
+            \item Add an empty entry to the record log. Save the record log to the IPFS.
+        \end{enumerate}
+\end{itemize}
 
 \subsubsection{Foreign keys}
 We use foreign keys to represent relationships between tables. A foreign key is simply a table name and a value of a primary key of a referenced record.
@@ -59,7 +76,7 @@ If more than one peer publishes a new version of the database that has been crea
     \item \textbf{The biggest hash wins} - if there is more than one database version at the same (discrete) time, the one with the biggest hash wins. This strategy is present in Figure \ref{databaseConflict}. 
     \item \textbf{The longest connecting time wins} - a user who is connected to the database for the longest time wins.
 \end{itemize}
-Lots of more strategies can be implemented. But they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).
+Lots of more strategies can be implemented. But they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North pole (the closest node to the North pole wins).\cite{lamport2019time}
 
 \begin{figure}[h]
     \centering
@@ -148,6 +165,11 @@ ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{
         \caption{Blocks list view}
         \label{blocksMockup}
     \end{subfigure}
+    \caption{ExplorerGUI mockups}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
     \begin{subfigure}[b]{.4\textwidth}
         \centering
         \includegraphics[width=1.0\linewidth]{mockups/blockDetail.png}

@@ -16,12 +16,12 @@ Another critical component of cryptocurrencies discussed in this work is blockch
 
 
 \section{Bitcoin}
-Bitcoin is probably the most famous cryptocurrency. On 3 January 2009, Satoshi Nakamoto (an alias for a person or group persons authored the bitcoin white paper) mined the genesis block of bitcoin (block with height 0). Satoshi gets the reward of 50 bitcoins (half a million US dollars in the time of writing). This text was embedded in the block (see Figure \ref{genesisBitcoin}): \textit{The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.}\footnote{\url{https://en.bitcoin.it/wiki/Genesis\_block}}\cite{newYorkerBTC}. 
+Bitcoin is probably the most famous cryptocurrency. On 3 January 2009, Satoshi Nakamoto (an alias for a person or group persons authored the bitcoin white paper) mined the genesis block of bitcoin (block with height 0). Satoshi gets the reward of 50 bitcoins (half a million US dollars in the time of writing). This text was embedded in the block (see Figure \ref{genesisBitcoin}): \textit{The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.}\footnote{\url{https://en.bitcoin.it/wiki/Genesis\_block}}\cite{newYorkerBTC}. Bitcoin has a limited supply of coins to approximately 21 million. New coins are emitted only when a new block is created.\cite{nakamoto2008peer}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=14cm]{genesisBitcoin.pdf}
-    \caption{Genesis bitcoin block}
+    \caption{Genesis bitcoin block\todo{toto asi dat prec...}}
     \label{genesisBitcoin}
 \end{figure}
 
@@ -33,7 +33,7 @@ DigiByte was developed and released in 2013. It is based on Bitcoin with some ad
 
 
 \section{Ethereum}
-While both the Bitcoin and Ethereum networks are powered by the principle of distributed ledgers and cryptography, the two differ technically in many ways. For example, transactions on the Ethereum network may contain executable code, while data affixed to Bitcoin network transactions are generally only for keeping notes. Other differences include block time (an ether transaction is confirmed in seconds compared to minutes for bitcoin) and the algorithms that they run on (Ethereum uses ethash while Bitcoin uses SHA-256).\cite{wood2014ethereum}
+Ethereum, rather than a cryptocurrency, is a blockchain application platform with Turing-complete programming language. While both the Bitcoin and Ethereum networks are powered by the principle of distributed ledgers and cryptography, the two differ technically in many ways. For example, transactions on the Ethereum network may contain executable code, while data affixed to Bitcoin network transactions are generally only for keeping notes. Other differences include block time (an ether transaction is confirmed in seconds compared to minutes for bitcoin) and the algorithms that they run on (Ethereum uses ethash while Bitcoin uses SHA-256).\cite{wood2014ethereum} \cite{buterin2014next}
 
 
 
@@ -41,20 +41,16 @@ While both the Bitcoin and Ethereum networks are powered by the principle of dis
 Decred is cryptocurrency build from Bitcoin. The main difference from Bitcoin is the rewarding system from mining. In Bitcoin, the miner gets full reward for a mined block. Sometimes, the Bitcoin blockchain splits when two or more miners found a block at nearly the same time. The fork is resolved when the subsequent block(s) are added, and one of the chains becomes longer than the alternative(s). In Decred the chance of blockchain forks is minimized by hybrid proof of work and proof of state system. Each time a block is created (by a miner), it is not automatically part of the blockchain. Block needs to be approved by ticket holders. Then miner receives a block reward (newly created DCR). If the block is rejected by ticket holders, the miner does not receive a reward. Tickets holders for a new block are chosen randomly. The ticket validates the previous block. A block needs at least three of the five votes chosen to approve it for it to be validated.  This hybrid system has many implications, including making a 51\% power attack very difficult, and making a minority fork very difficult as well.\cite{decredWhitePaper}
 
 \section{Monero}
-Three years after Bitcoin, in 2012, the competing Bytecoin cryptocurrency entered the market. The problem with this cryptocurrency, however, was that 80\% of all coins were mined in advance by its authors. The chances of mining were, therefore, not balanced. This led to the decision that this cryptocurrency would start again. New cryptocurrency starts on 18 April 2014 and was called BitMonero, a composite of the word coin in Esperanto (Monero) and Bitcoin according to Bitcoin. However, after five days, the community decided to use only Monero for short. Monero's significant advantage is the dynamic size of the mined blocks. Bitcoin has one block size limited to 1 MB, while Monero adapts the block size to the network load. If the number of transactions increases, so does the block size to accommodate all transactions. Thus, unlike Bitcoin, the more transactions users make, the lower the transaction fee. Monero's main benefit is its full anonymity and interchangeability. Monero hides recipient and sender addresses.\cite{moneroTracebility}
+Three years after Bitcoin, in 2012, the competing Bytecoin cryptocurrency entered the market. The problem with this cryptocurrency, however, was that 80\% of all coins were mined in advance by its authors. The chances of mining were, therefore, not balanced. This led to the decision that this cryptocurrency would start again. New cryptocurrency starts on 18 April 2014 and was called BitMonero, a composite of the word coin in Esperanto (Monero) and Bitcoin according to Bitcoin. However, after five days, the community decided to use only Monero for short. Monero's significant advantage is the dynamic size of the mined blocks. Bitcoin has one block size limited to 1 MB, while Monero adapts the block size to the network load. If the number of transactions increases, so does the block size to accommodate all transactions. Thus, unlike Bitcoin, the more transactions users make, the lower the transaction fee. Monero's main benefit is its full anonymity and interchangeability thanks to CryptoNote protocol\cite{van2013cryptonote}. Monero hides recipient and sender addresses.\cite{moneroTracebility}
 
 \section{Analyze of current blockchain explorers}
-A blockchain explorer is a browser for the blockchain that allows us to explore the whole blockchain.
-\todo{dopisat}
+A Blockchain Explorer is a web application that allows us to explore the whole blockchain. Their primary function is to allow everyone with an internet connection to track in real-time all the transactions or interactions made by each cryptocurrencies holders, regardless of his or her level of knowledge and expertise.\cite{laurence2019blockchain}\cite{dhillon2017blockchain}
 
 
 \subsection{Blockbook}
-Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and the community implemented some others). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSQL database that stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook:
+As a representative of traditional explorers, we chose Blockbook. Blockbook\footnote{\url{https://github.com/trezor/blockbook}} is a blockchain indexer for Trezor Wallet\footnote{\url{https://wallet.trezor.io/}}, developed by SatoshiLabs\footnote{\url{https://satoshilabs.com/}}. It currently supports more than 30 coins (and the community implemented some others). For data storage Blockbook is using RocksDB\footnote{\url{https://github.com/facebook/rocksdb/wiki}} developed by Facebook, which is a NoSQL database that stores only key-value pairs. Blockbook is providing fast API for accessing blocks, addresses and transactions. Main limitations of blockbook are:
 \begin{itemize}
     \item \textbf{Not distributed} (client-server architecture) - problem with scaling for more users. 
     \item \textbf{Not a SQL database} - it does not have a relational data model, it does not support SQL queries, and it has no support for indexes.
     \item \textbf{Single-Process} - only a single process (possibly multi-threaded) can access a particular database at a time.
 \end{itemize}
-
-\subsection{InsightAPI}
-\todo{dopisat}

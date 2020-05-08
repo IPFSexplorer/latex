@@ -9,6 +9,13 @@
 \newblock 2014, abs/1407.3561.
 \newblock Available at: ~{\small\url{http://arxiv.org/abs/1407.3561}}.
 
+\bibitem{buterin2014next}
+{\sc\bgroup}Buterin{\egroup}, V. et~al.
+\newblock A next-generation smart contract and decentralized application
+  platform.
+\newblock {\em White paper}.
+\newblock 2014, vol.~3, no.~37.
+
 \bibitem{digibyteBook}
 {\sc\bgroup}Dascano{\egroup}, M.
 \newblock {\em Digibyte: An Easy Guide to Learning the Essentials}.
@@ -24,6 +31,13 @@
 \newblock october 2011.
 \newblock Available at:
   ~{\small\url{https://www.newyorker.com/magazine/2011/10/10/the-crypto-currency}}.
+
+\bibitem{dhillon2017blockchain}
+{\sc\bgroup}Dhillon{\egroup}, V., {\sc\bgroup}Metcalf{\egroup}, D.
+  and~{\sc\bgroup}Hooper{\egroup}, M.
+\newblock {\em Blockchain Enabled Applications: Understand the Blockchain
+  Ecosystem and How to Make it Work for You}.
+\newblock Springer, 2017.
 
 \bibitem{WebEngineering}
 {\sc\bgroup}Dias{\egroup}, D. and~{\sc\bgroup}Benet{\egroup}, J.
@@ -64,6 +78,17 @@
 \newblock 2017.
 \newblock Available at: ~{\small\url{https://filecoin.io/filecoin.pdf}}.
 
+\bibitem{lamport2019time}
+{\sc\bgroup}Lamport{\egroup}, L.
+\newblock Time, clocks, and the ordering of events in a distributed system.
+\newblock In:~{\em Concurrency: the Works of Leslie Lamport}.
+\newblock 2019, p.~179--196.
+
+\bibitem{laurence2019blockchain}
+{\sc\bgroup}Laurence{\egroup}, T.
+\newblock {\em Blockchain for dummies}.
+\newblock John Wiley \& Sons, 2019.
+
 \bibitem{OrbitDBManual}
 {\sc\bgroup}Mark Robert Henderson{\egroup}, S.~P.
 \newblock {\em The OrbitDB Field Manual}.
@@ -75,6 +100,12 @@
 \newblock Kademlia: A peer-to-peer information system based on the xor metric.
 \newblock In: Springer.~{\em International Workshop on Peer-to-Peer Systems}.
 \newblock 2002, p.~53--65.
+
+\bibitem{nakamoto2008peer}
+{\sc\bgroup}Nakamoto{\egroup}, S. and~{\sc\bgroup}Bitcoin{\egroup}, A.
+\newblock A peer-to-peer electronic cash system.
+\newblock {\em Bitcoin.--URL: https://bitcoin. org/bitcoin. pdf}.
+\newblock 2008.
 
 \bibitem{narayanan2016bitcoin}
 {\sc\bgroup}Narayanan{\egroup}, A., {\sc\bgroup}Bonneau{\egroup}, J.,
@@ -97,6 +128,11 @@
 \newblock 2019.
 \newblock Available at:
   ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
+
+\bibitem{van2013cryptonote}
+{\sc\bgroup}Van Saberhagen{\egroup}, N.
+\newblock {\em CryptoNote v 2.0}.
+\newblock 2013.
 
 \bibitem{wayner1997digital}
 {\sc\bgroup}Wayner{\egroup}, P.

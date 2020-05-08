@@ -86,13 +86,13 @@ We can make queries with every database table model (such as model on Figure \re
 The most important part of the Explorer-core module is the database system which connects the query system with indexes. When we make a query, it translates to the database, and data are obtained with the help of the indexes.
 
 \subsubsection{Tables}
-A database contains tables that consists of indexes. A table has a interface that provide basic CRUD operations on its data:
+A database contains tables that consists of indexes. A table has an interface that provides operations to modify table data:
 \begin{itemize}
     \item \texttt{create} - creates history log for entity with first entity version. Then adds it to every table index.
     \item \texttt{update} - adds new version of the entity to its history log. Than update every index of the table.
     \item \texttt{delete} - removes entity from every table index. From now, an entity can not be find in this table.
-    \item \texttt{select} - obtain data. If no condition is set, table uses primary key index.
 \end{itemize}
+There is no \texttt{select} operation because a table itself does not perform queries for obtaining data (table has not got necessary logic for choosing optimal index for query). Selects are performed by QueryPlanner after analyzing all query conditions.
 
 Example of the class User is in Figure \ref{classExample}. It has two indexes. One primary on property \texttt{name} and one normal index on property \texttt{age}. The second index has also specified \texttt{comparator} that is a bit faster than default one but works only on numbers, and \texttt{keygetter} that returns a year when a user has born. 
 
