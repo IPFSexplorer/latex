@@ -133,7 +133,7 @@ Both Explorer and Feeder uses the same database schema. The database schema is d
     \item \textbf{Transaction} -- a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
     \item \textbf{Vin} -- every transaction can have multiple inputs. These inputs are stored in Vin table. Every Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
     \item \textbf{Vout} -- transactions can have multiple outputs. Every output has a foreign key to transaction and address. If the output is already spent, it has a link to the transaction where this output is used as an input.
-    \item \textbf{Address} -- Adress contains multiple columns. As the primary key, it uses the address hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
+    \item \textbf{Address} -- Address contains multiple columns. As the primary key, it uses the address hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
 \end{itemize}
 
 
@@ -189,7 +189,7 @@ ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{
 \label{explorerAPIroutes}
 ExplorerAPI is a server-side application that provides a simple HTTP API for obtaining data. Although our system is decentralized and therefore does not need servers, ExplorerAPI can be used with older devices on which it is not possible to run an IPFS node, or when integrating with other applications. Through RestApi, we could not use the full potential of our database system, so we get inspired by GraphQL\footnote{\url{https://graphql.org/}} during the design. ExplorerAPI provides endpoints for these database tables:
 \begin{itemize}
-    \item \texttt{/:currency/block} -- endopint for obtaining blocks. Each endpoint hash \texttt{currency} path parameter that can be currency unit (for example \texttt{btc}) or currency name (for example \texttt{bitcoin}).
+    \item \texttt{/:currency/block} -- endpoint for obtaining blocks. Each endpoint hash \texttt{currency} path parameter that can be currency unit (for example \texttt{btc}) or currency name (for example \texttt{bitcoin}).
     \item \texttt{/:currency/transaction} -- endpoint for retrieving transactions.  
     \item \texttt{/:currency/address} -- endpoint for obtaining data from address.
 \end{itemize}
