@@ -16,6 +16,11 @@
 \newblock {\em White paper}.
 \newblock 2014, vol.~3, no.~37.
 
+\bibitem{chacon2014pro}
+{\sc\bgroup}Chacon{\egroup}, S. and~{\sc\bgroup}Straub{\egroup}, B.
+\newblock {\em Pro git}.
+\newblock Apress, 2014.
+
 \bibitem{ChowdhuryNiaz2020Ibba}
 {\sc\bgroup}Chowdhury{\egroup}, N.
 \newblock {\em Inside blockchain, bitcoin, and cryptocurrencies}.
@@ -134,14 +139,6 @@
 \newblock 2019.
 \newblock Available at:
   ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
-
-\bibitem{crdtLog}
-{\sc\bgroup}Shapiro{\egroup}, M., {\sc\bgroup}Pregui{\c c}a{\egroup}, N.,
-  {\sc\bgroup}Baquero{\egroup}, C. and~{\sc\bgroup}Zawirski{\egroup}, M.
-\newblock {A comprehensive study of Convergent and Commutative Replicated Data
-  Types}.
-\newblock january 2011, RR-7506, p.~50.
-\newblock Available at: ~{\small\url{https://hal.inria.fr/inria-00555588}}.
 
 \bibitem{van2013cryptonote}
 {\sc\bgroup}Van Saberhagen{\egroup}, N.

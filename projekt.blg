@@ -21,6 +21,8 @@ while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
 Warning--empty number in IPFSwhitepaper
 Warning--empty edition in buterin2014next
+Warning--empty edition in chacon2014pro
+Warning--empty isbn in chacon2014pro
 Warning--empty edition in ChowdhuryNiaz2020Ibba
 Warning--empty edition in newYorkerBTC
 Warning--empty number in newYorkerBTC
@@ -49,52 +51,48 @@ Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
 Warning--empty edition in TextileWhitePaper
 Warning--empty isbn in TextileWhitePaper
-Warning--"{" isn't a brace-balanced string for entry crdtLog
-while executing--line 3172 of file bib-styles/Pysny/enplain.bst
-Warning--empty journal in crdtLog
-Warning--empty edition in crdtLog
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
 You've used 23 entries,
             3715 wiz_defined-function locations,
-            913 strings with 8631 characters,
-and the built_in function-call counts, 9794 in all, are:
-= -- 732
-> -- 316
-< -- 35
-+ -- 109
-- -- 81
-* -- 528
-:= -- 1313
-add.period$ -- 70
+            908 strings with 8417 characters,
+and the built_in function-call counts, 9614 in all, are:
+= -- 720
+> -- 304
+< -- 32
++ -- 105
+- -- 77
+* -- 513
+:= -- 1284
+add.period$ -- 69
 call.type$ -- 23
-change.case$ -- 140
-chr.to.int$ -- 36
+change.case$ -- 139
+chr.to.int$ -- 32
 cite$ -- 57
-duplicate$ -- 655
-empty$ -- 1295
-format.name$ -- 81
-if$ -- 2343
+duplicate$ -- 651
+empty$ -- 1280
+format.name$ -- 77
+if$ -- 2297
 int.to.chr$ -- 0
 int.to.str$ -- 23
 missing$ -- 0
-newline$ -- 144
+newline$ -- 143
 num.names$ -- 47
-pop$ -- 255
+pop$ -- 251
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 92
 quote$ -- 0
-skip$ -- 444
+skip$ -- 437
 stack$ -- 0
-substring$ -- 418
+substring$ -- 412
 swap$ -- 104
-text.length$ -- 17
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 47
 warning$ -- 34
-while$ -- 68
+while$ -- 65
 width$ -- 25
-write$ -- 259
+write$ -- 257
 (There were 3 error messages)

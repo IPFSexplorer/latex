@@ -18,7 +18,7 @@ After some research, we concluded that currently for storing and indexing data i
 \subsubsection{Record} 
 Every record in our database system is stored in an append-only log that contains the whole history of the record. Every update of a record adds a new entry to its log which points to the previous entry. 
 
-In centralized systems such as git, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository). This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody updates it before us (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. If two countries updates data at the same time (their updates pointing to the same previous version of the entry), they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries, then update the record with final increment.
+In centralized systems such as git\footnote{\url{https://git-scm.com/}}, conflicts are detected on write (for example, when two git users push changes to the server at the same time, one of them gets an error and needs to pull repository)\cite{chacon2014pro}. This approach is impossible in a decentralized system. When we update some record in our database, we can not know if somebody updates it before us (and we do not receive changes yet). For this reason, we need to solve conflicts while reading. Record with conflict has more than one head in a record log, and users need to solve them in application logic. Look at the example in Figure \ref{recordConflict}. There is a record that is updated by every country in the World when they have new statistics about a pandemic. If two countries updates data at the same time (their updates pointing to the same previous version of the entry), they create conflict. Luckily, this specific conflict is easy to solve. We just need to look at the previous entry and compute increment for both countries, then update the record with final increment.
 
 
 \begin{figure}[h]
@@ -30,10 +30,10 @@ In centralized systems such as git, conflicts are detected on write (for example
 
 
 \subsubsection{Indexes}
-An index is B-tree optimized for IPFS (no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed, because we would need to scan all tables where the entity is referenced and change the referenced value to a new one. Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
+An index is a B-tree structure optimized for IPFS (with no cycled references and node size less than 256kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed, because we would need to scan all tables where the entity is referenced and change the referenced value to a new one. Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
 \begin{itemize}
-    \item \textbf{Comparator} -- is a function that has two parameters (two keys of B-tree) and outputs a number as a result. An index is using a comparator to search records and insert record to the right place in B-tree.
-    \item \textbf{Key-getter} -- is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index comparator). Every index has key-getter that is using to obtain keys for B-tree.
+    \item \textbf{Comparator} -- is a function that has two parameters (two B-tree keys) and outputs a number as a result. An index is using a comparator to correctly traverse B-tree while searching records and inserting records to the right place.
+    \item \textbf{Key-getter} -- is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index Comparator). Every index has Key-getter that is using to obtain keys for objects stored in B-tree.
 \end{itemize}
 
 \subsubsection{Table}
@@ -64,17 +64,17 @@ When we commit a transaction, it is inserted to the transactions queue. If there
 \begin{itemize}
     \item \texttt{read} -- transaction for reading data from table. It is not logged in a database log (other peers don't have to know what we are reading from database).
     \item \texttt{sync} -- when some peer publishes a new version of the database, all other peers have to migrate to it. This transaction has the biggest priority, and therefore it is inserted at the beginning of the transactions queue. After the migration is done, transactions queue can continue working usually.
-    \item \texttt{insert}, \texttt{update}, \texttt{delete} -- other types of transactions are written to database logs, because they are modifying the database.
+    \item \texttt{insert}, \texttt{update}, \texttt{delete} -- these types of transactions are written to database logs, because they are modifying the database.
 \end{itemize}
 
 \subsubsection{Synchronization} 
 \label{designSync}
-Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users. When we receive information about the new database version, we load its root. Each database version has information from which version it was created. Database versions create an append-only log called database log. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS, and each points to a hash of previous version(s) forming a graph. Database logs can be forked and joined back together.\cite{crdtLog}
+Every time a transaction queue is empty (all pending transactions has been applied), a new version of a database is broadcasted to all connected users via IPFS PUBSUB API (see \ref{ipfsApis}). When we receive information about the new database version, we load its root. Database versions create an append-only log called database log so each database version has information from which version it was created. Database log is an immutable, operation-based conflict-free replicated data structure (CRDT\footnote{\url{https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type}}) for storing database versions. Every version in the log is saved in IPFS, and each points to a hash of the previous version forming a graph.
 
 If more than one peer publishes a new version of the database that has been created from the same database version, other peers need to decide which version they would accept. Opposite to records conflicts, we need to solve database versions conflict fast and automatically. There are multiple ways to solve them. For example: 
 \begin{itemize}
-    \item \textbf{The biggest hash wins} -- if there is more than one database version at the same (discrete) time, the one with the biggest hash wins. This strategy is present in Figure \ref{databaseConflict}. 
-    \item \textbf{The longest connecting time wins} -- a user who is connected to the database for the longest time wins.
+    \item \textbf{The biggest hash wins} -- if there is more than one database version at the same (discrete) time, the one with the biggest IPFS hash wins. This strategy is present in Figure \ref{databaseConflict}. 
+    \item \textbf{The longest connecting time wins} -- a peer that is connected to the database for the longest time wins.
 \end{itemize}
 Lots of more strategies can be implemented, but they need to be deterministic and as fair as possible. If we have access to geolocation, we can implement a strategy based on a distance to the North Pole (the closest node to the North Pole wins).\cite{lamport2019time}
 
@@ -88,20 +88,20 @@ Lots of more strategies can be implemented, but they need to be deterministic an
 \subsubsection{Queries} 
 A Database system provides query language for performing selects. A query consists of:
 \begin{itemize}
-    \item \textbf{conditions} -- query may contain multiple conditions. There are logical operators (and -- conjunction, or -- disjunction) between conditions. When it is possible (an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between \texttt{AND} conditions and union between \texttt{OR} conditions. These types of conditions are supported:
+    \item \textbf{conditions} -- query may contain multiple conditions. There are logical operators (and/conjunction, or/disjunction) between conditions. When it is possible (an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between \texttt{AND} conditions and union between \texttt{OR} conditions. These types of conditions are supported:
     \begin{itemize}
         \item \textbf{equal} -- record property equals to specified value,
         \item \textbf{greater than} -- record property is greater than specified value,
         \item \textbf{less than} -- record property is less than specified value,
         \item \textbf{between} -- record property is greater than specified minimal value, and less than specified maximal value.
     \end{itemize} 
-    \item \textbf{filters} -- filters are similar to conditions, but they can be more complicated. They are functions returning boolean that are being applied to query results. If any filter return \texttt{false} for the query result, the query result is ignored. A query can contain several filters.
-    \item \textbf{offset} -- offset saying how many query results should be ignored from the beginning.
+    \item \textbf{filters} -- filters are similar to conditions, but they can be more complicated. They are functions that are being applied to query results. If any filter return \texttt{false} for the query result, the result is ignored. A query can contain several filters.
+    \item \textbf{offset} -- offset is saying how many query results should be ignored from the beginning.
     \item \textbf{evaluator} -- we use evaluator for accessing results of the query.
     \begin{itemize}
-        \item \textbf{all} -- returns array of all results of the query,
-        \item \textbf{first} -- returns only first result,
-        \item \textbf{take} -- returns \texttt{N} number of results where \texttt{N} is an argument,
+        \item \textbf{all} -- returns array of all results of the query.
+        \item \textbf{first} -- returns only first result.
+        \item \textbf{take} -- returns \texttt{N} number of results where \texttt{N} is an argument.
         \item \textbf{paginate} -- returns page of results. Accept two arguments. \texttt{perPage} specifies the number of results in one page. \texttt{page} is number of requested page.
         \item \textbf{iterate} -- returns iterator that can be used in cycles such as \texttt{for} or \texttt{while}.
     \end{itemize}
@@ -127,11 +127,11 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
     \label{er}
 \end{figure}
 
-Both Explorer and Feeder uses the same database schema. The database schema is designed in the way to optimize typical queries. It consists of five tables:
+Both Explorer and Feeder use the same database schema. The database schema is designed in the way to optimize typical queries. It consists of five tables:
 \begin{itemize}
     \item \textbf{Block} -- table for storing blockchain blocks. It has a primary key on unique block hash, and indexes on height and time. With these indexes, we can perform queries like search block by its hash or height very efficiently. Also filtering or ordering blocks by time has good performance.
     \item \textbf{Transaction} -- a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
-    \item \textbf{Vin} -- every transaction can have multiple inputs. These inputs are stored in Vin table. Every Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
+    \item \textbf{Vin} -- every transaction can have multiple inputs. These inputs are stored in Vin table. Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
     \item \textbf{Vout} -- transactions can have multiple outputs. Every output has a foreign key to transaction and address. If the output is already spent, it has a link to the transaction where this output is used as an input.
     \item \textbf{Address} -- Address contains multiple columns. As the primary key, it uses the address hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
 \end{itemize}
@@ -139,16 +139,16 @@ Both Explorer and Feeder uses the same database schema. The database schema is d
 
 
 \subsection{Feeder}
-A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most updated database version. This way, new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consist of hundreds of transactions.  
+A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most up to date database version. This way, new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consist of hundreds of transactions.  
 
 A Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
 
 
 \subsection{Explorer}
-Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries (for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval). Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as a RestAPI.
+Explorer can perform basic queries like a search for block by its height or hash and search address and transaction by hash. Nevertheless, Explorer can also make more complex queries (for example, get the first 20 transaction where the sum of inputs is more than some value, or get transactions between some time interval). Explorer is an application that can be used in two environments. In browser with graphical user interface, or in node.js\footnote{\url{https://nodejs.org/}} as an API.
 
 \subsubsection{ExplorerGUI}
-ExplorerGUI is browser version of Explorer. It is implemented as a SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visits a different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties that have index is supported. Every user of ExplorerGUI keeps part of the database that he uses in his local storage. This principle helps balance Feeders load and helps to distribute data for other users.  Authentication to the ExplorerGUI is not necessary, because users can not modify data from there. They can only explore multiple blockchain data. All views have the same top toolbar, to allow user performs quick searches. User can see enabled cryptocurrencies at the home screen (see Figure \ref{homeMockup}). When a user selects cryptocurrency that he wants to explore, he will be redirected to the Blocks view where he can see and filter all parsed blocks from a selected cryptocurrency (see Figure \ref{blocksMockup}). User can select block by clicking on them. This action redirects a user to Block detail view where he can see all blocks transactions (see Figure \ref{blockDetailMockup}). User can also navigate to the next/previous block from this view. A user gets to the Address view every time he clicks on transaction input or output address. In this view, a user can see the current balance of the address and transactions which this address is part of (see Figure \ref{addressMockup}). Thanks to the database design, a user can also see the history of the address. 
+ExplorerGUI is browser version of Explorer. It is implemented as an SPA\footnote{\url{https://en.wikipedia.org/wiki/Single-page_application}} to prevent restarting connection with IPFS after each time a user visits a different page. It has separated views for block, transaction and address details. Also paginating, filtering and sorting objects by all its properties that have index is supported. Every user of ExplorerGUI keeps part of the database that he uses in his local storage. This principle helps balance Feeders load and helps to distribute data for other users. Authentication to the ExplorerGUI is not necessary, because users can not modify data from there. They can only explore multiple blockchain data. All views have the same top toolbar, to allow user performs quick searches. User can see enabled cryptocurrencies at the home screen (see Figure \ref{homeMockup}). When a user selects cryptocurrency that he wants to explore, he will be redirected to the Blocks view where he can see and filter all parsed blocks from a selected cryptocurrency (see Figure \ref{blocksMockup}). User can select block by clicking on them. This action redirects a user to Block detail view where he can see all blocks transactions (see Figure \ref{blockDetailMockup}). User can also navigate to the next/previous block from this view. A user gets to the Address view every time he clicks on transaction input or output address. In this view, a user can see the current balance of the address and transactions which this address is part of (see Figure \ref{addressMockup}). Thanks to the record log, a user can also see the history of the address. 
 
 
 \begin{figure}[h]

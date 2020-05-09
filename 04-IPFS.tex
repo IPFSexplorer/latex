@@ -83,20 +83,19 @@ IPLD is providing linking and addressing objects with CID (Content ID). CID is h
 \section{IPFS}
 IPFS is the top layer from the IPFS stack. It is used for pinning objects and files, naming system and keys management. File or object is automatically pinned when a user adds it (but other IPFS commands do not include automatic pinning). Pinning a CID tells an IPFS server that the data is essential and must not be thrown away. When garbage collection is triggered on a node, any pinned content is automatically exempt from deletion. Non-pinned data may be deleted. The Interplanetary Name System (IPNS) is a system for creating and updating mutable links to IPFS content. Since objects in IPFS are content addressed, an object address changes every time an object's content changes. A name in IPNS is the hash of a public key. It is associated with a record containing information about the hash it links to that is signed by the corresponding private key.
 
-
-IPFS provides several APIs that are on different abstraction levels. The regular top-level API is Files API\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/FILES.md}}. The Files API enables users to use the File System abstraction of IPFS. It has \texttt{add}, \texttt{cat}, \texttt{get} and \texttt{ls} methods for manipulating with regular files and directories. 
-
-For our system are low-level APIs such as \texttt{DAG}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/DAG.md}} and \texttt{PUBSUB}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/PUBSUB.md}} more interesting. \texttt{PUBSUB} API is used to broadcast messages between peers, and it consists of these methods:
+\subsection{IPFS core APIs}
+\label{ipfsApis}
+IPFS provides several APIs that are working on different abstraction levels. The regular top-level API is Files API\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/FILES.md}}. The Files API enables users to use the File System abstraction of IPFS. It has \texttt{add}, \texttt{cat}, \texttt{get} and \texttt{ls} methods for manipulating with regular files and directories. For our system are low-level APIs such as \texttt{DAG}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/DAG.md}} and \texttt{PUBSUB}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/PUBSUB.md}} more interesting. PUBSUB API is used to broadcast messages between peers, and it consists of these methods:
 \begin{itemize}
     \item \texttt{subscribe} -- listen to specific topic. A topic name and handler function is provided as a param.
-    \item \texttt{unsicribe} -- stop listening on a topic that is provided as parameter.
+    \item \texttt{unsucribe} -- stop listening on a topic that is provided as parameter.
     \item \texttt{publish} -- publish a message to topic. All peers that subscribed the topic receive the message.
     \item \texttt{ls} -- returns the list of subscriptions the peer is subscribed to.
     \item \texttt{peers} -- returns the peers that are subscribed to a topic. A topic name is a parameter of this function.
 \end{itemize}
-The \texttt{DAG} (stands for Direct Acyclic Graph\footnote{\url{https://en.wikipedia.org/wiki/Directed_acyclic_graph}}) API provides these methods for manipulation objects in IPFS:
+The DAG (stands for Direct Acyclic Graph\footnote{\url{https://en.wikipedia.org/wiki/Directed_acyclic_graph}}) API provides these methods for manipulation objects in IPFS:
 \begin{itemize}
-    \item \texttt{put} -- stores object that in IPFS. Return IPFS hash of a stored object.
+    \item \texttt{put} -- stores object in IPFS. Return IPFS hash of a stored object.
     \item \texttt{get} -- retrieves an object by its hash from IPFS.
     \item \texttt{tree} -- Enumerate all the entries in a graph.
 \end{itemize}
