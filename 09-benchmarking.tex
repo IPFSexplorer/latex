@@ -4,13 +4,13 @@
 Comparing our database system with typical database systems is very difficult. We need to prepare the same environment.
 
 \subsection{MySQL}
-MySQL is free and open-source software under the terms of the GNU General Public License and is also available under a variety of proprietary licenses. MySQL was owned and sponsored by the Swedish company MySQL AB, which was bought by Sun Microsystems (now Oracle Corporation). MySQL is used by many database-driven web applications, including Drupal, Joomla, phpBB, and WordPress. MySQL is also used by many popular websites, including Facebook, Flickr, MediaWiki, Twitter, and YouTube.
+MySQL is free and open-source software under the terms of the GNU General Public Licence and is also available under a variety of proprietary licences. MySQL was owned and sponsored by the Swedish company MySQL AB, which was bought by Sun Microsystems (now Oracle Corporation). MySQL is used by many database-driven web applications, including Drupal, Joomla, phpBB, and WordPress. MySQL is also used by many popular websites, including Facebook, Flickr, MediaWiki, Twitter, and YouTube.
 
 \subsection{PostgreSQL}
 PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance. It was initially named POSTGRES, referring to its origins as a successor to the Ingres database developed at the University of California, Berkeley. In 1996, the project was renamed to PostgreSQL to reflect its support for SQL. After a review in 2007, the development team decided to keep the name PostgreSQL. PostgreSQL features transactions with Atomicity, Consistency, Isolation, Durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys, and stored procedures. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. It is available for Linux, FreeBSD, OpenBSD, and Windows.
 
 \subsection{Environment}
-We compare MySQL and PostgresSQL with our p2p database system. These database systems run virtualized in Docker containers on hardware with 4 cores processor Intel Pentium G4560 3.50GHz and 16GB of RAM.  We start clients that connect to these database systems and performs queries on different hardware. Then we measure average queries per seconds that clients execute. Clients are written in JavaScript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb Ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10000 records and table \texttt{posts} contains 50000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
+We compare MySQL and PostgresSQL with our p2p database system. These database systems run virtualized in Docker containers on hardware with 4 cores processor Intel Pentium G4560 3.50GHz and 16 GB of RAM.  We start clients that connect to these database systems and performs queries on different hardware. Then we measure average queries per seconds that clients execute. Clients are written in JavaScript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb Ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10000 records and table \texttt{posts} contains 50000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
 
 \begin{figure}[h]
     \begin{subfigure}[t]{.3\textwidth}
@@ -130,7 +130,7 @@ We compare MySQL and PostgresSQL with our p2p database system. These database sy
 
 
 \subsection*{Single connected client}
-With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same -- about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of IO operations. 
+With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same -- about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of input-output operations. 
 
 \begin{figure}[h]
     \begin{subfigure}{.5\textwidth}
@@ -171,7 +171,7 @@ With 20 connected clients, PostgreSQL performance dropped to 50 queries per seco
 
 
 \subsection*{80 connected clients}
-With 80 connected clients, our database system outperforms MySQL and PostgreSQL after few seconds. Every client of our database system performs 100 queries per second. PostgreSQL client performs only 10 queries per second and MySQL only 2 queries per second (see \ref{bench80per}). CPU usage is in our database system also very low. In the beginning, when content is not distributed on the clients, the central node uses 60 percents of CPU, but it decreases over time (see \ref{bench80cpu}).
+With 80 connected clients, our database system outperforms MySQL and PostgreSQL after few seconds. Every client of our database system performs 100 queries per second. PostgreSQL client performs only 10 queries per second and MySQL only 2 queries per second (see \ref{bench80per}). CPU usage is in our database system also very low. In the beginning, when content is not distributed on the clients, the central node uses 60\% of CPU, but it decreases over time (see \ref{bench80cpu}).
 
 
 \begin{figure}[h]

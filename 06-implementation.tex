@@ -16,7 +16,7 @@ Explorer-core is the most complex module of a whole system with more than 5000 l
 
 \subsection{IPFS connector}
 IPFS connector is a singleton class that provides a connection to IPFS. It has a method \texttt{getInstanceAsync} which will returns promise that resolves into IPFS node instance. This instance is stored in a private static class variable. Next call of function \texttt{getInstanceAsync} returns that static class variable.
-Also, swarm key is present in IPFS connector. This key is used to make private IPFS network with only Explorers and Feeders peers. Other peers (without swarm key) can not connect to our network. IPFS connector contains settings for node.js and browser IPFS peer. Browser peers use WebRTC and Websockets for transport. Node.js peers use TCP and WebSockets. That means that Feeders (a node.js application) can communicate with each other with TCP. Explorer communicates with other explorers with WebSockets or WebRTC. Explorer uses WebSockets when communicating with Feeders.
+Also, swarm key is present in IPFS connector. This key is used to make private IPFS network with only Explorers and Feeders peers. Other peers (without swarm key) can not connect to our network. IPFS connector contains settings for node.js and browser IPFS peer. Browser peers use WebRTC and WebSockets for transport. Node.js peers use TCP and WebSockets. That means that Feeders (a node.js application) can communicate with each other with TCP. Explorer communicates with other explorers with WebSockets or WebRTC. Explorer uses WebSockets when communicating with Feeders.
 
 \subsection{Indexes}
 For indexing there is currently implemented only B-tree, but different structures such as tries\footnote{\url{https://en.wikipedia.org/wiki/Trie}} can be implemented easily. They only need to implement index interface (function such as \texttt{insert}, \texttt{delete}, \texttt{update}, \texttt{find}). We can create indexes on database entities with decorators\footnote{\url{https://www.typescriptlang.org/docs/handbook/decorators.html}}, which are part of ECMAScript 6 standard. Every database entity has to have \texttt{PrimaryKey} decorator on property that is used as a primary index. Index has three parameters:
@@ -38,7 +38,7 @@ All search queries (equal, less, greater, between) has two steps:
 \begin{figure}[h]
     \centering
     \includegraphics[width=13cm]{btreeindex.png}
-    \caption{Btree indexing first 100 blocks by their height}
+    \caption{B-tree indexing first 100 blocks by their height}
     \label{btree}
 \end{figure}
 
@@ -86,13 +86,13 @@ We can make queries with every database table model (such as model on Figure \re
 The most important part of the Explorer-core module is the database system which connects the query system with indexes. When we make a query, it translates to the database, and data are obtained with the help of the indexes.
 
 \subsubsection{Tables}
-A database contains tables that consists of indexes. A table has an interface that provides operations to modify table data:
+A database contains tables that consist of indexes. A table has an interface that provides operations to modify table data:
 \begin{itemize}
     \item \texttt{create} -- creates history log for entity with first entity version. Then adds it to every table index.
     \item \texttt{update} -- adds new version of the entity to its history log. Then update every index of the table.
     \item \texttt{delete} -- removes entity from every table index. From now, an entity can not be found in this table.
 \end{itemize}
-There is no \texttt{select} operation because a table itself does not perform queries for obtaining data (table has not got necessary logic for choosing optimal index for query). Selects are performed by QueryPlanner after analyzing all query conditions.
+There is no \texttt{select} operation because a table itself does not perform queries for obtaining data (table has not got necessary logic for choosing optimal index for query). Selects are performed by QueryPlanner after analysing all query conditions.
 
 Example of the class User is in Figure \ref{classExample}. It has two indexes. One primary on property \texttt{name} and one normal index on property \texttt{age}. The second index has also specified \texttt{comparator} that is a bit faster than default one but works only on numbers, and \texttt{keyGetter} that returns a year when a user has born. 
 
@@ -117,7 +117,7 @@ Example of the class User is in Figure \ref{classExample}. It has two indexes. O
 
 
 \subsubsection{Transactions}
-A database can execute only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it will wait 50ms for more transactions to come. Transactions in our system are represented by classes \texttt{Transaction} and \texttt{TransactionsBulk}. Both classes implements \texttt{ITrasnaction} interface with \texttt{run} function. Transactions bulk are treated the same way as a single transaction thanks to Composite pattern\footnote{\url{https://en.wikipedia.org/wiki/Composite_pattern}} (see Figure \ref{transactionsComposite}). After executing, each transaction is appended to the database log. After we execute all transactions in transactions queue (transaction queue is empty), we publish a new database version to all connected peers.
+A database can execute only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it waits 50ms for more transactions to come. Transactions in our system are represented by classes \texttt{Transaction} and \texttt{TransactionsBulk}. Both classes implements \texttt{ITrasnaction} interface with \texttt{run} function. Transactions bulk are treated the same way as a single transaction thanks to Composite pattern\footnote{\url{https://en.wikipedia.org/wiki/Composite_pattern}} (see Figure \ref{transactionsComposite}). After executing, each transaction is appended to the database log. After we execute all transactions in transactions queue (transaction queue is empty), we publish a new database version to all connected peers.
 
 \begin{figure}[h]
     \centering
@@ -148,7 +148,7 @@ A database can execute only a single transaction at the time to prevent data inc
 
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state need to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state needs to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
 \begin{itemize}
     \item \textbf{hash} -- an IPFS hash of this entry,
     \item \textbf{payload} -- payload is object that contains all entry data. Usually, there is a transaction (or transactions bulk if in this entry is published more transactions) and an IPFS hash of the database.

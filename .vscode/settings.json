@@ -1,15 +1,19 @@
 {
-    "ltex.en-US.disabledRules": [
+    "ltex.en-GB.disabledRules": [
         "DASH_RULE"
     ],
     "ltex.ignoreRuleInSentence": [
         {
-            "rule": "MORFOLOGIK_RULE_EN_US",
-            "sentence": "^\\QIt has a method getInstanceAsync which will returns promise that resolves into IPFS node instance.\\E$"
+            "rule": "MORFOLOGIK_RULE_EN_GB",
+            "sentence": "^\\QBlockbook \\EDummy[0-9]+\\Q is a blockchain indexer for Trezor Wallet \\EDummy[0-9]+\\Q, developed by SatoshiLabs \\EDummy[0-9]+\\Q.\\E$"
         },
         {
-            "rule": "MORFOLOGIK_RULE_EN_US",
-            "sentence": "^\\QAfter downloading them, they are stored on a peer's filesystem and are offered to other peers.\\E$"
+            "rule": "MORFOLOGIK_RULE_EN_GB",
+            "sentence": "^\\QBlockbook \\EDummy[0-9]+\\Q is a blockchain indexer for Trezor Wallet \\EDummy[0-9]+\\Q, developed by SatoshiLabs \\EDummy[0-9]+\\Q.\\E$"
+        },
+        {
+            "rule": "EN_GB_SIMPLE_REPLACE",
+            "sentence": "^\\QWhen a garbage collector is triggered on a node, any pinned content is automatically exempt from deletion.\\E$"
         }
     ]
 }
