@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  15 MAY 2020 17:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.3.27)  21 MAY 2020 15:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -875,7 +875,7 @@ File: zadani.pdf Graphic file (type pdf)
 <use zadani.pdf, page 1>
 Package pdftex.def Info: zadani.pdf , page1 used on input line 306.
 (pdftex.def)             Requested size: 597.53416pt x 845.08372pt.
- [2 <./zadani.pdf>] [3] [4] [5]
+ [2 <./zadani.pdf>] [3] [4] [5] [6]
 (./projekt.toc<<ot1.cmap>><<oml.cmap>><<oms.cmap>><<omx.cmap>>
 LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 
@@ -918,7 +918,7 @@ l.1 \chapter
 
 ]
 Chapter 2.
-<images/failedCryptos.PNG, id=365, 743.77875pt x 437.38406pt>
+<images/failedCryptos.PNG, id=369, 743.77875pt x 437.38406pt>
 File: images/failedCryptos.PNG Graphic file (type png)
 <use images/failedCryptos.PNG>
 Package pdftex.def Info: images/failedCryptos.PNG  used on input line 12.
@@ -934,7 +934,7 @@ l.20
 
 pdfTeX warning: pdflatex.exe (file ./images/genesisBitcoin.pdf): PDF inclusion:
  found PDF version <1.7>, but at most version <1.5> allowed
-<images/genesisBitcoin.pdf, id=383, 438.63875pt x 293.095pt>
+<images/genesisBitcoin.pdf, id=387, 438.63875pt x 293.095pt>
 File: images/genesisBitcoin.pdf Graphic file (type pdf)
 <use images/genesisBitcoin.pdf>
 Package pdftex.def Info: images/genesisBitcoin.pdf  used on input line 23.
@@ -944,15 +944,20 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.33 
-      [5 <./images/genesisBitcoin.pdf>] [6]
+      [5 <./images/genesisBitcoin.pdf>]pdfTeX warning (ext4): destination with 
+the same identifier (name{page.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.48 
+      [6]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 5
 3.
-
-(c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
+ (c:/texlive/2019/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)) (./04-IPFS.tex [7]
+)) (./04-IPFS.tex
+[7]
 Chapter 3.
-<images/classicWebAddresing.png, id=467, 777.90625pt x 363.3575pt>
+<images/classicWebAddresing.png, id=471, 777.90625pt x 363.3575pt>
 File: images/classicWebAddresing.png Graphic file (type png)
 <use images/classicWebAddresing.png>
 Package pdftex.def Info: images/classicWebAddresing.png  used on input line 11.
@@ -961,7 +966,7 @@ Package pdftex.def Info: images/classicWebAddresing.png  used on input line 11.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/ipfsAddressing.png, id=468, 688.5725pt x 507.8975pt>
+<images/ipfsAddressing.png, id=472, 688.5725pt x 507.8975pt>
 File: images/ipfsAddressing.png Graphic file (type png)
 <use images/ipfsAddressing.png>
 Package pdftex.def Info: images/ipfsAddressing.png  used on input line 18.
@@ -969,7 +974,7 @@ Package pdftex.def Info: images/ipfsAddressing.png  used on input line 18.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/IPFSstack.png, id=473, 633.36626pt x 345.29pt>
+<images/IPFSstack.png, id=477, 633.36626pt x 345.29pt>
 File: images/IPFSstack.png Graphic file (type png)
 <use images/IPFSstack.png>
 Package pdftex.def Info: images/IPFSstack.png  used on input line 29.
@@ -985,7 +990,7 @@ Chapter 4.
 [13
 
 ]
-<images/recordConflictSolver.png, id=572, 532.99126pt x 544.0325pt>
+<images/recordConflictSolver.png, id=576, 532.99126pt x 544.0325pt>
 File: images/recordConflictSolver.png Graphic file (type png)
 <use images/recordConflictSolver.png>
 Package pdftex.def Info: images/recordConflictSolver.png  used on input line 26
@@ -996,7 +1001,7 @@ Package pdftex.def Info: images/recordConflictSolver.png  used on input line 26
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14] [15 <./images/recordConflictSolver.png>]
-<images/DBconflict.png, id=602, 683.55376pt x 522.95375pt>
+<images/DBconflict.png, id=605, 683.55376pt x 522.95375pt>
 File: images/DBconflict.png Graphic file (type png)
 <use images/DBconflict.png>
 Package pdftex.def Info: images/DBconflict.png  used on input line 83.
@@ -1006,12 +1011,12 @@ Package pdftex.def Info: images/DBconflict.png  used on input line 83.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [16] [17 <./images/DBconflict.png>]
-<images/AppArchitecture.png, id=620, 699.61375pt x 510.90875pt>
+<images/AppArchitecture.png, id=623, 699.61375pt x 510.90875pt>
 File: images/AppArchitecture.png Graphic file (type png)
 <use images/AppArchitecture.png>
 Package pdftex.def Info: images/AppArchitecture.png  used on input line 115.
 (pdftex.def)             Requested size: 312.9803pt x 228.56593pt.
-<images/ER.png, id=621, 980.66376pt x 453.695pt>
+<images/ER.png, id=624, 980.66376pt x 453.695pt>
 File: images/ER.png Graphic file (type png)
 <use images/ER.png>
 Package pdftex.def Info: images/ER.png  used on input line 125.
@@ -1021,12 +1026,12 @@ Package pdftex.def Info: images/ER.png  used on input line 125.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [18 <./images/AppArchitecture.png>] [19 <./images/ER.png>]
-<mockups/home.png, id=652, 382.42876pt x 442.65375pt>
+<mockups/home.png, id=656, 382.42876pt x 442.65375pt>
 File: mockups/home.png Graphic file (type png)
 <use mockups/home.png>
 Package pdftex.def Info: mockups/home.png  used on input line 158.
 (pdftex.def)             Requested size: 172.99007pt x 200.2325pt.
-<mockups/blocks.png, id=653, 382.42876pt x 442.65375pt>
+<mockups/blocks.png, id=657, 382.42876pt x 442.65375pt>
 File: mockups/blocks.png Graphic file (type png)
 <use mockups/blocks.png>
 Package pdftex.def Info: mockups/blocks.png  used on input line 164.
@@ -1035,12 +1040,12 @@ Package pdftex.def Info: mockups/blocks.png  used on input line 164.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<mockups/blockDetail.png, id=654, 382.42876pt x 442.65375pt>
+<mockups/blockDetail.png, id=658, 382.42876pt x 442.65375pt>
 File: mockups/blockDetail.png Graphic file (type png)
 <use mockups/blockDetail.png>
 Package pdftex.def Info: mockups/blockDetail.png  used on input line 175.
 (pdftex.def)             Requested size: 172.99007pt x 200.2325pt.
-<mockups/address.png, id=655, 382.42876pt x 442.65375pt>
+<mockups/address.png, id=659, 382.42876pt x 442.65375pt>
 File: mockups/address.png Graphic file (type png)
 <use mockups/address.png>
 Package pdftex.def Info: mockups/address.png  used on input line 181.
@@ -1059,7 +1064,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 ) (./06-implementation.tex [21 <./mockups/home.png> <./mockups/blocks.png>]
 [22 <./mockups/blockDetail.png> <./mockups/address.png>]
 Chapter 5.
-<images/ExplorerArchitecture.png, id=738, 1036.87375pt x 524.96124pt>
+<images/ExplorerArchitecture.png, id=741, 1036.87375pt x 524.96124pt>
 File: images/ExplorerArchitecture.png Graphic file (type png)
 <use images/ExplorerArchitecture.png>
 Package pdftex.def Info: images/ExplorerArchitecture.png  used on input line 8.
@@ -1068,12 +1073,12 @@ Package pdftex.def Info: images/ExplorerArchitecture.png  used on input line 8.
 [23
 
  <./images/ExplorerArchitecture.png>] [24]
-<images/btreeindex.png, id=762, 673.51625pt x 303.1325pt>
+<images/btreeindex.png, id=765, 673.51625pt x 303.1325pt>
 File: images/btreeindex.png Graphic file (type png)
 <use images/btreeindex.png>
 Package pdftex.def Info: images/btreeindex.png  used on input line 40.
 (pdftex.def)             Requested size: 369.88582pt x 166.47824pt.
-<images/btreeIndexQuery.png, id=764, 673.51625pt x 304.13625pt>
+<images/btreeIndexQuery.png, id=767, 673.51625pt x 304.13625pt>
 File: images/btreeIndexQuery.png Graphic file (type png)
 <use images/btreeIndexQuery.png>
 Package pdftex.def Info: images/btreeIndexQuery.png  used on input line 50.
@@ -1085,7 +1090,7 @@ n two queries. Par-ent query re-solves
  []
 
 [26 <./images/btreeindexQuery.png>]
-<images/queryStateDiagram.png, id=783, 1826.825pt x 419.5675pt>
+<images/queryStateDiagram.png, id=786, 1826.825pt x 419.5675pt>
 File: images/queryStateDiagram.png Graphic file (type png)
 <use images/queryStateDiagram.png>
 Package pdftex.def Info: images/queryStateDiagram.png  used on input line 79.
@@ -1095,7 +1100,7 @@ Package pdftex.def Info: images/queryStateDiagram.png  used on input line 79.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [27 <./images/queryStateDiagram.png>] [28]
-<images/syncDB.png, id=839, 466.74374pt x 518.93875pt>
+<images/syncDB.png, id=842, 466.74374pt x 518.93875pt>
 File: images/syncDB.png Graphic file (type png)
 <use images/syncDB.png>
 Package pdftex.def Info: images/syncDB.png  used on input line 162.
@@ -1108,25 +1113,25 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [29] [30 <./images/syncDB.png>]
-<images/explorerGuiHomeFrame.png, id=864, 1202.4925pt x 956.57375pt>
+<images/explorerGuiHomeFrame.png, id=867, 1202.4925pt x 956.57375pt>
 File: images/explorerGuiHomeFrame.png Graphic file (type png)
 <use images/explorerGuiHomeFrame.png>
 Package pdftex.def Info: images/explorerGuiHomeFrame.png  used on input line 22
 5.
 (pdftex.def)             Requested size: 216.24089pt x 172.01529pt.
-<images/explorerGuiBlockDetailFrame.png, id=865, 1199.48125pt x 1030.85126pt>
+<images/explorerGuiBlockDetailFrame.png, id=868, 1199.48125pt x 1030.85126pt>
 File: images/explorerGuiBlockDetailFrame.png Graphic file (type png)
 <use images/explorerGuiBlockDetailFrame.png>
 Package pdftex.def Info: images/explorerGuiBlockDetailFrame.png  used on input 
 line 231.
 (pdftex.def)             Requested size: 216.24089pt x 185.82835pt.
-<images/explorerGuiAddressFrame.png, id=866, 1201.48875pt x 856.19875pt>
+<images/explorerGuiAddressFrame.png, id=869, 1201.48875pt x 856.19875pt>
 File: images/explorerGuiAddressFrame.png Graphic file (type png)
 <use images/explorerGuiAddressFrame.png>
 Package pdftex.def Info: images/explorerGuiAddressFrame.png  used on input line
  237.
 (pdftex.def)             Requested size: 216.24089pt x 154.09605pt.
-<images/explorerGuiBlocksFrame.png, id=867, 1202.4925pt x 946.53625pt>
+<images/explorerGuiBlocksFrame.png, id=870, 1202.4925pt x 946.53625pt>
 File: images/explorerGuiBlocksFrame.png Graphic file (type png)
 <use images/explorerGuiBlocksFrame.png>
 Package pdftex.def Info: images/explorerGuiBlocksFrame.png  used on input line 
@@ -1140,7 +1145,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<images/explorerGuiPlaygroundFrame.png, id=911, 1190.4475pt x 1120.185pt>
+<images/explorerGuiPlaygroundFrame.png, id=915, 1190.4475pt x 1120.185pt>
 File: images/explorerGuiPlaygroundFrame.png Graphic file (type png)
 <use images/explorerGuiPlaygroundFrame.png>
 Package pdftex.def Info: images/explorerGuiPlaygroundFrame.png  used on input l
@@ -1288,7 +1293,7 @@ Overfull \hbox (32.6859pt too wide) in paragraph at lines 122--123
 
 pdfTeX warning: pdflatex.exe (file ./excel/1per.pdf): PDF inclusion: found PDF 
 version <1.7>, but at most version <1.5> allowed
-<excel/1per.pdf, id=976, 845.07718pt x 597.55246pt>
+<excel/1per.pdf, id=979, 845.07718pt x 597.55246pt>
 File: excel/1per.pdf Graphic file (type pdf)
 <use excel/1per.pdf>
 Package pdftex.def Info: excel/1per.pdf  used on input line 138.
@@ -1297,7 +1302,7 @@ Package pdftex.def Info: excel/1per.pdf  used on input line 138.
 
 pdfTeX warning: pdflatex.exe (file ./excel/1cpu.pdf): PDF inclusion: found PDF 
 version <1.7>, but at most version <1.5> allowed
-<excel/1cpu.pdf, id=978, 845.07718pt x 597.55246pt>
+<excel/1cpu.pdf, id=981, 845.07718pt x 597.55246pt>
 File: excel/1cpu.pdf Graphic file (type pdf)
 <use excel/1cpu.pdf>
 Package pdftex.def Info: excel/1cpu.pdf  used on input line 144.
@@ -1314,7 +1319,7 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 pdfTeX warning: pdflatex.exe (file ./excel/20per.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/20per.pdf, id=982, 845.07718pt x 597.55246pt>
+<excel/20per.pdf, id=985, 845.07718pt x 597.55246pt>
 File: excel/20per.pdf Graphic file (type pdf)
 <use excel/20per.pdf>
 Package pdftex.def Info: excel/20per.pdf  used on input line 159.
@@ -1323,7 +1328,7 @@ Package pdftex.def Info: excel/20per.pdf  used on input line 159.
 
 pdfTeX warning: pdflatex.exe (file ./excel/20cpu.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/20cpu.pdf, id=984, 845.07718pt x 597.55246pt>
+<excel/20cpu.pdf, id=987, 845.07718pt x 597.55246pt>
 File: excel/20cpu.pdf Graphic file (type pdf)
 <use excel/20cpu.pdf>
 Package pdftex.def Info: excel/20cpu.pdf  used on input line 165.
@@ -1337,7 +1342,7 @@ Overfull \hbox (2.43332pt too wide) in paragraph at lines 157--169
 
 pdfTeX warning: pdflatex.exe (file ./excel/80per.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/80per.pdf, id=1081, 845.07718pt x 597.55246pt>
+<excel/80per.pdf, id=1085, 845.07718pt x 597.55246pt>
 File: excel/80per.pdf Graphic file (type pdf)
 <use excel/80per.pdf>
 Package pdftex.def Info: excel/80per.pdf  used on input line 180.
@@ -1346,7 +1351,7 @@ Package pdftex.def Info: excel/80per.pdf  used on input line 180.
 
 pdfTeX warning: pdflatex.exe (file ./excel/80cpu.pdf): PDF inclusion: found PDF
  version <1.7>, but at most version <1.5> allowed
-<excel/80cpu.pdf, id=1083, 845.07718pt x 597.55246pt>
+<excel/80cpu.pdf, id=1087, 845.07718pt x 597.55246pt>
 File: excel/80cpu.pdf Graphic file (type pdf)
 <use excel/80cpu.pdf>
 Package pdftex.def Info: excel/80cpu.pdf  used on input line 186.
@@ -1364,7 +1369,7 @@ f>]
 
 pdfTeX warning: pdflatex.exe (file ./excel/150per.pdf): PDF inclusion: found PD
 F version <1.7>, but at most version <1.5> allowed
-<excel/150per.pdf, id=1123, 845.07718pt x 597.55246pt>
+<excel/150per.pdf, id=1126, 845.07718pt x 597.55246pt>
 File: excel/150per.pdf Graphic file (type pdf)
 <use excel/150per.pdf>
 Package pdftex.def Info: excel/150per.pdf  used on input line 200.
@@ -1373,7 +1378,7 @@ Package pdftex.def Info: excel/150per.pdf  used on input line 200.
 
 pdfTeX warning: pdflatex.exe (file ./excel/150cpu.pdf): PDF inclusion: found PD
 F version <1.7>, but at most version <1.5> allowed
-<excel/150cpu.pdf, id=1125, 845.07718pt x 597.55246pt>
+<excel/150cpu.pdf, id=1128, 845.07718pt x 597.55246pt>
 File: excel/150cpu.pdf Graphic file (type pdf)
 <use excel/150cpu.pdf>
 Package pdftex.def Info: excel/150cpu.pdf  used on input line 206.
@@ -1467,11 +1472,11 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  19988 strings out of 480994
  297478 string characters out of 5916032
- 819060 words of memory out of 5000000
+ 823329 words of memory out of 5000000
  34556 multiletter control sequences out of 15000+600000
  630223 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,18n,132p,2398b,1749s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,132p,4683b,1749s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2019/tex
 mf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/texlive/2019/texmf-dist/fonts/enc/dvi
 ps/opensans/a_jg4h6q.enc}<c:/texlive/2019/texmf-dist/fonts/type1/ascender/opens
@@ -1486,10 +1491,10 @@ onts/type1/public/lm/lmr8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm
 /lmr9.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texl
 ive/2019/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2019/texmf-dis
 t/fonts/type1/public/lm/lmtt9.pfb>
-Output written on projekt.pdf (48 pages, 2742957 bytes).
+Output written on projekt.pdf (49 pages, 2746697 bytes).
 PDF statistics:
- 1332 PDF objects out of 1440 (max. 8388607)
- 1132 compressed objects within 12 object streams
+ 1336 PDF objects out of 1440 (max. 8388607)
+ 1135 compressed objects within 12 object streams
  425 named destinations out of 1000 (max. 500000)
  639 words of extra memory for PDF output out of 10000 (max. 10000000)
 
