@@ -24,6 +24,8 @@ Warning--empty edition in buterin2014next
 Warning--empty edition in chacon2014pro
 Warning--empty isbn in chacon2014pro
 Warning--empty edition in ChowdhuryNiaz2020Ibba
+Warning--empty edition in dascano2018digibyte
+Warning--empty isbn in dascano2018digibyte
 Warning--empty edition in newYorkerBTC
 Warning--empty number in newYorkerBTC
 Warning--empty edition in dhillon2017blockchain
@@ -54,45 +56,45 @@ Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-You've used 23 entries,
+You've used 24 entries,
             3715 wiz_defined-function locations,
-            908 strings with 8417 characters,
-and the built_in function-call counts, 9614 in all, are:
-= -- 720
-> -- 304
+            910 strings with 8457 characters,
+and the built_in function-call counts, 9934 in all, are:
+= -- 743
+> -- 313
 < -- 32
-+ -- 105
-- -- 77
-* -- 513
-:= -- 1284
-add.period$ -- 69
-call.type$ -- 23
-change.case$ -- 139
++ -- 108
+- -- 79
+* -- 531
+:= -- 1327
+add.period$ -- 71
+call.type$ -- 24
+change.case$ -- 144
 chr.to.int$ -- 32
-cite$ -- 57
-duplicate$ -- 651
-empty$ -- 1280
-format.name$ -- 77
-if$ -- 2297
+cite$ -- 60
+duplicate$ -- 675
+empty$ -- 1325
+format.name$ -- 79
+if$ -- 2372
 int.to.chr$ -- 0
-int.to.str$ -- 23
+int.to.str$ -- 24
 missing$ -- 0
-newline$ -- 143
-num.names$ -- 47
-pop$ -- 251
+newline$ -- 148
+num.names$ -- 49
+pop$ -- 261
 preamble$ -- 1
-purify$ -- 92
+purify$ -- 95
 quote$ -- 0
-skip$ -- 437
+skip$ -- 452
 stack$ -- 0
-substring$ -- 412
-swap$ -- 104
+substring$ -- 422
+swap$ -- 107
 text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 47
-warning$ -- 34
-while$ -- 65
-width$ -- 25
-write$ -- 257
+type$ -- 49
+warning$ -- 36
+while$ -- 67
+width$ -- 26
+write$ -- 266
 (There were 3 error messages)
