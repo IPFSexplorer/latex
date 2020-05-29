@@ -21,7 +21,7 @@ Also, swarm key is present in IPFS connector. This key is used to make private I
 \subsection{Indexes}
 For indexing there is currently implemented only B-tree, but different structures such as tries\footnote{\url{https://en.wikipedia.org/wiki/Trie}} can be implemented easily. They only need to implement index interface (function such as \texttt{insert}, \texttt{delete}, \texttt{update}, \texttt{find}). We can create indexes on database entities with decorators\footnote{\url{https://www.typescriptlang.org/docs/handbook/decorators.html}}, which are part of ECMAScript 6 standard. Every database entity has to have \texttt{PrimaryKey} decorator on property that is used as a primary index. Index has three parameters:
 \begin{itemize}
-    \item \texttt{comparator} -- is a function that accepts two arguments and returns number that is less than zero if first arguments is greater than a second, zero if arguments are the same, more than zero if a second argument is greater than first. If a user has not set any custom comparator default one (\texttt{(a, b) =>
+    \item \texttt{comparator} -- is a function that accepts two arguments and returns number that is less than zero if the first argument is greater than a second, zero if arguments are the same, more than zero if a second argument is greater than first. If a user has not set any custom comparator default one (\texttt{(a, b) =>
     a < b ? -1 : +(a > b)}) is used. This default comparator works on atomic keys such as string or numbers. 
     \item \texttt{keyGetter} -- is another function that accepts a whole entity as arguments and returns key, that is used in an index. A default key getter is function that returns value of index property (for example default key getter for property \texttt{height} is \texttt{(e) =>  e[''height'']}).
     \item \texttt{branching} -- the branching factor is the number of children at each node, the outdegree. Default branching factor is 16.
@@ -53,7 +53,7 @@ Database system offers a complex query system. A query can consist of multiple c
 \end{figure}
 
 
-We can make queries with every database table model (such as model on Figure \ref{classExample}). Whole query system is displayed in the state diagram on Figure \ref{queryStateDiagram}. The query system consists of these functions: 
+We can make queries with every database table model (such as model on Figure \ref{classExample}). Whole query system is displayed in the state diagram on the Figure \ref{queryStateDiagram}. The query system consists of these functions: 
 \begin{itemize}
     \item \texttt{where(propertyName)} -- create a condition on the property. There can be multiple conditions in one query. A condition hash to be followed by one of the functions: 
     \begin{itemize}
@@ -148,7 +148,7 @@ A database can execute only a single transaction at the time to prevent data inc
 
 
 \subsubsection{Synchronization}
-There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes database state needs to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
+There are two types of transactions. Those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}) and those that don't (\texttt{select}). Every transaction that changes the database state needs to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
 \begin{itemize}
     \item \textbf{hash} -- an IPFS hash of this entry,
     \item \textbf{payload} -- payload is object that contains all entry data. Usually, there is a transaction (or transactions bulk if in this entry is published more transactions) and an IPFS hash of the database.
@@ -191,7 +191,7 @@ public async merge(log) {
     }
 }
     \end{lstlisting}
-    \caption{\todo{Zapisat algoritmom. Nie kodom}Algorithm for merging database logs}
+    \caption{Simplified code for merging database logs}
     \label{dblogMergeAlgo}
 \end{figure}
 

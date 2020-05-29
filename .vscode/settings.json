@@ -14,6 +14,10 @@
         {
             "rule": "EN_GB_SIMPLE_REPLACE",
             "sentence": "^\\QWhen a garbage collector is triggered on a node, any pinned content is automatically exempt from deletion.\\E$"
+        },
+        {
+            "rule": "MORFOLOGIK_RULE_EN_US",
+            "sentence": "^\\QThe behaviour mentioned above dramatically limits the scalability of the server.\\E$"
         }
     ]
 }

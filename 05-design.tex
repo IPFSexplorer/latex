@@ -30,7 +30,7 @@ In centralized systems such as git\footnote{\url{https://git-scm.com/}}, conflic
 
 
 \subsubsection{Indexes}
-An index is a B-tree structure optimized for IPFS (with no cycled references and node size less than 256 kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of Guid. Value of the primary key for an entity can not be changed, because we would need to scan all tables where the entity is referenced and change the referenced value to a new one. Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
+An index is a B-tree structure optimized for IPFS (with no cycled references and node size less than 256 kB). Each table has at least one primary index. We use the primary index to reference record in foreign keys. A primary key is automatically created when a user does not specify it and has a type of GUID. Value of the primary key for an entity can not be changed, because we would need to scan all tables where the entity is referenced and change the referenced value to a new one. Also, when we execute a query without any condition or sorting, we use a primary key to obtain records. Every index has several components: 
 \begin{itemize}
     \item \textbf{Comparator} -- is a function that has two parameters (two B-tree keys) and outputs a number as a result. An index is using a comparator to correctly traverse B-tree while searching records and inserting records to the right place.
     \item \textbf{Key-getter} -- is a function that returns a comparable object from the record (a comparable object is an object that can be compared using index Comparator). Every index has Key-getter that is using to obtain keys for objects stored in B-tree.
@@ -52,7 +52,7 @@ A table contains indexes and table name. Also, it implements operations that mod
     \item \textbf{Delete} -- remove a record from a table. 
         \begin{enumerate}
             \item Get old record key and remove it from all table indexes.
-            \item Add an empty entry to the record log. Save the record log to the IPFS.
+            \item Add empty entry to the record log. Save the record log to the IPFS.
         \end{enumerate}
 \end{itemize}
 
@@ -131,7 +131,7 @@ Both Explorer and Feeder use the same database schema. The database schema is de
 \begin{itemize}
     \item \textbf{Block} -- table for storing blockchain blocks. It has a primary key on unique block hash, and indexes on height and time. With these indexes, we can perform queries like search block by its hash or height very efficiently. Also filtering or ordering blocks by time has good performance.
     \item \textbf{Transaction} -- a table that contains blockchain transactions has a primary key on transaction hash and foreign key, that references block in which is transaction confirmed, on \texttt{blockHash} column. Indexes for efficient filtering are on \texttt{blockHeight} and \texttt{blockTime} columns. 
-    \item \textbf{Vin} -- every transaction can have multiple inputs. These inputs are stored in Vin table. Vin has not got any unique property, so a custom Guid\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
+    \item \textbf{Vin} -- every transaction can have multiple inputs. These inputs are stored in Vin table. Vin has not got any unique property, so a custom GUID\footnote{\url{https://en.wikipedia.org/wiki/Universally_unique_identifier}} needs to be created as a primary key. It has two foreign keys to reference transaction and address. Foreign key \texttt{address} can be null, because the input can be mined block reward.
     \item \textbf{Vout} -- transactions can have multiple outputs. Every output has a foreign key to transaction and address. If the output is already spent, it has a link to the transaction where this output is used as an input.
     \item \textbf{Address} -- Address contains multiple columns. As the primary key, it uses the address hash. Address also contains its \texttt{balance}, \texttt{totalReceived} and \texttt{totalSent}. These values are updated every time new input or output is added to the transaction.  
 \end{itemize}
@@ -139,7 +139,7 @@ Both Explorer and Feeder use the same database schema. The database schema is de
 
 
 \subsection{Feeder}
-A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most up to date database version. This way, new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This optimalization means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consist of hundreds of transactions.  
+A Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most up to date database version. This way, new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This optimalisation means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consist of hundreds of transactions.  
 
 A Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
 

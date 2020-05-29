@@ -1,7 +1,7 @@
 \chapter{IPFS}
 \label{ipfs}
 
-IPFS\footnote{\url{https://ipfs.io/}} stands for Interplanetary File System and is a peer-to-peer distributed file system designed to make the Web faster, safer, and more open. In contrast with a standard file system, objects in IPFS are content-addressed by the cryptographic hash of their contents. In the case of the standard Web, when user wants some file, he needs to know on which server is a file located and the full path to the file (see Figure \ref{webAddressing}). Principle of the IPFS is that a user needs only to know the hash of the requested file. He does not care about the location of the file (see Figure \ref{ipfsAddressing}). Let us take an MIT licence text, and add it to IPFS. If somebody tries to add this licence as a file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is from now on the \textit{content address} of that file. Later, when a user tries to get this file by its hash, he can get it from a random person that added it into IPFS in the past.
+IPFS\footnote{\url{https://ipfs.io/}} stands for Interplanetary File System and is a peer-to-peer distributed file system designed to make the Web faster, safer, and more open. In contrast with a standard file system, objects in IPFS are content-addressed by the cryptographic hash of their contents. In the case of the standard Web, when the user wants some file, he needs to know on which server is a file located and the full path to the file (see Figure \ref{webAddressing}). The principle of the IPFS is that a user needs only to know the hash of the requested file. He does not care about the location of the file (see Figure \ref{ipfsAddressing}). Let us take an MIT licence text, and add it to IPFS. If somebody tries to add this licence as a file to IPFS, it will return \texttt{QmWpvK4bYR7k9b1feM48fsk\-t2XsZfMaPfNnFxdbhJHw7QJ} every time. That is from now on the \textit{content address} of that file. Later, when a user tries to get this file by its hash, he can get it from a random person that added it into IPFS in the past.
 
 IPFS can easily represent a file system consisting of files and directories. A small file (less than 256 kB) is represented by an IPFS object with data being the file contents (plus a small header and footer). Note that the file name is not part of the IPFS object, so two files with different names and the same content will have the same IPFS object representation and hence the same hash. A large file (more than 256 kB) is represented by a list of links to file chunks that are less than 256 kB, and only minimal information specifying that this object represents a large file. Currently, there are no known size limitations uploaded file or directory. There are already some big datasets hosted on IPFS such as Geocities archive\footnote{\url{https://ipfs.io/ipfs/QmVCjhoEFC9vwvaa8bKyJgwAByP4MXSogcyDGoz4Lkc3ox}} (704 TB) or Project Apollo Archives\footnote{\url{https://ipfs.io/ipfs/QmSnuWmxptJZdLJpKRarxBMS2Ju2oANVrgbr2xWbie9b2D}} (61 GB).
 
@@ -32,7 +32,7 @@ We can split IPFS into layers (see Figure \ref{IPFSstack}). \textit{Libp2p}\foot
 \end{figure}
 
 
-\section{libp2p}
+\section{Libp2p}
 Libp2p is a modular system of protocols, specifications and libraries that enable the development of peer-to-peer network applications. It provides NAT Traversal, Peer Discovery, Routing, Stream Multiplexing, Protocol Multiplexing, Encryption, Authentication and more. It grew out of IPFS to solve networking problems in p2p networks, but now it does not require or depend on IPFS. Today many projects use libp2p as their network transporting layer, which is responsible for the actual transmission and receipt of data from one peer to another. For both content discovery and peer routing, libp2p uses Kademlia-based distributed hash table. With Kademlia, libp2p iteratively routes requests closer to the desired peer or content using Kademlia routing algorithm\cite{kademlia}. In the future, Kademlia might be changed easily to some other solution that implements a simple interface for publishing and requesting data and finding a peer. \cite{WebEngineering}
 
 
@@ -87,9 +87,9 @@ IPFS is the top layer from the IPFS stack. It is used for pinning objects and fi
 \label{ipfsApis}
 IPFS provides several APIs that are working on different abstraction levels. The regular top-level API is Files API\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/FILES.md}}. The Files API enables users to use the File System abstraction of IPFS. It has \texttt{add}, \texttt{cat}, \texttt{get} and \texttt{ls} methods for manipulating with regular files and directories. For our system are low-level APIs such as \texttt{DAG}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/DAG.md}} and \texttt{PUBSUB}\footnote{\url{https://github.com/ipfs/interface-js-ipfs-core/blob/master/SPEC/PUBSUB.md}} more interesting. PUBSUB API is used to broadcast messages between peers, and it consists of these methods:
 \begin{itemize}
-    \item \texttt{subscribe} -- listen to specific topic. A topic name and handler function is provided as a param.
+    \item \texttt{subscribe} -- listen to specific topic. A topic name and handler function are provided as a parameter.
     \item \texttt{unsucribe} -- stop listening on a topic that is provided as parameter.
-    \item \texttt{publish} -- publish a message to topic. All peers that subscribed the topic receive the message.
+    \item \texttt{publish} -- publish a message to topic. All peers that are subscribed to the topic receive the message.
     \item \texttt{ls} -- returns the list of subscriptions the peer is subscribed to.
     \item \texttt{peers} -- returns the peers that are subscribed to a topic. A topic name is a parameter of this function.
 \end{itemize}
