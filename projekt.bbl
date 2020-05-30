@@ -64,6 +64,17 @@
 \newblock Cham: Springer International Publishing, 2016, p.~616--619.
 \newblock ISBN 978-3-319-38791-8.
 
+\bibitem{drake2002practical}
+{\sc\bgroup}Drake{\egroup}, J.~D. and~{\sc\bgroup}Worsley{\egroup}, J.~C.
+\newblock {\em Practical PostgreSQL}.
+\newblock " O'Reilly Media, Inc.", 2002.
+
+\bibitem{dubois1999mysql}
+{\sc\bgroup}DuBois{\egroup}, P. and~{\sc\bgroup}Foreword By Widenius{\egroup},
+  M.
+\newblock {\em MySQL}.
+\newblock New riders publishing, 1999.
+
 \bibitem{haber1990time}
 {\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
 \newblock How to time-stamp a digital document.
@@ -117,6 +128,11 @@
 \newblock In: Springer.~{\em International Workshop on Peer-to-Peer Systems}.
 \newblock 2002, p.~53--65.
 
+\bibitem{mysql2001mysql}
+{\sc\bgroup}MySQL{\egroup}, A.
+\newblock {\em MySQL}.
+\newblock 2001.
+
 \bibitem{nakamoto2008peer}
 {\sc\bgroup}Nakamoto{\egroup}, S. and~{\sc\bgroup}Bitcoin{\egroup}, A.
 \newblock A peer-to-peer electronic cash system.
@@ -144,6 +160,13 @@
 \newblock 2019.
 \newblock Available at:
   ~{\small\url{https://blog.textile.io/introducing-textiles-threads-protocol/}}.
+
+\bibitem{stonebraker1986design}
+{\sc\bgroup}Stonebraker{\egroup}, M. and~{\sc\bgroup}Rowe{\egroup}, L.~A.
+\newblock The design of POSTGRES.
+\newblock {\em ACM Sigmod Record}.
+\newblock ACM New York, NY, USA.
+\newblock 1986, vol.~15, no.~2, p.~340--355.
 
 \bibitem{van2013cryptonote}
 {\sc\bgroup}Van Saberhagen{\egroup}, N.

@@ -7,6 +7,10 @@ manual is already a type "wizard-defined" function name
  : function {manual
  :                 } { techreport }
 Database file #1: 20-bibliography.bib
+Repeated entry---line 267 of file 20-bibliography.bib
+ : @article{stonebraker1986design
+ :                               ,
+I'm skipping whatever remains of this entry
 Warning--"{" isn't a brace-balanced string for entry IPFSwhitepaper
 while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
@@ -21,6 +25,10 @@ Warning--empty edition in newYorkerBTC
 Warning--empty number in newYorkerBTC
 Warning--empty edition in dhillon2017blockchain
 Warning--empty isbn in dhillon2017blockchain
+Warning--empty edition in drake2002practical
+Warning--empty isbn in drake2002practical
+Warning--empty edition in dubois1999mysql
+Warning--empty isbn in dubois1999mysql
 Warning--empty isbn and issn in haber1990time
 Warning--empty edition in decredWhitePaper
 Warning--empty number in decredWhitePaper
@@ -44,7 +52,8 @@ Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
 Warning--empty edition in TextileWhitePaper
 Warning--empty isbn in TextileWhitePaper
+Warning--empty edition in stonebraker1986design
 Warning--empty edition in wayner1997digital
 Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-(There were 3 error messages)
+(There were 4 error messages)
