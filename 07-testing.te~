@@ -1,5 +1,5 @@
 \chapter{Testing}
-Testing is an essential part of the development of any project. As part of my master thesis, I~performed two types of testing. Unit testing to ensure that every system module works correctly, and testing the user interface of ExplorerGUI in which I~tested how quickly and efficiently the user handles tasks, and how user-friendly the user interface is.
+Testing is an essential part of the development of any project. As part of my master thesis, I performed two types of testing. Unit testing to ensure that every system module works correctly, and testing the user interface of ExplorerGUI in which I tested how quickly and efficiently the user handles tasks, and how user-friendly the user interface is.
 
 \section{Unit testing}
 We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference).
