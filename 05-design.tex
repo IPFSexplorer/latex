@@ -3,14 +3,16 @@
 This chapter describes the proposed design of the whole system for storing and exploring blockchains in IPFS that is to be created as a result of this thesis. All parts of the system are described in this chapter.
 
 \section{Database system}
-We need a database in our system to store and index data. Database system needs to be decentralized and distributed. There are several databases build on top of IPFS already implemented. The two most known are OrbitDB and Textile.
+We need a database in our system to store and index data. Database system needs to be decentralized and distributed. There are several databases build on top of IPFS already implemented. 
+
+The two most known are OrbitDB and Textile. However, neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed. 
 
 \subsection{OrbitDB}
-OrbitDB\footnote{\url{https://orbitdb.org/}} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases. However, it is still in the alpha stage of development, and it is not well optimized for storing hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to select only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.\cite{OrbitDBManual}
+OrbitDB\footnote{\url{https://orbitdb.org/}} \cite{OrbitDBManual} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases. However, it is still in the alpha stage of development, and it is not well optimized for storing hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to select only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
 
 \subsection{Textile}
 Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provide backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client.
-Neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed.\cite{TextileWhitePaper}
+\cite{TextileWhitePaper}
 
 \subsection{Database system design}
 After some research, we concluded that currently for storing and indexing data in IPFS without large hard disk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes. A~database system that fits our needs is distributed and decentralized. That brings us lots of synchronization problems to solve. This database system consists of tables that contain records. For faster searching, tables have indexes. Relations between tables are represented via foreign keys. Also, this database system supports fluent query language, used for performing complex queries.
@@ -41,15 +43,15 @@ A~table contains indexes and table name. Also, it implements operations that mod
 \begin{itemize}
     \item \textbf{Insert} -- creates a new record in a table. Insert operation has these steps: 
         \begin{enumerate}
-            \item Creates record log with a new entry and store it in IPFS
+            \item Creates record log with a new entry and store it in IPFS.
             \item Gets record key (via Key-getter) and inserts it to all table indexes with IPFS hash as value.
         \end{enumerate}
-    \item \textbf{Update} -- save new record version. It consists of:
+    \item \textbf{Update} -- saves a new version of record. It consists of:
         \begin{enumerate}
             \item Add new entry to the record log. Save the record log to the IPFS.
             \item Get new record key (via Key-getter) and update all table indexes with new IPFS hash as value.
         \end{enumerate}
-    \item \textbf{Delete} -- remove a record from a table. 
+    \item \textbf{Delete} -- removes a record from a table. 
         \begin{enumerate}
             \item Get old record key and remove it from all table indexes.
             \item Add empty entry to the record log. Save the record log to the IPFS.
@@ -81,33 +83,33 @@ Lots of more strategies can be implemented, but they need to be deterministic an
 \begin{figure}[h]
     \centering
     \includegraphics[width=13cm]{DBconflict.png}
-    \caption{Synchronization of a database. Note that in time 4, Node1 adds two transactions in one DB version.}
+    \caption{Synchronization of a database. Note that in Time 4, node1 adds two transactions in one DB version.}
     \label{databaseConflict}
 \end{figure}
 
 \subsubsection{Queries} 
-A~Database system provides query language for performing selects. A~query consists of:
+A~database system provides query language for performing selects. A~query consists of:
 \begin{itemize}
-    \item \textbf{conditions} -- query may contain multiple conditions. There are logical operators (and/conjunction, or/disjunction) between conditions. When it is possible (an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between \texttt{AND} conditions and union between \texttt{OR} conditions. These types of conditions are supported:
+    \item \textbf{conditions} -- query may contain multiple conditions. There are logical operators (and/conjunction, or/disjunction) between conditions. When it is possible (i.e., an index is available on condition property), we use indexes for evaluating conditions. If there are more than one conditions, we use an intersection between \texttt{AND} conditions and union between \texttt{OR} conditions. These types of conditions are supported:
     \begin{itemize}
-        \item \textbf{equal} -- record property equals to specified value,
-        \item \textbf{greater than} -- record property is greater than specified value,
-        \item \textbf{less than} -- record property is less than specified value,
+        \item \textbf{equal} -- record property equals to specified value;
+        \item \textbf{greater than} -- record property is greater than specified value;
+        \item \textbf{less than} -- record property is less than specified value;
         \item \textbf{between} -- record property is greater than specified minimal value, and less than specified maximal value.
     \end{itemize} 
     \item \textbf{filters} -- filters are similar to conditions, but they can be more complicated. They are functions that are being applied to query results. If any filter return \texttt{false} for the query result, the result is ignored. A~query can contain several filters.
     \item \textbf{offset} -- offset is saying how many query results should be ignored from the beginning.
-    \item \textbf{evaluator} -- we use evaluator for accessing results of the query.
+    \item \textbf{evaluator} -- we use evaluator for accessing results of the query:
     \begin{itemize}
-        \item \textbf{all} -- returns array of all results of the query.
-        \item \textbf{first} -- returns only first result.
-        \item \textbf{take} -- returns \texttt{N} number of results where \texttt{N} is an argument.
-        \item \textbf{paginate} -- returns page of results. Accept two arguments. \texttt{perPage} specifies the number of results in one page. \texttt{page} is number of requested page.
+        \item \textbf{all} -- returns array of all results of the query;
+        \item \textbf{first} -- returns only first result;
+        \item \textbf{take} -- returns \texttt{N} number of results where \texttt{N} is an argument;
+        \item \textbf{paginate} -- returns page of results. It accepts two arguments: \texttt{perPage} specifies the number of results in one page, \texttt{page} is number of requested page;
         \item \textbf{iterate} -- returns iterator that can be used in cycles such as \texttt{for} or \texttt{while}.
     \end{itemize}
 \end{itemize}  
 
-\section{System components}
+\section{System Components}
 The system consists of one or more Feeders and Explorers. Feeders are connected to data sources and provide synchronization with cryptocurrency blockchains. Explorer can request data from the system network and display them to a user (see Figure \ref{systemArchitecture}).
 
 \begin{figure}[h]
@@ -141,7 +143,7 @@ Both Explorer and Feeder use the same database schema. The database schema is de
 \subsection{Feeder}
 A~Feeder is a service that stores data in IPFS and indexes them in our database system. Once all blocks are indexed, Feeder waits for new blocks and is periodically publishing most up to date database version. This way, new clients synchronize database more quickly. For optimization purposes, Feeder is performing transactions in bulks. This optimalisation means that Feeder is not publishing a new version of the database every time it parsed block or transaction, but rather after it parsed transactions bulk which can consist of hundreds of transactions.  
 
-A~Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other data source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
+A~Feeder can use different sources for obtaining blockchains data. It can be connected directly to the blockchain as a full node or to some other source providing blockchain data as Blockbook\footnote{\url{https://github.com/trezor/blockbook}} or Insight\footnote{\url{https://insight.is}}.
 
 
 \subsection{Explorer}
