@@ -1,18 +1,18 @@
 \chapter{Implementation}
 \label{Implementation}
-This chapter describes the implementation details of the system and shows the internal architecture. All system components are implemented in Typescript that is later compiled to JavaScript. This choice of language enables code sharing between individual components and allow us to support multiple platforms (desktop via Node.js, and browser). All system components are dependent on Explorer-core module where is the whole database system implemented (see Figure \ref{systemArchitecture}). 
+This chapter describes the implementation details of the platform and shows the internal architecture. All platform components are implemented in Typescript that is later compiled to JavaScript. This choice of language enables code sharing between individual components and allow us to support multiple platforms (desktop via Node.js, and browser). All platform components are dependent on Explorer-core module where is the whole database system implemented (see Figure \ref{systemArchitecture}). 
 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{ExplorerArchitecture.pdf}
-    \caption{System architecture}
+    \caption{Platform architecture}
     \label{systemArchitecture}
 \end{figure}
 
 
 \section{Explorer-core Implementation}
-Explorer-core is the most complex module of a whole system with more than 5,000 lines of code. The database subsystem is a main part of the Explorer-core module. The subsystem consists of a query system, indexes and an abstract database layer. Explorer-core is only system components that communicates with IPFS via js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation.
+Explorer-core is the most complex module of a whole platform with more than 5,000 lines of code. The database subsystem is a main part of the Explorer-core module. The Explorer-core consists of a Query system, indexes and an abstract database layer. Explorer-core is only out of platform components that communicates with IPFS via js-ipfs\footnote{\url{https://github.com/ipfs/js-ipfs}} implementation.
 
 \subsection{IPFS Connector}
 IPFS connector is a singleton class that provides a connection to IPFS. It has a method \texttt{getInstanceAsync} which will return promise that resolves into IPFS node instance. This instance is stored in a private static class variable. Next call of function \texttt{getInstanceAsync} returns that static class variable.
@@ -49,7 +49,7 @@ All search queries (equal, less, greater, between) has two steps:
 \end{figure}
 
 \subsection{Query System}
-Our database offers a complex query system. A~query can consist of multiple conditions, and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter, and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results. Example query returning blocks between 38 and 42 is shown in Figure \ref{btreeQuery}. A~peer needs to download only data that are highlighted in green. After downloading them, they are stored on a peer's filesystem and are offered to other peers. 
+Our database offers a complex Query system. A~query can consist of multiple conditions, and the \texttt{Query Planner} is responsible for resolving them. It decides which indexes are used for query and choose a strategy. If there is no condition, a primary key is used for query execution. In the case of a single condition, \texttt{Query Planner} checks if there is an index on the condition's property. If yes, then this index is used to perform the query. Else condition is transformed to filter, and a primary key is used to obtain results which are then filtered. For multiple conditions connected with logical operators \texttt{AND} or \texttt{OR}, \texttt{Query Planner} creates \texttt{OR-hashset} and \texttt{AND-hashset}. \texttt{AND-hashset} is initialized with the results of a condition which has the smallest number of results and uses \texttt{AND} operator. Then we check for each result hash for all other \texttt{AND} conditions if \texttt{AND-hashset} contains it. If no, a hash is deleted from \texttt{AND-hashset}. This creates intersection between all \texttt{AND} conditions. The \texttt{OR-hashset} is created empty. Then, we add a hash of every result of all \texttt{OR} conditions to it. This creates union between \texttt{OR} conditions. At the end, we perform union between \texttt{AND-hashset} and \texttt{OR-hashset}. This creates final hashset which is used later to obtain actual data with resolvers such as \texttt{all}, \texttt{first}, \texttt{paginate} etc. If one of the \texttt{AND} conditions has great selectivity (it has less than a hundred results), \texttt{Query Planner} can decide to don't use other indexes, but transform condition to filter and cycle over the results. Example query returning blocks between 38 and 42 is shown in Figure \ref{btreeQuery}. A~peer needs to download only data that are highlighted in green. After downloading them, they are stored on a peer's filesystem and are offered to other peers. 
 
 \begin{figure}[h]
     \centering
@@ -59,7 +59,7 @@ Our database offers a complex query system. A~query can consist of multiple cond
 \end{figure}
 
 
-We can make queries with every database table model (such as model on Figure \ref{classExample}). Whole query system is displayed in the state diagram on the Figure \ref{queryStateDiagram}. The query system consists of these functions: 
+We can make queries with every database table model (such as model on Figure \ref{classExample}). Whole Query system is displayed in the state diagram on the Figure \ref{queryStateDiagram}. The Query system consists of these functions: 
 \begin{itemize}
     \item \texttt{where(propertyName)} -- create a condition on the property. There can be multiple conditions in one query. A~condition hash needs to be followed by one of the functions: 
     \begin{itemize}
@@ -83,13 +83,13 @@ We can make queries with every database table model (such as model on Figure \re
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{queryStateDiagram.pdf}
-    \caption{State diagram of the query system}
+    \caption{State diagram of the Query system}
     \label{queryStateDiagram}
 \end{figure}
 
 
 \subsection{Database}
-The most important part of the Explorer-core module is the database subsystem which connects the query system with indexes. When we make a query, it is precessed by database, and data are obtained with the help of the indexes.
+The most important part of the Explorer-core module is the database subsystem which connects the \texttt{Query Planner} with indexes. When we make a query, it is precessed by database, and data are obtained with the help of the indexes.
 
 \subsubsection{Tables}
 A~database contains tables that consist of indexes. A~table has an interface that provides operations to modify table data:
@@ -123,7 +123,7 @@ Example of the class User is in Figure \ref{classExample}. It has two indexes. O
 
 
 \subsubsection{Transactions}
-A~database can execute only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it waits 50 ms for more transactions to come. Transactions in our system are represented by classes \texttt{Transaction} and \texttt{TransactionsBulk}. Both classes implements \texttt{ITrasnaction} interface with \texttt{run} function. Transactions bulk are treated the same way as a single transaction thanks to Composite pattern\footnote{\url{https://en.wikipedia.org/wiki/Composite_pattern}} (see Figure \ref{transactionsComposite}). After executing, each transaction is appended to the database log. After we execute all transactions in transactions queue (transaction queue is empty), we publish a new database version to all connected peers.
+A~database can execute only a single transaction at the time to prevent data inconsistency. For that reason, we implemented a transaction queue where transactions are stored before executing in the order in which they came. Executing more transactions in a row is significantly more effective than executing them one by one. If a transactions queue has only one transaction, it waits 50 ms for more transactions to come. Transactions in our platform are represented by classes \texttt{Transaction} and \texttt{TransactionsBulk}. Both classes implements \texttt{ITrasnaction} interface with \texttt{run} function. Transactions bulk are treated the same way as a single transaction thanks to Composite pattern\footnote{\url{https://en.wikipedia.org/wiki/Composite_pattern}} (see Figure \ref{transactionsComposite}). After executing, each transaction is appended to the database log. After we execute all transactions in transactions queue (transaction queue is empty), we publish a new database version to all connected peers.
 
 \begin{figure}[h]
     \centering
