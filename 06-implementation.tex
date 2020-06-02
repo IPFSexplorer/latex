@@ -5,7 +5,7 @@ This chapter describes the implementation details of the system and shows the in
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{ExplorerArchitecture.png}
+    \includegraphics[width=\textwidth]{ExplorerArchitecture.pdf}
     \caption{System architecture}
     \label{systemArchitecture}
 \end{figure}
@@ -37,7 +37,7 @@ All search queries (equal, less, greater, between) has two steps:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=13cm]{btreeindex.png}
+    \includegraphics[width=13cm]{btreeindex.pdf}
     \caption{B-tree indexing first 100 blocks by their height}
     \label{btree}
 \end{figure}
@@ -47,7 +47,7 @@ Our database offers a complex query system. A~query can consist of multiple cond
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=13cm]{btreeIndexQuery.png}
+    \includegraphics[width=13cm]{btreeIndexQuery.pdf}
     \caption{Data access for performing query that returns blocks that have a height between 38 and 42.}
     \label{btreeQuery}
 \end{figure}
@@ -76,7 +76,7 @@ We can make queries with every database table model (such as model on Figure \re
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{queryStateDiagram.png}
+    \includegraphics[width=\textwidth]{queryStateDiagram.pdf}
     \caption{State diagram of the query system}
     \label{queryStateDiagram}
 \end{figure}
@@ -163,7 +163,7 @@ At first, we create a new instance of \texttt{TransactionsBulk} where we store t
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=10cm]{syncDB.png}
+    \includegraphics[width=10cm]{syncDB.pdf}
     \caption{Database synchronization}
     \label{syncDB}
 \end{figure}
