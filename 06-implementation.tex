@@ -27,7 +27,13 @@ For indexing purposes, there is currently implemented only B-tree, but different
     \item \texttt{branching} -- the branching factor is the number of children at each node (the outdegree). Default branching factor is 16.
 \end{itemize}
 
-The B-tree structure (see Figure \ref{btree}) is optimized for IPFS. Unlike PostgreSQL B-tree\footnote{\url{https://github.com/postgres/postgres/tree/master/src/backend/access/nbtree}}, leaf nodes have not got left and right sibling references due to cyclic reference that is not possible in IPFS, because links are changing CID of an object \cite{stonebraker1986design}. Therefore, if we store object \texttt{A} with a link to the object \texttt{B}, CID of \texttt{A} will change. Then if we add backlink from \texttt{B} to \texttt{A}, CID of \texttt{B} will be changed and so \texttt{A} is now linked to an old version of \texttt{B}. If we update link of object \texttt{A} to point on the new version of object \texttt{B}, CID of object \texttt{A} will change and therefore object \texttt{B} is now pointing to the old version of object \texttt{A}. From this example, it appears that there is no way of making cyclic references in IPFS. Without siblings's references, we do not have to store data only in leaves, but we can store data in nodes itself. This approach leads to better performance when executing queries. For insert queries, statistically fewer nodes need to be updated. Also in search queries, there is a chance that we would found a key in some non-leaf node; therefore, we would need fewer node visits.
+The B-tree structure (see Figure \ref{btree}) is optimized for IPFS. Unlike PostgreSQL B-tree\footnote{\url{https://github.com/postgres/postgres/tree/master/src/backend/access/nbtree}}, leaf nodes have not got left and right sibling references due to cyclic reference that is not possible in IPFS, because links are changing CID of an object \cite{stonebraker1986design}. We can demonstrate this in the following example:
+\begin{itemize}
+    \item If we store object \texttt{A} with a link to the object \texttt{B}, CID of \texttt{A} will change.
+    \item Then if we add backlink from \texttt{B} to \texttt{A}, CID of \texttt{B} will be changed and so \texttt{A} is now linked to an old version of \texttt{B}.
+    \item If we update link of object \texttt{A} to point on the new version of object \texttt{B}, CID of object \texttt{A} will change and therefore object \texttt{B} is now pointing to the old version of object \texttt{A}.
+\end{itemize}
+From this example, it appears that there is no way of making cyclic references in IPFS. Without siblings's references, we do not have to store data only in leaves, but we can store data in nodes itself. This approach leads to better performance when executing queries. Statistically less nodes need to be updated in case of insert queries. Also in search queries, there is a chance that we would find a key in some non-leaf node; therefore, we would need fewer node visits.
 
 All search queries (equal, less, greater, between) has two steps:
 \begin{itemize}
@@ -92,7 +98,7 @@ A~database contains tables that consist of indexes. A~table has an interface tha
     \item \texttt{update} -- adds new version of the entity to its history log. Then update every index of the table;
     \item \texttt{delete} -- removes entity from every table index. From now, an entity can not be found in this table.
 \end{itemize}
-There is no \texttt{select} operation because a table itself does not perform queries for obtaining data (table has not got necessary logic for choosing optimal index for query). Selects are performed by \textit{Query Planner} after analysing all query conditions.
+There is no \texttt{select} operation because a table itself does not perform queries for obtaining data (table has not got necessary logic for choosing optimal index for query). Selects are performed by \texttt{Query Planner} after analysing all query conditions.
 
 Example of the class User is in Figure \ref{classExample}. It has two indexes. One primary on property \texttt{name} and one normal index on property \texttt{age}. The second index has also specified \texttt{comparator} that is a bit faster than default one but works only on numbers, and \texttt{keyGetter} that returns a year when a user has born. 
 
@@ -148,10 +154,10 @@ A~database can execute only a single transaction at the time to prevent data inc
 
 
 \subsubsection{Synchronization}
-There are two types of transactions: 1) those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}); and 2) those that do not (\texttt{select}). Every transaction that changes the database state needs to be synchronized with other peers. We created Database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
+There are two types of transactions: 1) those that changes the database state (\texttt{create}, \texttt{update}, \texttt{delete}); and 2) those that do not (\texttt{select}). Every transaction that changes the database state needs to be synchronized with other peers. We created database log for that. It is an append-only log with a discrete-time. Every entry of a database log has these properties:
 \begin{itemize}
     \item \textbf{hash} -- an IPFS hash of this entry;
-    \item \textbf{payload} -- payload is object that contains all entry data. Usually, there is a transaction (or transactions bulk if more transactions are published in this entry) and an IPFS hash of the database;
+    \item \textbf{payload} -- payload is object that contains all entry data. Usually, there is a transaction (if there are more transactions published in this entry, there is transactions bulk) and an IPFS hash of the database;
     \item \textbf{parent} -- an IPFS hash to previous entry. We can re-create a whole database log from a head entry be accessing parent property until it is \texttt{null};
     \item \textbf{clock} -- A~Lamport clock \footnote{\url{https://en.wikipedia.org/wiki/Lamport_timestamps}} with entry create time.
 \end{itemize}
