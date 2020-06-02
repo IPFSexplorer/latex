@@ -1,10 +1,41 @@
 \chapter{Testing and Benchmarking}
+In this chapter, we describe how our platform is verified and validated. Then, we measured the performance of the database system with different count of clients, and we compared results with other database systems. 
+
 
 \section{Testing}
 Testing is an essential part of the development of any project. As part of my master thesis, We~performed two types of testing. Unit testing to ensure that every platform module works correctly, and testing the user interface of ExplorerGUI in which we~tested how quickly and efficiently the user handles tasks, and how user-friendly the user interface is.
 
+\begin{figure}[h]
+    \centering
+    \begin{lstlisting}[style=ES6]
+describe("Btree", () =>
+{
+    it("insert values to btree", async () =>
+    {
+        const t = new BTree();
+        for (let i = 0; i < 100; i++)
+        {
+            await t.add(i, { name: "test object", value: i });
+        }
+
+        for (let i = 0; i < 100; i++)
+        {
+            expect(await t.find(i)).toStrictEqual({ name: "test object", value: i });
+        }
+        expect(await t.find(101)).toBe(null);
+    });
+});
+    \end{lstlisting}
+    \caption{Unit test for B-Tree insert operation.}
+    \label{unitTest}
+\end{figure}
+
 \subsection{Unit Testing}
-We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference).
+We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference). Test for B-Tree insert operation can be seen in Figure \ref{unitTest}. Tests for every application we have developed in this thesis can be run by command \texttt{npm run test}.
+
+
+
+
 
 
 % \subsection{Testing of User Interface}
@@ -23,16 +54,16 @@ We tested all critical parts of the Explorer-core module through unit tests. We 
 
 \section{Benchmarking}
 \label{benchmark}
-\section{Comparing to Other Database Systems}
-Comparing our platform with typical database systems is very difficult. We need to prepare the same environment.
+To test the performance of our platform, we have focused on the speed of transaction processing in the database system. We compared our database system to other widely used solutions -- MySQL and PostgreSQL.
+
+
 
 \subsubsection{MySQL}
-\todo{prepisat}
-MySQL is free and open-source software under the terms of the GNU General Public Licence and is also available under a variety of proprietary licences. MySQL was owned and sponsored by the Swedish company MySQL AB, which was bought by Sun Microsystems (now Oracle Corporation). MySQL is used by many database-driven web applications, including Drupal, Joomla, phpBB, and WordPress. MySQL is also used by many popular websites, including Facebook, Flickr, MediaWiki, Twitter, and YouTube. \cite{mysql2001mysql, dubois1999mysql}
+MySQL is leading open-source multi-platform relational database system. Originally, MySql was created by the Swedish company MySQL AB, now owned by Oracle Corporation. It can provide stable and robust database solution for application. Due to its easy deployment, performance and especially due to the fact that it is a freely distributable software, it has a high share in currently used databases. 
+\cite{mysql2001mysql, dubois1999mysql}
 
 \subsubsection{PostgreSQL}
-\todo{prepisat}
-PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance. It was initially named POSTGRES, referring to its origins as a successor to the Ingres database developed at the University of California, Berkeley. In 1996, the project was renamed to PostgreSQL to reflect its support for SQL. After a review in 2007, the development team decided to keep the name PostgreSQL. PostgreSQL features transactions with Atomicity, Consistency, Isolation, Durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys, and stored procedures. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. It is available for Linux, FreeBSD, OpenBSD, and Windows. \cite{drake2002practical}
+PostgreSQL is object-relational widly used open-source database system. It is available for Linux, FreeBSD, OpenBSD, and Windows. PostgreSQL was formed in 1977. Project started in university of California and later on was developed commercially. To this date PostgreSQL has active development wordwide community. Main advantage of PostgreSQL is aprouch of object-relational model. This allows developers to store. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. \cite{drake2002practical}
 
 \subsubsection{Environment}
 We compare MySQL and PostgresSQL with our peer-to-peer database system. These database systems run virtualized in Docker containers on hardware with 4 cores processor Intel Pentium G4560 3.50GHz and 16 GB of RAM.  We start clients that connect to these database systems and performs queries on different hardware. Then we measure average queries per seconds that clients execute. Clients are written in JavaScript with official node.js connectors for MySQL\footnote{\url{https://www.npmjs.com/package/mysql}} and PostgreSQL\footnote{\url{https://www.npmjs.com/package/postgres}} and are connected in the LAN with database systems over 1Gb Ethernet. Database structure that is used in benchmarks can be seen in Figure \ref{benchDatabaseStructure}. Table \texttt{authors} contains 10,000 records and table \texttt{posts} contains 50,000 records (each author has 5 posts). Test query for each database system can be seen in Figure \ref{benchQuery}.
