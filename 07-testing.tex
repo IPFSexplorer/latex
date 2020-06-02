@@ -7,16 +7,16 @@ Testing is an essential part of the development of any project. As part of my ma
 We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference).
 
 
-\subsection{Testing of User Interface}
-We also test ExplorerGUI by a user. We invited for this type of testing five people whose task was to perform several simple steps:
-\begin{enumerate}
-    \item Load ExplorerGUI web page.
-    \item Select cryptocurrency.
-    \item Make filter that selects all blocks between 1,000 and 2,000.
-    \item Click on any block to view its transactions.
-    \item Select some address and view its transactions.
-\end{enumerate}
-There were almost no problems during testing. As this is a relatively complex platform that requires at least a minimum knowledge of cryptocurrencies, the principles of blocks and transactions were not clear to all tested. However, testers completed the tasks in a short time. The user interface seemed to everyone intuitive and straightforward. Subsequently, given the test results, we performed a few graphical changes, such as enlarging and highlighting some controls. Also, most testers liked the graphic design and the chosen colours of the application.
+% \subsection{Testing of User Interface}
+% We also test ExplorerGUI by a user. We invited for this type of testing five people whose task was to perform several simple steps:
+% \begin{enumerate}
+%     \item Load ExplorerGUI web page.
+%     \item Select cryptocurrency.
+%     \item Make filter that selects all blocks between 1,000 and 2,000.
+%     \item Click on any block to view its transactions.
+%     \item Select some address and view its transactions.
+% \end{enumerate}
+% There were almost no problems during testing. As this is a relatively complex platform that requires at least a minimum knowledge of cryptocurrencies, the principles of blocks and transactions were not clear to all tested. However, testers completed the tasks in a short time. The user interface seemed to everyone intuitive and straightforward. Subsequently, given the test results, we performed a few graphical changes, such as enlarging and highlighting some controls. Also, most testers liked the graphic design and the chosen colours of the application.
 
 
 
@@ -27,9 +27,11 @@ There were almost no problems during testing. As this is a relatively complex pl
 Comparing our platform with typical database systems is very difficult. We need to prepare the same environment.
 
 \subsubsection{MySQL}
+\todo{prepisat}
 MySQL is free and open-source software under the terms of the GNU General Public Licence and is also available under a variety of proprietary licences. MySQL was owned and sponsored by the Swedish company MySQL AB, which was bought by Sun Microsystems (now Oracle Corporation). MySQL is used by many database-driven web applications, including Drupal, Joomla, phpBB, and WordPress. MySQL is also used by many popular websites, including Facebook, Flickr, MediaWiki, Twitter, and YouTube. \cite{mysql2001mysql, dubois1999mysql}
 
 \subsubsection{PostgreSQL}
+\todo{prepisat}
 PostgreSQL, also known as Postgres, is a free and open-source relational database management system emphasizing extensibility and SQL compliance. It was initially named POSTGRES, referring to its origins as a successor to the Ingres database developed at the University of California, Berkeley. In 1996, the project was renamed to PostgreSQL to reflect its support for SQL. After a review in 2007, the development team decided to keep the name PostgreSQL. PostgreSQL features transactions with Atomicity, Consistency, Isolation, Durability (ACID) properties, automatically updatable views, materialized views, triggers, foreign keys, and stored procedures. It is designed to handle a range of workloads, from single machines to data warehouses or Web services with many concurrent users. It is available for Linux, FreeBSD, OpenBSD, and Windows. \cite{drake2002practical}
 
 \subsubsection{Environment}
