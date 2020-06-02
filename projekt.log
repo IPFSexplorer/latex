@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.23)  1 JUN 2020 01:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.23)  1 JUN 2020 20:57
 entering extended mode
 **./projekt.tex
 (projekt.tex
@@ -2237,7 +2237,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  27140 strings out of 493290
  448014 string characters out of 3128989
- 592633 words of memory out of 3000000
+ 592638 words of memory out of 3000000
  29771 multiletter control sequences out of 15000+200000
  652872 words of font info for 112 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2266,7 +2266,7 @@ grams/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Matus/AppData/Local
 /Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy6.pfb><C:/Users/Matus/AppData/Lo
 cal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Users/Matus/AppDat
 a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt9.pfb>
-Output written on projekt.pdf (50 pages, 2907636 bytes).
+Output written on projekt.pdf (50 pages, 2907908 bytes).
 PDF statistics:
  1356 PDF objects out of 1440 (max. 8388607)
  432 named destinations out of 1000 (max. 500000)

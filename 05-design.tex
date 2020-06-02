@@ -2,19 +2,19 @@
 \label{Design}
 This chapter describes the proposed design of the whole system for storing and exploring blockchains in IPFS that is to be created as a result of this thesis. All parts of the system are described in this chapter.
 
-\section{Database system}
+\section{Database System}
 We need a database in our system to store and index data. Database system needs to be decentralized and distributed. There are several databases build on top of IPFS already implemented. 
 
 The two most known are OrbitDB and Textile. However, neither of these solutions fits our use case to store a large amount of data distributed on several nodes and performs queries that can be resolved by downloading only necessary parts of the database. Therefore, we need to create a new database system based on IFPS that would be decentralized and distributed. 
 
 \subsection{OrbitDB}
-OrbitDB\footnote{\url{https://orbitdb.org/}} \cite{OrbitDBManual} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks. OrbitDB is a decent solution for small user's databases. However, it is still in the alpha stage of development, and it is not well optimized for storing hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to select only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
+OrbitDB\footnote{\url{https://orbitdb.org/}} \cite{OrbitDBManual} is a serverless, distributed, peer-to-peer database build on top of IPFS, developed by HAJA networks\footnote{\url{https://haja.io}}. OrbitDB is a decent solution for small user's databases. However, it is still in the alpha stage of development, and it is not well optimized for storing hundreds of gigabytes of data. The biggest problem is that OrbitDB performs all queries locally. To perform a query that selects transactions that are more valuable than 1BTC, OrbitDB needs to load the whole database locally and then perform a cycle on all transactions to select only those transactions that meet the criteria. So every client ends up with a full copy of the database. This limitation is not usable for our case when we have a database that has hundreds of gigabytes of data.
 
 \subsection{Textile}
-Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. It uses Cafe peers to provide backups and indexing. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client. 
+Textile\footnote{\url{https://textile.io/}} is a set of open-source tools that provide a distributed peer-to-peer database, remote storage, user management, and more, over the IPFS network. Textile already created applications for storing photos, notes or anything else (Anytype). Textile provides a high abstraction on top of the IPFS and provides simple API to store and index files securely. Textile provides an open source service called \textbf{cafes}, which are nodes that offer offline inboxing and backup. Data are duplicated on several Cafe peers. When a client is performing some query, it contacts one of the Cafe peers to resolve the query for the client. 
 \cite{TextileWhitePaper}
 
-\subsection{Database system design}
+\subsection{Database System Design}
 After some research, we concluded that currently for storing and indexing data in IPFS without large hard disk memory consumption, there is no solution. We created our own indexing system that currently supports three types of indexes. A~database system that fits our needs is distributed and decentralized. That brings us lots of synchronization problems to solve. This database system consists of tables that contain records. For faster searching, tables have indexes. Relations between tables are represented via foreign keys. Also, this database system supports fluent query language, used for performing complex queries.
 
 \subsubsection{Record} 
@@ -58,7 +58,7 @@ A~table contains indexes and table name. Also, it implements operations that mod
         \end{enumerate}
 \end{itemize}
 
-\subsubsection{Foreign keys}
+\subsubsection{Foreign Keys}
 We use foreign keys to represent relationships between tables. A~foreign key is simply a table name and a value of a primary key of a referenced record.
 
 \subsubsection{Transactions}
@@ -119,7 +119,7 @@ The system consists of one or more Feeders and Explorers. Feeders are connected 
     \label{systemArchitecture}
 \end{figure}
 
-\subsection{Database design}
+\subsection{Database Design}
 \label{design}
 
 \begin{figure}[h]
@@ -223,7 +223,7 @@ Every endpoint can be accessed with \texttt{GET} or \texttt{POST} HTTP method. A
     }
 }
         \end{lstlisting}
-        \caption{Request that returns blocks with an odd height that is between 11990 and 12000.}
+        \caption{Request that returns blocks with an odd height that is between 11,990 and 12,000.}
         \label{explorerApiRequest}
     \end{subfigure}
     \begin{subfigure}[t]{.5\textwidth}
