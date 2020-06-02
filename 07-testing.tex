@@ -155,7 +155,7 @@ We compare MySQL and PostgresSQL with our peer-to-peer database system. These da
 
 
 \subsubsection*{Single Connected Client}
-With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a p2p network. CPU usage with a single connected client is for MySQL and PostgreSQL same -- about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of input-output operations. 
+With a single connected client, PostgreSQL can make more than 250 queries per second and MySQL 70 queries per second. Our database system is far behind with up to 20 queries per second (see Figure \ref{bench1per}). We can see that our database system builds cache, and performance increases by time. With only a single connected client, there is no advantage of a peer-to-peer network. CPU usage with a single connected client is for MySQL and PostgreSQL same -- about 20\% (see Figure \ref{bench1cpu}). For our database system, it is only 3\% due to lots of input-output operations. 
 
 \begin{figure}[h]
     \begin{subfigure}{.5\textwidth}
@@ -176,7 +176,7 @@ With a single connected client, PostgreSQL can make more than 250 queries per se
 
 
 \subsubsection*{20 Connected Clients}
-With 20 connected clients, PostgreSQL performance dropped to 50 queries per seconds and MySQL to 10 queries per seconds. At the end of benchmarking, our database system is more powerful than PostgreSQL and MySQL, because data gets distributed to clients (see \ref{bench20per}). Our database system also requires less processor time thanks to p2p network. Data are not obtained only from the server (as opposed to MySQL and PostgreSQL) but also from other clients. Thanks to this, our platform only using less than 20\% CPU power (see Figure \ref{bench20cpu}).
+With 20 connected clients, PostgreSQL performance dropped to 50 queries per seconds and MySQL to 10 queries per seconds. At the end of benchmarking, our database system is more powerful than PostgreSQL and MySQL, because data gets distributed to clients (see \ref{bench20per}). Our database system also requires less processor time thanks to peer-to-peer network. Data are not obtained only from the server (as opposed to MySQL and PostgreSQL) but also from other clients. Thanks to this, our platform only using less than 20\% CPU power (see Figure \ref{bench20cpu}).
 
 \begin{figure}[h]
     \begin{subfigure}{.5\textwidth}
@@ -236,7 +236,7 @@ We need to change the default PostgreSQL setting for maximum connections to conn
 \end{figure}
 
 \subsubsection{Benchmark Conclusion}
-We can see that with more than 20 connected clients, our database system became more effective than traditional ones. Thanks to IPFS and its p2p network, a content of the database is distributed on the clients. This reduces the load on the central node.
+We can see that with more than 20 connected clients, our database system became more effective than traditional ones. Thanks to IPFS and its peer-to-peer network, a content of the database is distributed on the clients. This reduces the load on the central node.
 
 \section{Comparing with Blockchain Explorers}
 Our blockchain exploration platform is unique and differs from traditional blockchain explorers in many ways. See the table \ref{comparingTable} to compare traditional blockchain explorers with ours. 
