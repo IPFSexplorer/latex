@@ -1465,7 +1465,7 @@ FUNCTION {format.edition}
     { edition "1" =
       edition "21" =
       edition "31" =
-	      or or
+        or or
         { edition "st ed." * }
         { edition "2" =
           edition "22" =
@@ -2737,7 +2737,7 @@ FUNCTION {proceedings}
   if$
   fin.entry
 } % @Proceedings
-			
+
 
 % Processes @Misc, @Webpage and @Website type records.
 %
@@ -2831,19 +2831,19 @@ FUNCTION {website} { misc }
 % Elements of el. doc.:  howpublished*, cited*
 %
 % Note: * Required element for el. doc.
-FUNCTION {manual}
+FUNCTION {techreport}
 { output.bibitem
   author.or.editor
   new.block %% author (required)
   format.btitle "title" output.check
   format.howpublished output
   new.block
-  format.manual.type
+  format.report.type
   format.edition capitalize comma.connect output
   new.block
   contrybutory capitalize output
   new.block %% podrizena odpovednost (volitelna)
-  format.manual.details
+  format.report.details
   format.date comma.connect
   format.revised comma.connect
   format.cited tie.or.connect
@@ -2858,7 +2858,7 @@ FUNCTION {manual}
   fin.entry
 }%@Manual, @TechReport and @Unpublished
 FUNCTION {manual} { techreport }
-FUNCTION {manual} { unpublished }
+FUNCTION {unpublished} { techreport }
 
 % Processes @BachelorsThesis, @MastersThesis and @PhdThesis type records.
 % Bibliographic citation of theses (bachelor's, master's and dissertation).
@@ -2908,7 +2908,7 @@ FUNCTION {thesis}
   fin.entry %% standard number ISBN (optional)
 }%@BachelorsThesis, @MastersThesis a @PhdThesis
 
-% @BachelorThesis type records are processed by thesis function.
+% @BachelorsThesis type records are processed by thesis function.
 FUNCTION {bachelorsthesis}{ thesis }
 
 % @MastersThesis type records are processed by thesis function.

@@ -2450,7 +2450,7 @@ FUNCTION {format.report.type}
 %
 % int empty.misc.check ()
 % {
-%   if ( (empty$(author)) && (empty$(title)) && (empty$()) &&
+%   if ( (empty$(author)) && (empty$(title)) &&
 %        (empty$(howpublished)) && (empty$(month)) && (empty$(year)) &&
 %        (empty$(note)) && (!empty$(key)) )
 %   {
@@ -2811,7 +2811,7 @@ FUNCTION {proceedings}
 %
 % Povinne polozky:   Alespon jedna z volitelnych!
 % Volitelne polozky: author, secondarytitle, title, subtitle, howpublished, contrybutory, edition, month, doi, issn
-%       year, revised*, cited, note, url, version
+%       year, revised*, cited, note, url, version, path
 %
 % Pozn.: Protestuje, pokud neni vyplneny rok. Nemel by tedy volat format.date...
 FUNCTION {misc}
@@ -2924,7 +2924,7 @@ FUNCTION {techreport}
   fin.entry
 }%@Manual, @TechReport a @Unpublished
 FUNCTION {manual} { techreport }
-FUNCTION {manual} { unpublished }
+FUNCTION {unpublished} { techreport }
 
 
 % Zpracuje zaznamy typu @BachelorsThesis, @MastersThesis a @PhdThesis.
@@ -2976,7 +2976,7 @@ FUNCTION {thesis}
 }%@BachelorsThesis, @MastersThesis a @PhdThesis
 
 % Zaznamy typu @BachelorsThesis jsou zpracovany funkci thesis.
-FUNCTION {bachelorthesis}{ thesis }
+FUNCTION {bachelorsthesis}{ thesis }
 
 % Zaznamy typu @MastersThesis jsou zpracovany funkci thesis.
 FUNCTION {mastersthesis} { thesis }

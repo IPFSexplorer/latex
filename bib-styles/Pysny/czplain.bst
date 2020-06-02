@@ -2260,7 +2260,7 @@ FUNCTION {conference.basics}
   if$
 }
 
-			
+
 % Formatuje informace o akademicke (diplomova, dizertacni atp.) praci.
 % Odlisuje se od beznych nakladatelskych informaci pouzitymi polozkami.
 %
@@ -2924,7 +2924,7 @@ FUNCTION {techreport}
   fin.entry
 }%@Manual, @TechReport a @Unpublished
 FUNCTION {manual} { techreport }
-FUNCTION {manual} { unpublished }
+FUNCTION {unpublished} { techreport }
 
 
 % Zpracuje zaznamy typu @BachelorsThesis, @MastersThesis a @PhdThesis.
@@ -3053,7 +3053,7 @@ FUNCTION {author.sort}
     { author empty$
       editor empty$
       and
-	    { "to sort, need author or key in " cite$ * warning$
+        { "to sort, need author or key in " cite$ * warning$
           ""
         }
         { author empty$
