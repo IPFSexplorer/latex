@@ -1,0 +1,99 @@
+<mxfile host="" modified="2020-06-02T10:40:49.797Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.1 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36" etag="D2Ha0Uq2hLx-Me3XsDBW" version="13.1.3">
+    <diagram id="4XsRgoqimwRmzhETqfrs" name="Page-1">
+        <mxGraphModel dx="1188" dy="801" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=16;" parent="1" source="Q8NOQmn6Is1BngRNlUJe-1" target="Q8NOQmn6Is1BngRNlUJe-2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-1" value="Cases: 1 790 564&lt;br style=&quot;font-size: 16px;&quot;&gt;Deaths: 109 654&lt;br style=&quot;font-size: 16px;&quot;&gt;Recovered: 409 540" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="500" width="164" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=16;" parent="1" source="Q8NOQmn6Is1BngRNlUJe-2" target="Q8NOQmn6Is1BngRNlUJe-4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=16;" parent="1" source="Q8NOQmn6Is1BngRNlUJe-2" target="Q8NOQmn6Is1BngRNlUJe-6" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="392" y="375"/>
+                            <mxPoint x="550" y="375"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-2" value="Cases: 1 791 547&lt;br style=&quot;font-size: 16px;&quot;&gt;Deaths: 109 660&lt;br style=&quot;font-size: 16px;&quot;&gt;Recovered: 409 618" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="410" width="164" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.55;entryY=0.95;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=16;" parent="1" source="Q8NOQmn6Is1BngRNlUJe-4" target="Q8NOQmn6Is1BngRNlUJe-19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="247" y="250"/>
+                            <mxPoint x="392" y="250"/>
+                            <mxPoint x="392" y="186"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-4" value="Cases: 1 801 654&lt;br style=&quot;font-size: 16px;&quot;&gt;Deaths: 110 543&lt;br style=&quot;font-size: 16px;&quot;&gt;Recovered: 410 188" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="170" y="280" width="154" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.55;entryY=0.95;entryDx=0;entryDy=0;entryPerimeter=0;startArrow=classic;startFill=1;endArrow=none;endFill=0;fontSize=16;" parent="1" source="Q8NOQmn6Is1BngRNlUJe-6" target="Q8NOQmn6Is1BngRNlUJe-19" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="550" y="250"/>
+                            <mxPoint x="392" y="250"/>
+                            <mxPoint x="392" y="186"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-6" value="Cases: 1 800 123&lt;br style=&quot;font-size: 16px;&quot;&gt;Deaths: 109 743&lt;br style=&quot;font-size: 16px;&quot;&gt;Recovered: 409 854" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="280" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-10" value="" style="endArrow=none;dashed=1;html=1;" parent="1" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="150" y="560" as="sourcePoint"/>
+                        <mxPoint x="150" y="20" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-11" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Time 1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="520" width="70" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-12" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Time 2&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="430" width="70" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-13" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Time 3&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="300" width="70" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-15" value="Pandemia statistics record created" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="502" width="160" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-16" value="Slovakia updated stats" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="415" width="160" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-17" value="USA and Spain updated stats in the same time" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="330" y="272.5" width="136.5" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-18" value="&lt;font style=&quot;font-size: 16px&quot;&gt;Time 4&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="40" width="70" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-19" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="332" y="110" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.489;entryY=0.087;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=none;endFill=0;fontSize=16;" edge="1" parent="1" source="Q8NOQmn6Is1BngRNlUJe-22" target="Q8NOQmn6Is1BngRNlUJe-19">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-22" value="Cases: 1 810 230&lt;br style=&quot;font-size: 16px;&quot;&gt;Deaths: 110 626&lt;br style=&quot;font-size: 16px;&quot;&gt;Recovered: 410 424" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="307" y="20" width="170" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-27" value="Conflict solver" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="344" y="122.5" width="100" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-28" value="We got conflict beacuse in one time, there are two versions of record" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="434" y="190" width="226" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="Q8NOQmn6Is1BngRNlUJe-30" value="Application defined conflict solver adds new version of record.&amp;nbsp;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="474" y="122.5" width="206" height="55" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
