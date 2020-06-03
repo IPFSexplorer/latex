@@ -20,6 +20,7 @@
 {\sc\bgroup}Chacon{\egroup}, S. and~{\sc\bgroup}Straub{\egroup}, B.
 \newblock {\em Pro git}.
 \newblock Apress, 2014.
+\newblock ISBN 1484200772.
 
 \bibitem{ChowdhuryNiaz2020Ibba}
 {\sc\bgroup}Chowdhury{\egroup}, N.
@@ -35,16 +36,11 @@
   Platform, 2018.
 \newblock ISBN 1725629178.
 
-\bibitem{dascano2018digibyte}
-{\sc\bgroup}Dascano{\egroup}, M.
-\newblock {\em Digibyte: An Easy Guide to Learning the Essentials}.
-\newblock First Rank Publishing, 2018.
-
 \bibitem{newYorkerBTC}
 {\sc\bgroup}Davis{\egroup}, J.
-\newblock The Crypto-Currency.
-\newblock {\em The New Yorker}.
-\newblock october 2011.
+\newblock {\em The Crypto-Currency}.
+\newblock October 2011.
+\newblock {\small [Online; Accessed 10.5.2020]}.
 \newblock Available at:
   ~{\small\url{https://www.newyorker.com/magazine/2011/10/10/the-crypto-currency}}.
 
@@ -68,12 +64,14 @@
 {\sc\bgroup}Drake{\egroup}, J.~D. and~{\sc\bgroup}Worsley{\egroup}, J.~C.
 \newblock {\em Practical PostgreSQL}.
 \newblock " O'Reilly Media, Inc.", 2002.
+\newblock ISBN 1565928466.
 
 \bibitem{dubois1999mysql}
 {\sc\bgroup}DuBois{\egroup}, P. and~{\sc\bgroup}Foreword By Widenius{\egroup},
   M.
 \newblock {\em MySQL}.
 \newblock New riders publishing, 1999.
+\newblock ISBN 9780321833877.
 
 \bibitem{haber1990time}
 {\sc\bgroup}Haber{\egroup}, S. and~{\sc\bgroup}Stornetta{\egroup}, W.~S.
@@ -103,23 +101,27 @@
 {\sc\bgroup}Labs{\egroup}, P.
 \newblock {Filecoin} - A Decentralized Storage Network.
 \newblock 2017.
+\newblock [Online; Accessed 7.5.2020].
 \newblock Available at: ~{\small\url{https://filecoin.io/filecoin.pdf}}.
 
 \bibitem{lamport2019time}
 {\sc\bgroup}Lamport{\egroup}, L.
-\newblock Time, clocks, and the ordering of events in a distributed system.
-\newblock In:~{\em Concurrency: the Works of Leslie Lamport}.
-\newblock 2019, p.~179--196.
+\newblock {Time, clocks, and the ordering of events in a distributed system}.
+\newblock {\em Communications of the ACM}.
+\newblock 1978, vol.~21, no.~7, p.~558--565.
+\newblock Available at: ~{\small\url{https://doi.org/10.1145/359545.359563}}.
 
 \bibitem{laurence2019blockchain}
 {\sc\bgroup}Laurence{\egroup}, T.
 \newblock {\em Blockchain for dummies}.
 \newblock John Wiley \& Sons, 2019.
+\newblock ISBN 1119555019.
 
 \bibitem{OrbitDBManual}
 {\sc\bgroup}Mark Robert Henderson{\egroup}, S.~P.
 \newblock {\em The OrbitDB Field Manual}.
 \newblock 2019.
+\newblock {\small [Online; Accessed 13.5.2020]}.
 \newblock Available at: ~{\small\url{https://github.com/orbitdb/field-manual}}.
 
 \bibitem{kademlia}
@@ -128,16 +130,13 @@
 \newblock In: Springer.~{\em International Workshop on Peer-to-Peer Systems}.
 \newblock 2002, p.~53--65.
 
-\bibitem{mysql2001mysql}
-{\sc\bgroup}MySQL{\egroup}, A.
-\newblock {\em MySQL}.
-\newblock 2001.
-
 \bibitem{nakamoto2008peer}
-{\sc\bgroup}Nakamoto{\egroup}, S. and~{\sc\bgroup}Bitcoin{\egroup}, A.
+{\sc\bgroup}Nakamoto{\egroup}, S.
 \newblock A peer-to-peer electronic cash system.
-\newblock {\em Bitcoin.--URL: https://bitcoin. org/bitcoin. pdf}.
+\newblock {\em Bitcoin}.
 \newblock 2008.
+\newblock [Online; Accessed 21.4.2020].
+\newblock Available at: ~{\small\url{https://nakamotoinstitute.org/bitcoin/}}.
 
 \bibitem{narayanan2016bitcoin}
 {\sc\bgroup}Narayanan{\egroup}, A., {\sc\bgroup}Bonneau{\egroup}, J.,
@@ -146,6 +145,7 @@
 \newblock {\em Bitcoin and cryptocurrency technologies: a comprehensive
   introduction}.
 \newblock Princeton University Press, 2016.
+\newblock ISBN 9780691171692.
 
 \bibitem{moneroTracebility}
 {\sc\bgroup}Noether{\egroup}, S.
@@ -168,15 +168,25 @@
 \newblock ACM New York, NY, USA.
 \newblock 1986, vol.~15, no.~2, p.~340--355.
 
+\bibitem{mysql2001mysql}
+{\sc\bgroup}Suehring{\egroup}, S.
+\newblock {\em MySQL Bible}.
+\newblock Wiley Publishing, Inc., 2002.
+\newblock ISBN 0764549324.
+
 \bibitem{van2013cryptonote}
 {\sc\bgroup}Van Saberhagen{\egroup}, N.
 \newblock {\em CryptoNote v 2.0}.
 \newblock 2013.
+\newblock {\small [Online; Accessed 20.5.2020]}.
+\newblock Available at:
+  ~{\small\url{https://static.coinpaprika.com/storage/cdn/whitepapers/1611.pdf}}.
 
 \bibitem{wayner1997digital}
 {\sc\bgroup}Wayner{\egroup}, P.
-\newblock {\em Digital cash: Commerce on the net}.
-\newblock Academic Press Professional, Inc., 1997.
+\newblock {\em Digital Cash (2nd Ed.): Commerce on the Net}.
+\newblock USA: Academic Press Professional, Inc., 1997.
+\newblock ISBN 0127887725.
 
 \bibitem{wood2014ethereum}
 {\sc\bgroup}Wood{\egroup}, G. et~al.

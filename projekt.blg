@@ -1,34 +1,26 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: projekt.aux
+This is BibTeX, Version 0.99d (TeX Live 2019)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: projekt.aux
 The style file: bib-styles/Pysny/enplain.bst
-format.manual.type is an unknown function---line 2841 of file bib-styles/Pysny/enplain.bst
-format.manual.details is an unknown function---line 2846 of file bib-styles/Pysny/enplain.bst
-manual is already a type "wizard-defined" function name
----line 2860 of file bib-styles/Pysny/enplain.bst
- : function {manual
- :                 } { techreport }
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: 20-bibliography.bib
-Repeated entry---line 267 of file 20-bibliography.bib
- : @article{stonebraker1986design
- :                               ,
-I'm skipping whatever remains of this entry
 Warning--"{" isn't a brace-balanced string for entry IPFSwhitepaper
 while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty edition in IPFSwhitepaper
 Warning--empty number in IPFSwhitepaper
 Warning--empty edition in buterin2014next
 Warning--empty edition in chacon2014pro
-Warning--empty isbn in chacon2014pro
 Warning--empty edition in ChowdhuryNiaz2020Ibba
-Warning--empty edition in dascano2018digibyte
-Warning--empty isbn in dascano2018digibyte
-Warning--empty edition in newYorkerBTC
-Warning--empty number in newYorkerBTC
 Warning--empty edition in dhillon2017blockchain
 Warning--empty isbn in dhillon2017blockchain
 Warning--empty edition in drake2002practical
-Warning--empty isbn in drake2002practical
 Warning--empty edition in dubois1999mysql
-Warning--empty isbn in dubois1999mysql
 Warning--empty isbn and issn in haber1990time
 Warning--empty edition in decredWhitePaper
 Warning--empty number in decredWhitePaper
@@ -37,23 +29,61 @@ while executing--line 3172 of file bib-styles/Pysny/enplain.bst
 Warning--empty journal in filecoinWhitepaper
 Warning--empty edition in filecoinWhitepaper
 Warning--empty number in filecoinWhitepaper
-Warning--empty editor and organization in lamport2019time
-Warning--empty isbn and issn in lamport2019time
+Warning--"{" isn't a brace-balanced string for entry lamport2019time
+while executing--line 3172 of file bib-styles/Pysny/enplain.bst
+Warning--empty edition in lamport2019time
 Warning--empty edition in laurence2019blockchain
-Warning--empty isbn in laurence2019blockchain
-Warning--empty edition in OrbitDBManual
-Warning--empty isbn in OrbitDBManual
 Warning--empty isbn and issn in kademlia
 Warning--empty edition in nakamoto2008peer
 Warning--empty number in nakamoto2008peer
 Warning--empty edition in narayanan2016bitcoin
-Warning--empty isbn in narayanan2016bitcoin
 Warning--empty edition in moneroTracebility
 Warning--empty number in moneroTracebility
 Warning--empty edition in TextileWhitePaper
 Warning--empty isbn in TextileWhitePaper
 Warning--empty edition in stonebraker1986design
+Warning--empty edition in mysql2001mysql
 Warning--empty edition in wayner1997digital
-Warning--empty isbn in wayner1997digital
 Warning--empty edition in wood2014ethereum
-(There were 4 error messages)
+You've used 27 entries,
+            3721 wiz_defined-function locations,
+            948 strings with 9124 characters,
+and the built_in function-call counts, 11396 in all, are:
+= -- 866
+> -- 356
+< -- 40
++ -- 122
+- -- 89
+* -- 606
+:= -- 1521
+add.period$ -- 93
+call.type$ -- 27
+change.case$ -- 162
+chr.to.int$ -- 44
+cite$ -- 56
+duplicate$ -- 761
+empty$ -- 1502
+format.name$ -- 89
+if$ -- 2730
+int.to.chr$ -- 0
+int.to.str$ -- 27
+missing$ -- 0
+newline$ -- 179
+num.names$ -- 55
+pop$ -- 303
+preamble$ -- 1
+purify$ -- 108
+quote$ -- 0
+skip$ -- 503
+stack$ -- 0
+substring$ -- 492
+swap$ -- 129
+text.length$ -- 18
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 55
+warning$ -- 29
+while$ -- 79
+width$ -- 29
+write$ -- 325
+(There were 32 warnings)
