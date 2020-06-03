@@ -3,7 +3,10 @@ In this chapter, we describe how our platform is verified and validated. Then, w
 
 
 \section{Testing}
-Testing is an essential part of the development of any project. As part of my master thesis, We~performed two types of testing. Unit testing to ensure that every platform module works correctly, and testing the user interface of ExplorerGUI in which we~tested how quickly and efficiently the user handles tasks, and how user-friendly the user interface is.
+Testing is an essential part of the development of any project. As part of this master thesis, we~performed unit testing to ensure that every platform module works correctly.
+
+\subsection{Unit Testing}
+We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference). Test for B-Tree insert operation can be seen in Figure \ref{unitTest}. Tests for every application we have developed in this thesis can be run by command \texttt{npm run test}. Tests was automatically performed after each commit to the versioning system, thanks to  continuous integration (CI) provided by GitHub\footnote{\url{https://help.github.com/en/actions/building-and-testing-code-with-continuous-integration/about-continuous-integration}}. All applications are dockerized (can be run via Docker\footnote{\url{https://www.docker.com/}}), therefore making CI pipeline was easy.
 
 \begin{figure}[h]
     \centering
@@ -29,11 +32,6 @@ describe("Btree", () =>
     \caption{Unit test for B-Tree insert operation.}
     \label{unitTest}
 \end{figure}
-
-\subsection{Unit Testing}
-We tested all critical parts of the Explorer-core module through unit tests. We use jest.js\footnote{\url{https://jestjs.io/}} framework for writing tests. We test every operation on B-Tree index (add, remove, find, update), an append-only log that is used for database log and record log (add, merge, difference). Test for B-Tree insert operation can be seen in Figure \ref{unitTest}. Tests for every application we have developed in this thesis can be run by command \texttt{npm run test}.
-
-
 
 
 
@@ -116,7 +114,7 @@ We compare MySQL and PostgresSQL with our peer-to-peer database system. These da
         \end{lstlisting}
         \caption{PostgreSQL}
     \end{subfigure}
-    \begin{subfigure}[t]{.3\textwidth}
+    \begin{subfigure}[t]{.4\textwidth}
         \begin{lstlisting}[style=ES6,basicstyle=\tiny]
             class Author {
                 @PrimaryKey() id: number;
@@ -168,7 +166,7 @@ We compare MySQL and PostgresSQL with our peer-to-peer database system. These da
         \end{lstlisting}
         \caption{PostgreSQL}
     \end{subfigure}
-    \begin{subfigure}{.3\textwidth}
+    \begin{subfigure}{.4\textwidth}
         \centering
         \begin{lstlisting}[style=ES6,basicstyle=\tiny]
             new Author()
